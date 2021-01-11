@@ -1,0 +1,138 @@
+
+
+QLabel#label_uid {
+    background-color: rgba(56, 69, 93, 0.3);
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: white;
+    padding-left: 6px;
+    background-color: rgba(56, 69, 93, 0.45);
+    border-radius: 10px;
+}
+
+QLabel#label_uid_2 {
+    background-color: rgba(56, 69, 93, 0.3);
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: green;
+    padding-left: 6px;
+    background-color: rgba(56, 69, 93, 0.45);
+    border-radius: 10px;
+}
+
+QLabel#label_loading_icon {
+    border: none;
+    background-image: url(./resource/image/video_item_loading.png);
+}
+
+QLabel#label_state_icon {
+    border: none;
+    background-image: url(./resource/image/video_item_bg_icon.png);
+}
+
+QLabel#label_state_icon_2 {
+    border: none;
+    background-image: url(./resource/image/video_item_bg_icon.png);
+}
+
+
+QLabel#label_loading_tip {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #cfd3de;
+}
+
+QLabel#label_state_tip {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #cfd3de;
+}
+
+QLabel#label_state_tip_2 {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #cfd3de;
+}
+
+QLabel#label_volume {
+    background-color: rgba(56, 69, 93, 0.3);
+    border-radius: 10px;
+    background-image: url(./resource/image/item_mic_open.png);
+    background-repeat: no-repeat;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: right center;
+    color: white;
+    background-origin: content;
+    background-position: left;
+    padding-right: 2px;
+    padding-left: 5px;
+}
+
+QPushButton#pushButton_cam {
+    background-color: rgba(56, 69, 93, 0.45);
+    border-radius: 12px;
+    border: 0.5px solid rgba(207, 211, 222, 0.2);
+    background-image: url(./resource/image/item_cam_open.png);
+    background-repeat: no-repeat;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: right center;
+    color: white;
+    background-origin: content;
+    background-position: left;
+    padding-right: 6px;
+    padding-left: 5px;
+}
+
+QPushButton#pushButton_mic {
+    background-color: rgba(56, 69, 93, 0.45);
+    border-radius: 12px;
+    border: 0.5px solid rgba(207, 211, 222, 0.2);
+    background-image: url(./resource/image/item_mic_open.png);
+    background-repeat: no-repeat;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: right center;
+    color: white;
+    background-origin: content;
+    background-position: left;
+    padding-right: 6px;
+    padding-left: 5px;
+}
+
+QPushButton#pushButton_hd {
+    background-color: rgba(56, 69, 93, 0.45);
+    border-radius: 12px;
+    border: 0.5px solid rgba(207, 211, 222, 0.2);
+    background-image: url(./resource/image/hd_default.png);
+    background-repeat: no-repeat;
+}
+
+QPushButton#pushButton_close {
+    background-color: rgba(56, 69, 93, 0.45);
+    border-radius: 12px;
+    border: 0.5px solid rgba(207, 211, 222, 0.2);
+    background-image: url(./resource/image/mainvideoclose.png);
+    background-repeat: no-repeat;
+}

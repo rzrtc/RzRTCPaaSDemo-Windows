@@ -1,0 +1,247 @@
+QWidget#widget {
+    background-color: white;
+}
+
+QWidget#widget_2 {
+    border-radius: 2px;
+    background-color: #ffa62f;
+}
+
+QWidget#widget_3 {
+    border-radius: 2px;
+    background-color: #eb5757;
+}
+
+QWidget#widget_4 {
+    border-radius: 2px;
+    background-color: #34bc40;
+}
+
+QWidget#widget_5 {
+    border-radius: 2px;
+    background-color: #1e6ceb;
+}
+
+QLabel#label_localuser {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #38455d;
+}
+
+QLabel#label_uid {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_uid {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_delay {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_delay {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_cpu {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_cpu {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_mem {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_mem {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_network_up {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_network_up {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_network_down {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_network_down {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_bit_stream {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_bit_stream {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_loss {
+    font-family: Microsoft YaHei;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+QLabel#label_value_loss {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_icon_uid {
+    background-image: url(./resource/image/userid2.png);
+    background-repeat: no-repeat;
+}
+
+QLabel#label_icon_cpu {
+    background-image: url(./resource/image/cpu.png);
+    background-repeat: no-repeat;
+}
+
+QLabel#label_icon_network {
+    background-image: url(./resource/image/network.png);
+    background-repeat: no-repeat;
+}
+
+QLabel#label_icon_bit {
+    background-image: url(./resource/image/bitrate.png);
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2E2A617E-3117-4AD1-AD44-9DDBE1BA366F}</ProjectGuid>
+    <Keyword>QtVS_v303</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
+    <IncludePath>$(SolutionDir)sdk\include;$(SolutionDir)sdk\include\OSModule;$(SolutionDir)sdk\include\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)sdk;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Link>
+      <AdditionalDependencies>libabsl_bad_optional_access.lib;libavcodec.a;libavdevice.a;libavfilter.a;libavformat.a;libavutil.a;libmn.lib;libopus.lib;libpostproc.a;libprotobuf.lib;libsol.lib;libswresample.a;libswscale.a;libuv.lib;libwebrtc.lib;libx264.lib;libyuv.lib;PaaSSDK.lib;psapi.lib;iphlpapi.lib;userenv.lib;Secur32.lib;MSVCRTD.lib;bcrypt.lib;vfw32.lib;Shlwapi.lib;Crypt32.lib;ws2_32.lib;Wldap32.lib;winmm.lib;user32.lib;gdi32.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;d3d9.lib;Strmiids.lib;zlib.lib;libcurl.lib;dby-logan-log.lib;portaudio.lib;libcrypto.lib;libssl.lib;Normaliz.lib;SDL2.lib;dshowcapture.lib;videoInputD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:Multiple %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\lib\KMSVC\debug;$(SolutionDir)..\..\rz-paas-sdk-msvc\build-paas\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\DataFlow;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\IChannel;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\MediaStream;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\ProcessInterface;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\libuv;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\ffmpeg;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\opus;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\yuv;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\OSModule;.\;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-native-sdk\third_party\videoinput;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_OPENGL_RENDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/MP8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Link>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>PaaSSDK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:Multiple %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;%(AdditionalIncludeDirectories)$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_OPENGL_RENDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
+    <QtInstall>vs_2019_static</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="QtSettings">
+    <QtInstall>vs_2019_static</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="easydump\easydump.cpp" />
+    <ClCompile Include="LostDialog.cpp" />
+    <ClCompile Include="PrivateIRtcChannelEventHandler.cpp" />
+    <ClCompile Include="PrivateIRtcEngineEventHandler.cpp" />
+    <ClCompile Include="PrivateIRtcStreamEventHandler.cpp" />
+    <ClCompile Include="RemoteUserInfoWidgets.cpp" />
+    <ClCompile Include="RzObject.cpp" />
+    <ClCompile Include="SelectList.cpp" />
+    <ClCompile Include="ChannelDialog.cpp" />
+    <ClCompile Include="ListWidgetSet.cpp" />
+    <ClCompile Include="MoreInfoDialog.cpp" />
+    <ClCompile Include="NoFocusDelegate.cpp" />
+    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="SwitchButton.cpp" />
+    <ClCompile Include="TipDialog.cpp" />
+    <ClCompile Include="TitleBarWidget.cpp" />
+    <ClCompile Include="UserStateSingleton.cpp" />
+    <ClCompile Include="VideoItem.cpp" />
+    <ClCompile Include="VideoItemData.cpp" />
+    <ClCompile Include="VideoWidget.cpp" />
+    <QtRcc Include="PaasTest.qrc" />
+    <QtUic Include="LostDialog.ui" />
+    <QtUic Include="RemoteUserInfoWidgets.ui" />
+    <QtUic Include="SelectList.ui" />
+    <QtUic Include="ChannelDialog.ui" />
+    <QtUic Include="LoadingDialog.ui" />
+    <QtUic Include="MoreInfoDialog.ui" />
+    <QtUic Include="PaasTest.ui" />
+    <QtMoc Include="PaasTest.h" />
+    <ClCompile Include="LoadingDialog.cpp" />
+    <ClCompile Include="PaasTest.cpp" />
+    <ClCompile Include="main.cpp" />
+    <QtUic Include="TipDialog.ui" />
+    <QtUic Include="TitleBarWidget.ui" />
+    <QtUic Include="VideoItem.ui" />
+    <QtUic Include="VideoWidget.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\cam.qss" />
+    <None Include="resource\channel.qss" />
+    <None Include="resource\loading.qss" />
+    <None Include="resource\login.qss" />
+    <None Include="resource\loss.qss" />
+    <None Include="resource\mainvideostate.qss" />
+    <None Include="resource\moreinfo.qss" />
+    <None Include="resource\setting.qss" />
+    <None Include="resource\userinfo.qss" />
+    <None Include="resource\videoitem.qss" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="LoadingDialog.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="NoFocusDelegate.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ListWidgetSet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Settings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="TipDialog.h" />
+    <QtMoc Include="VideoWidget.h" />
+    <ClInclude Include="easydump\easydump.h" />
+    <ClInclude Include="global.h" />
+    <QtMoc Include="LostDialog.h" />
+    <ClInclude Include="PrivateIRtcChannelEventHandler.h" />
+    <ClInclude Include="PrivateIRtcEngineEventHandler.h" />
+    <ClInclude Include="PrivateIRtcStreamEventHandler.h" />
+    <QtMoc Include="RemoteUserInfoWidgets.h" />
+    <QtMoc Include="RzObject.h" />
+    <QtMoc Include="VideoItemData.h" />
+    <QtMoc Include="UserStateSingleton.h" />
+    <QtMoc Include="SwitchButton.h" />
+    <QtMoc Include="MoreInfoDialog.h" />
+    <QtMoc Include="VideoItem.h" />
+    <QtMoc Include="TitleBarWidget.h" />
+    <QtMoc Include="ChannelDialog.h" />
+    <QtMoc Include="SelectList.h" />
+    <ClInclude Include="common.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

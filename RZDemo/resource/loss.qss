@@ -1,0 +1,77 @@
+LostDialog {
+    /*background-color: #929baa;*/
+}
+
+QWidget#widget {
+    background-color: white;
+    border-radius: 8px;
+}
+
+QWidget#widget_2 {
+    background-image: url(./resource/image/Component.png);
+}
+
+QLabel#label {
+    font-family: Microsoft YaHei;
+    /*margin: 0 158px 8px 0;*/
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #38455d;
+}
+
+
+QLabel#label_2 {
+    font-family: Microsoft YaHei;
+    /*margin: 8px 0 0;*/
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #929baa;
+}
+
+
+QPushButton#pushButton {
+    border-radius: 6px;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);
+    background-color: #1e6ceb;
+    color: white;
+   /* background-color: blue;
+    color: blue;*/
+    /*color: #1e6ceb;*/
+}
+
+QPushButton#pushButton_cancel {
+    border-radius: 6px;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);
+    background-color: white;
+    color: #1e6ceb;
+    /* background-color: blue;
+    color: blue;*/
+    /*color: #1e6ceb;*/
+}
+
+QPushButton#pushButton_2 {
+    background-image: url(./resource/image/lossclose.png);
+    background-repeat: no-repeat;
+    background-color: white;
+    border:none;
+
+    /*color: #1e6ceb;*/
+}
+
+
+
+

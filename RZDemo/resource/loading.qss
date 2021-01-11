@@ -1,0 +1,21 @@
+LoadingDialog {
+    background-color: #1e6ceb;
+}
+
+/*QLabel#label_PAASSDK {
+    font-family: "PlutoW01-Black-Regular";
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+}*/
+
+QProgressBar#progressBar {
+    border-radius: 10px;
+    background-color: white;
+}
+
+QProgressBar#progressBar::chunk {
+    border-radius: 6px;
+    background-color: #1e6ceb;
+    margin: 4px;
+}

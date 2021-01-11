@@ -1,0 +1,39 @@
+CamDeviceList {
+    background-color: white;
+    border-radius: 4px;
+    /*box-shadow: 0 4px 12px 0 rgba(151, 151, 151, 0.5);*/
+}
+
+QLabel#label {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+
+QListWidget {
+    border-radius: 2px;
+    border: 0.5px solid #e8eaef;
+    background-color: white;
+    outline: 0px;
+}
+
+QListWidget::Item {
+    border-bottom: 0.5px solid #e8eaef;
+    /*padding-top:-2px; padding-bottom:-1px;*/
+}
+
+QListWidget::Item:hover {
+    background-color: white;
+}
+
+    QListWidget::item:selected {
+        /* background: rgba(30, 108, 235, 0.05);*/
+        background-color: white;
+    }
+
+QListWidget::item:selected:!active {
+    background-color: white;
+}

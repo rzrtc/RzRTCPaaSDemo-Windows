@@ -1,0 +1,120 @@
+PaasTest{
+    background-color:#1e6ceb;
+}
+
+QLabel#label_logo {
+    /*font-family: "PlutoW01-Black-Regular";*/
+    font-size: 72px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+
+QLabel#label_yaxis {
+   background-color:white;
+}
+
+QLabel#label_channelid {
+    font-family: Microsoft YaHei;
+    /*font-family: AlibabaPuHuiTi;*/
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+
+QLabel#label_uid {
+    font-family: Microsoft YaHei;
+    /*font-family: AlibabaPuHuiTi;*/
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: white;
+}
+
+QLabel#label_channelid_tip {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffa62f;
+}
+
+QLabel#label_uid_tip {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffa62f;
+}
+
+QLineEdit#lineEdit_channelid {
+    background-color: #1e6ceb;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid #ffffff;
+    font-family: Microsoft YaHei;
+    color:white;
+}
+
+QLineEdit#lineEdit_uid {
+    background-color: #1e6ceb;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid #ffffff;
+    font-family: Microsoft YaHei;
+    color: white;
+}
+
+
+
+QPushButton#pushButton_join {
+    border-radius: 3px;
+    box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);
+    border: 1px solid #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: white;
+}
+
+
+QPushButton#pushButton_min {
+    border: none;
+    background-color: #1e6ceb;
+    background-image: url(./resource/image/login_min.png);
+    background-repeat: no-repeat;
+}
+
+QPushButton#pushButton_close {
+    border: none;
+    background-color: #1e6ceb;
+    background-image: url(./resource/image/login_close.png);
+    background-repeat: no-repeat;
+}

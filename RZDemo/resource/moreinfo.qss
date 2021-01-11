@@ -1,0 +1,51 @@
+/* 向在移动 */
+
+QTabWidget::tab-bar {
+    /*left: 20px;*/
+    background-color:white;
+}
+
+QTabBar::tab {
+    /*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E1E1E1, stop: 0.4 #DDDDDD, stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);*/
+    background-color: white;
+    border: 0.5px solid #e8eaef;
+    /*min-width: 90px;*/
+    max-width: 94px;
+    min-height:48px;
+    max-height:48px;
+}
+QTabBar::scroller {
+    width: 0
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected {
+    border-top: 2px solid #1e6ceb;
+    background-color: white;
+}
+
+QListWidget {
+    /*border-radius: 2px;*/
+    /*border: 0.5px solid #e8eaef;*/
+    border: none;
+    background-color: white;
+    outline: 0px;
+}
+
+QListWidget::Item {
+    /*border-bottom: 0.5px solid #e8eaef;*/
+    border-radius: 2px;
+    /*padding-top:-2px; padding-bottom:-1px;*/
+}
+
+QListWidget::Item:hover {
+    background: white;
+}
+
+QListWidget::item:selected {
+    /*background: rgba(30, 108, 235, 0.05);*/
+}
+
+QListWidget::item:selected:!active {
+    background: white;
+}

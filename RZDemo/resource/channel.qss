@@ -1,0 +1,111 @@
+ChannelDialog {
+    background-color: #F7F8FA;
+}
+
+QWidget#widget_titlebar {
+    background-color: #F7F8FA;
+}
+
+QWidget#page_audience_waiting {
+    background-color: #929baa;
+}
+
+QLabel#label_pleasewaiting {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #cfd3de;
+}
+
+QLabel#label_channelid {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_onlineusers {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #cfd3de;
+}
+
+QPushButton#pushButton_leavechannel {
+    border-radius: 4px;
+    border: 0.5px solid #cfd3de;
+    background-color: white;
+    background-image: url(./resource/image/onoff.png);
+    background-repeat: no-repeat;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: right center;
+    color: #929baa;
+    background-origin: content;
+    background-position: left;
+    padding-right: 12px;
+    padding-left: 8px;
+}
+
+QPushButton#pushButton_userinfo {
+    border-radius: 4px;
+    border: 0.5px solid #cfd3de;
+    background-color: white;
+    background-image: url(./resource/image/userid.png);
+    background-repeat: no-repeat;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: right center;
+    color: #929baa;
+    background-origin: content;
+    background-position: left;
+    padding-right: 12px;
+    padding-left: 8px;
+}
+
+QPushButton#pushButton_more {
+    border-radius: 4px;
+    border: 0.5px solid #cfd3de;
+    background-color: white;
+    background-image: url(./resource/image/more.png);
+    background-repeat: no-repeat;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: right center;
+    color: #929baa;
+    background-origin: content;
+    background-position: left;
+    padding-right: 12px;
+    padding-left: 8px;
+}
+
+QPushButton#pushButton_min {
+    border: none;
+    background-image: url(./resource/image/min.png);
+}
+QPushButton#pushButton_max {
+    border: none;
+    background-image: url(./resource/image/max.png);
+}
+QPushButton#pushButton_quit {
+    border: none;
+    background-image: url(./resource/image/shutup.png);
+}

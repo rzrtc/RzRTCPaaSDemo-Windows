@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MoreInfoDialog</class>
+ <widget class="QDialog" name="MoreInfoDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1402</width>
+    <height>1006</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MoreInfoDialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>1022</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>62</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>375</width>
+         <height>900</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>375</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <widget class="QWidget" name="tab_channel">
+        <attribute name="title">
+         <string/>
+        </attribute>
+        <widget class="QLabel" name="label_channel_set">
+         <property name="geometry">
+          <rect>
+           <x>19</x>
+           <y>16</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>频道设置</string>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="listWidget_channel_set">
+         <property name="geometry">
+          <rect>
+           <x>11</x>
+           <y>42</y>
+           <width>351</width>
+           <height>217</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_pushstream">
+        <attribute name="title">
+         <string/>
+        </attribute>
+        <widget class="QListWidget" name="listWidget_stream_set_device">
+         <property name="geometry">
+          <rect>
+           <x>11</x>
+           <y>42</y>
+           <width>351</width>
+           <height>109</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_stream_set_device">
+         <property name="geometry">
+          <rect>
+           <x>19</x>
+           <y>16</y>
+           <width>100</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>设备选择</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_stream_set1">
+         <property name="geometry">
+          <rect>
+           <x>19</x>
+           <y>167</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>默认推流</string>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="listWidget_stream_set_stream1">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>193</y>
+           <width>351</width>
+           <height>180</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="listWidget_stream_set_stream2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>415</y>
+           <width>351</width>
+           <height>180</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_stream_set2">
+         <property name="geometry">
+          <rect>
+           <x>19</x>
+           <y>389</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>自定推流</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_stream_set_stream1">
+         <property name="geometry">
+          <rect>
+           <x>77</x>
+           <y>167</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>视频一</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_stream_set_stream2">
+         <property name="geometry">
+          <rect>
+           <x>77</x>
+           <y>389</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>视频二</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_userinfo">
+        <attribute name="title">
+         <string/>
+        </attribute>
+        <widget class="QListWidget" name="listWidget_remote_user_info">
+         <property name="geometry">
+          <rect>
+           <x>12</x>
+           <y>16</y>
+           <width>351</width>
+           <height>800</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_data">
+        <attribute name="title">
+         <string/>
+        </attribute>
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>16</y>
+           <width>54</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>流程数据</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="textEdit">
+         <property name="geometry">
+          <rect>
+           <x>12</x>
+           <y>42</y>
+           <width>351</width>
+           <height>800</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

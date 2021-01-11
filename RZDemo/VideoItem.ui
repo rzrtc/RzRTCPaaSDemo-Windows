@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VideoItem</class>
+ <widget class="QWidget" name="VideoItem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>224</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>300</width>
+    <height>224</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>VideoItem</string>
+  </property>
+  <widget class="VideoWidget" name="widget_video" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>224</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_uid">
+   <property name="geometry">
+    <rect>
+     <x>6</x>
+     <y>6</y>
+     <width>74</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>74</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>8601（我）</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_cam">
+   <property name="geometry">
+    <rect>
+     <x>6</x>
+     <y>194</y>
+     <width>56</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>56</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>推送</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_mic">
+   <property name="geometry">
+    <rect>
+     <x>66</x>
+     <y>194</y>
+     <width>56</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>56</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>推送</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_hd">
+   <property name="geometry">
+    <rect>
+     <x>126</x>
+     <y>194</y>
+     <width>56</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>切换</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_loading_icon">
+   <property name="geometry">
+    <rect>
+     <x>108</x>
+     <y>100</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_loading_tip">
+   <property name="geometry">
+    <rect>
+     <x>138</x>
+     <y>102</y>
+     <width>54</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>54</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>加载中...</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_state_tip">
+   <property name="geometry">
+    <rect>
+     <x>93</x>
+     <y>88</y>
+     <width>126</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>远端视频流停止发送</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_state_icon">
+   <property name="geometry">
+    <rect>
+     <x>68</x>
+     <y>86</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_state_tip_2">
+   <property name="geometry">
+    <rect>
+     <x>93</x>
+     <y>116</y>
+     <width>140</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>已停止拉取远端视频流</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_state_icon_2">
+   <property name="geometry">
+    <rect>
+     <x>68</x>
+     <y>114</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_uid_2">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>6</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>74</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>8601（我）</string>
+   </property>
+  </widget>
+  <zorder>widget_video</zorder>
+  <zorder>pushButton_mic</zorder>
+  <zorder>pushButton_cam</zorder>
+  <zorder>pushButton_hd</zorder>
+  <zorder>label_state_tip_2</zorder>
+  <zorder>label_loading_icon</zorder>
+  <zorder>label_state_icon</zorder>
+  <zorder>label_state_icon_2</zorder>
+  <zorder>label_state_tip</zorder>
+  <zorder>label_uid</zorder>
+  <zorder>label_uid_2</zorder>
+  <zorder>label_loading_tip</zorder>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>VideoWidget</class>
+   <extends>QWidget</extends>
+   <header>VideoWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

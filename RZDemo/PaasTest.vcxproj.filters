@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Setting">
+      <UniqueIdentifier>{30a3d4af-6f7b-4c5a-aff8-8285b5456129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SdkWrapper">
+      <UniqueIdentifier>{50cd459a-ffb8-480c-adf9-4da9ed43c67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="easydump">
+      <UniqueIdentifier>{a7cb9df6-0947-4407-bb0a-b7d13c6189e3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="PaasTest.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtMoc Include="PaasTest.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClCompile Include="PaasTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoFocusDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListWidgetSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="ChannelDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBarWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoreInfoDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserStateSingleton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RzObject.cpp">
+      <Filter>SdkWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="PrivateIRtcEngineEventHandler.cpp">
+      <Filter>SdkWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="PrivateIRtcChannelEventHandler.cpp">
+      <Filter>SdkWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="PrivateIRtcStreamEventHandler.cpp">
+      <Filter>SdkWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoItemData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteUserInfoWidgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LostDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="easydump\easydump.cpp">
+      <Filter>easydump</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TipDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\login.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\loading.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\setting.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\channel.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\userinfo.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\moreinfo.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\cam.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\videoitem.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\loss.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\mainvideostate.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="LoadingDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="NoFocusDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ListWidgetSet.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Settings.h">
+      <Filter>Setting</Filter>
+    </QtMoc>
+    <QtMoc Include="ChannelDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="TitleBarWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VideoItem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MoreInfoDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SwitchButton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SelectList.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UserStateSingleton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VideoItemData.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RzObject.h">
+      <Filter>SdkWrapper</Filter>
+    </QtMoc>
+    <QtMoc Include="RemoteUserInfoWidgets.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="LostDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VideoWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="TipDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="LoadingDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ChannelDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="TitleBarWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="VideoItem.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="PaasTest.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="MoreInfoDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="SelectList.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="RemoteUserInfoWidgets.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="LostDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="VideoWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="TipDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrivateIRtcEngineEventHandler.h">
+      <Filter>SdkWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="PrivateIRtcChannelEventHandler.h">
+      <Filter>SdkWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="PrivateIRtcStreamEventHandler.h">
+      <Filter>SdkWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="easydump\easydump.h">
+      <Filter>easydump</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

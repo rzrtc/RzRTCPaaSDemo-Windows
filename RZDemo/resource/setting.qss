@@ -1,0 +1,687 @@
+SettingDialog {
+    background-color: #f7f8fa;
+}
+
+QWidget#widget_navbar {
+    background-color: white;
+}
+
+QPushButton#pushButton_backicon {
+    border: none;
+    background-image: url(./resource/image/back.png);
+    background-repeat: no-repeat;
+}
+
+QPushButton#pushButton_back {
+    border: none;
+    font-family: PingFangSC;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #1e6ceb;
+}
+
+QLabel#label_setup {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_pushstream {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #64728c;
+}
+
+
+QLabel#label_setup_deviceauth {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_app {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #64728c;
+}
+
+
+QPushButton#pushButton_join_2 {
+    /* border: none;
+    background-image: url(./resource/image/back.png);
+    background-repeat: no-repeat;*/
+    border-radius: 6px;
+    box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);
+    background-color: #1e6ceb;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: white;
+}
+QPushButton#pushButton_export_set {
+    /* border: none;
+    background-image: url(./resource/image/back.png);
+    background-repeat: no-repeat;*/
+    border-radius: 6px;
+    box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);
+    background-color: white;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    color: #1e6ceb;
+}
+
+
+QLabel#label_join_tip {
+    font-family: Microsoft YaHei;
+    color: #929baa;
+    font-size: 14px;
+    text-align: left;
+}
+
+
+QListWidget {
+    border-radius: 2px;
+    border: 0.5px solid #e8eaef;
+    background-color: white;
+    outline: 0px;
+}
+    QListWidget::Item {
+        border-bottom: 0.5px solid #e8eaef;
+        /*padding-top:-2px; padding-bottom:-1px;*/
+    }
+
+QListWidget::Item:hover{
+    background:white;
+}
+
+QListWidget::item:selected {
+    background: rgba(30, 108, 235, 0.05);
+}
+
+QListWidget::item:selected:!active{
+    background:white;
+}
+
+QLabel#label_setup_channel_page_title_env {
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_channel {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_exp_env {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_self {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_self_env {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_self_switch {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QTextEdit#textEdit_setup_channel_page_title_self {
+    font-family: Microsoft YaHei;
+    border-radius: 2px;
+    border: 0.5px solid #e8eaef;
+    background-color: white;
+}
+
+QWidget#widget_setup_channel_page_self {
+    border-radius: 2px;
+    border: 0.5px solid #e8eaef;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_encode 
+{
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_encode_select 
+{
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_render {
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_render_select {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_render_mode {
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_render_mode_select {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_pushstream {
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_pushstream_2 {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+/*麦克风设置页面*/
+QPushButton#pushButton_mic_select {
+    border-radius: 4px;
+    border: 1px solid #929baa;
+    background-color: white;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+    background-image: url(./resource/image/arrow.png);
+    background-origin: content;
+    background-position: right;
+    padding-left: 12px;
+    padding-right: 8px;
+    background-repeat: no-repeat;
+}
+QLabel#label_setup_channel_page_title_mic {
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_mic_select {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_mic_dev {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+}
+
+QLabel#label_setup_channel_page_title_mic_volume {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+}
+
+QLabel#label_setup_channel_page_title_mic_test {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+}
+
+QPushButton#pushButton_mic_play {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    /*box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);*/
+    background-color: #1e6ceb;
+}
+
+QPushButton#pushButton_mic_suspend {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    /*box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);*/
+    background-color: #1e6ceb;
+}
+
+QSlider#horizontalSlider_mic_volume::add-page:Horizontal {
+    background-color: #dcdcdc;
+    /*background-color: #e8eaef;*/
+}
+
+QSlider#horizontalSlider_mic_volume::sub-page:horizontal {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #1e6ceb, stop:0.25 #1e6ceb, stop:0.5 #1e6ceb, stop:1 #1e6ceb);
+}
+
+
+QSlider#horizontalSlider_mic_volume::groove:Horizontal {
+    height: 4px;
+    left: 4px;
+    /*right: 100px;*/
+    background: #dcdcdc;
+    
+}
+
+QSlider#horizontalSlider_mic_volume::handle:Horizontal {
+    border-radius: 6px;
+    width: 12px;
+    height: 12px;
+    margin: -5px 0px;
+    background: #1e6ceb;
+    
+    /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);*/
+}
+
+/*QComboBox#comboBox_mic_dev {*/
+    /*font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #000000;
+    font-style: italic;
+    font-weight: bold;*/
+    /*border-radius: 4px;
+    border: 1px solid #929baa;*/
+    /*padding-left: 12px;*/
+    /*padding: 1px 18px 1px 3px;
+    background-color: white;
+}
+
+    QComboBox#comboBox_mic_dev::down-drop {*/
+        /*border: none;
+        width: 24px;
+        height: 24px;*/
+        /*image: url("./resource/image/arrow.png");*/
+        /*padding-right: 36px;
+        subcontrol-position: center top;
+        subcontrol-origin: padding;*/
+        /*subcontrol-origin: padding;*/
+        /* 按钮位置,右上角 */
+        /*subcontrol-position: top right;*/
+        /* 按钮宽度 */
+        /*width: 25px;*/
+        /* 一条边框线控制 */
+        /*border-left-width: 3px;
+        border-left-color: red;
+        border-left-style: solid;*/
+        /* 倒角 */
+        /*border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+    QComboBox#comboBox_mic_dev::down-arrow {*/
+        /* border: 1px solid green;*/
+        /*border: none;*/
+       /* background-image: url(./resource/image/arrow.png);
+        background-repeat: no-repeat;*/
+        
+    /*}*/
+QLabel#label_setup_channel_page_title_mic_volume_indicator {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #1e6ceb;
+}
+
+/*摄像头设置页面*/
+QPushButton#pushButton_cam_select {
+    border-radius: 4px;
+    border: 1px solid #929baa;
+    background-color: white;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+    background-image: url(./resource/image/arrow.png);
+    background-origin: content;
+    background-position: right;
+    padding-left: 12px;
+    padding-right: 8px;
+    background-repeat: no-repeat;
+}
+QLabel#label_setup_channel_page_title_camera {
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_camera_select {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_camera_dev {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+}
+
+QLabel#label_setup_channel_page_title_cam_test {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+}
+
+QPushButton#pushButton_cam_play {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    /*box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);*/
+    background-color: #1e6ceb;
+}
+
+QPushButton#pushButton_cam_suspend {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    /*box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);*/
+    background-color: #1e6ceb;
+}
+
+QWidget#widget_camera_view {
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+/*扬声器设置页面*/
+QPushButton#pushButton_speaker_select {
+    border-radius: 4px;
+    border: 1px solid #929baa;
+    background-color: white;
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+    background-image: url(./resource/image/arrow.png);
+    background-origin: content;
+    background-position: right;
+    padding-left: 12px;
+    padding-right: 8px;
+    background-repeat: no-repeat;
+}
+
+QLabel#label_setup_channel_page_title_speaker {
+    font-family: Microsoft YaHei;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: PingFangSC;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #64728c;
+    width: 727px;
+    height: 44px;
+    background-color: white;
+}
+
+QLabel#label_setup_channel_page_title_speaker_select {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    color: #64728c;
+}
+
+QLabel#label_setup_channel_page_title_speaker_dev {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+}
+
+QLabel#label_setup_channel_page_title_speaker_audition {
+    font-family: Microsoft YaHei;
+    font-size: 12px;
+    text-align: left;
+    color: #929baa;
+}
+
+
+QPushButton#pushButton_speaker_play {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    /*box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);*/
+    background-color: #1e6ceb;
+}
+
+QPushButton#pushButton_speaker_suspend {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    /*box-shadow: 0 4px 12px 0 rgba(76, 138, 239, 0.5);*/
+    background-color: #1e6ceb;
+}
+
+/*stackedwidget*/
+QWidget#page_env {
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+QWidget#page_encode
+{
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+QWidget#page_render
+{
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+QWidget#page_render_mode
+{
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+QWidget#page_push_stream {
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+QWidget#page_micphone {
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+QWidget#page_camera {
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+QWidget#page_speaker {
+    border-radius: 2px;
+    border: 1px solid #e8eaef;
+    background-color: #f7f8fa;
+}
+
+QWidget#widget_mic {
+    border-radius: 2px;
+    border: 0.5px solid #e8eaef;
+    background-color: white;
+}
+
+QWidget#widget_camera {
+    border-radius: 2px;
+    border: 0.5px solid #e8eaef;
+    background-color: white;
+}
+
+QWidget#widget_speaker {
+    border-radius: 2px;
+    border: 0.5px solid #e8eaef;
+    background-color: white;
+}
+
+
