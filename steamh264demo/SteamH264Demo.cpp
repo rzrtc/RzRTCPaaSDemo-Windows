@@ -20,7 +20,7 @@ SteamH264Demo::SteamH264Demo(QWidget* parent)
     this->setFixedSize(1200, 720);
     qssFile.close();
     drawWindow();
-    RTC::instance()->init("Drv4Q0KB14Y85qma");
+    RTC::instance()->init("appid");
     // ´íÎóAPPID²âÊÔ
     //RTC::instance()->init("Erv4Q0KB14Y85qma");
 }
