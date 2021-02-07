@@ -41,6 +41,7 @@ namespace rz{
         std::shared_ptr<AudioMix> audioMix;
         std::shared_ptr<AudioResample> audioResample;
         std::shared_ptr<AudioVolumeDetect> audioVolumeDetect;
+        std::shared_ptr<AudioFilterAdapter> audioPlaybackFilter;
         std::shared_ptr<AudioSinkDataConsumer> audioSinkDataConsumer;
 
         std::shared_ptr<AudioSink> audioSink;
@@ -55,9 +56,15 @@ namespace rz{
 
         void onVolume(int volume,int vad) override ;
 
+        int enableAudioVolumeIndication(int interval, int smooth, bool report_vad);
+
         void Start();
 
         void Stop();
+
+        void setAudioPlaybackFilter(std::shared_ptr<AudioFilterAdapter>& filter);
+
+        void removeAudioPlaybackFilter();
 
     protected:
         void onError(MODULE_TYPE type,int errCode, const std::string &errMsg) override ;

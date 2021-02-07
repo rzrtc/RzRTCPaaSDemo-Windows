@@ -175,6 +175,23 @@ namespace rz {
             return buffer;
         }
 
+        void updateData(VideoFrame &frame) {
+
+            width = frame.width;
+            height = frame.height;
+            for (int i = 0; i < MAX_VIDEO_PLANE; i++) {
+                delete[]Plane[i];
+                Plane[i] = nullptr;
+            }
+            Plane[0] = new uint8_t[frame.yStride];
+            memcpy(Plane[0], frame.yBuffer, frame.yStride);
+            Plane[1] = new uint8_t[frame.uStride];
+            memcpy(Plane[1], frame.uBuffer, frame.yStride);
+            Plane[2] = new uint8_t[frame.vStride];
+            memcpy(Plane[2], frame.vBuffer, frame.yStride);
+            timestamp = frame.timeStamp;
+        }
+
         VideoData(const unsigned char *data,VIDEO_STREAM_TYPE streamType,VIDEO_PIXEL_FORMAT frameType, int w, int h, long ts){
             if (data == nullptr)
                 return;
@@ -282,13 +299,12 @@ namespace rz {
             this->DataSize = length;
         }
 
-        VideoData(rzrtc::AVData &data,VIDEO_PIXEL_FORMAT fmt){
+        VideoData(rzrtc::AVData &data){
 
             if(data.dataType == rzrtc::AVData::AV_DATA_TYPE_H264)
                 videoStreamType = VIDEO_STREAM_H264;
             else
                 videoStreamType = VIDEO_STREAM_CUSTOM;
-            format = fmt;
             timestamp = data.timestemp;
             index = data.index;
             isKey = data.isKey;
@@ -602,6 +618,21 @@ namespace rz {
         void getData(uint8_t **data, uint32_t &dataLen) {
             *data = this->Data;
             dataLen = this->DataSize;
+        }
+
+
+        void updateData(AudioFrame& frame) {
+            sampleSize = frame.bytesPerSample;                 //每个采样占有的byte数量
+            channelCount = frame.channels;                 //声道数
+            sampleRate = frame.samplesRate;             //采样率
+
+            for (int i = 0; i < MAX_AUDIO_CHANNEL; i++) {
+                delete[]Plane[i];
+                Plane[i] = nullptr;
+            }
+            Plane[0] = new uint8_t[sampleSize * frame.samples];
+            memcpy(Plane[0], frame.buffer, sampleSize * frame.samples);
+            timestamp = frame.timeStamp;
         }
 
          /**

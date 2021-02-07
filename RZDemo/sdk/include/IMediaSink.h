@@ -115,8 +115,8 @@ namespace rz{
         * 进行数据的抛出
         * sdk接收调用该接口将数据进行抛出
         */
-        void consumeAudioData(const unsigned char *buffer,int length,AUDIO_STREAM_TYPE streamType,AUDIO_PCM_FORMAT frameType,
-                              int channel,int resampleRate,long timestamp) override = 0;
+		virtual void consumePcmData(uint8_t* buffer[8], uint32_t lineSize[8], AUDIO_PCM_FORMAT frameType,
+			uint32_t channel, uint32_t sampleRate, long timestamp) = 0;
 
         ~IAudioSink() override = default;
     };

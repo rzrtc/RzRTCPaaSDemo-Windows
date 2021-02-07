@@ -26,6 +26,8 @@
 #include "StatisticsInfoManager.h"
 #include "RZAudioVolumeIndication.h"
 #include "StructureFactory.h"
+#include "RZLogging++.h"
+
 
 namespace rz {
 
@@ -66,21 +68,27 @@ namespace rz {
         std::shared_ptr<SystemInfoCache> systemInfo;
 
         std::shared_ptr<StatisticsInfoManager> statisticsManage;
-        std::shared_ptr<RZHttpClient> httpClient;
+		std::shared_ptr<RZHttpClient> httpClient;
+		std::shared_ptr<DataStatistics> dataStatisticsWriter;
 
         //engine 上下文信息
         IRtcEngineContext *engineContext = nullptr;
 
         static std::string logFilePath;
         
-        static int logLevel;
+        static LOG_FILTER_TYPE logLevel;
 
         static uint32_t LogFileSize;
 
+        static rzl::Configurations conf;
+		
         std::map<void*, void*> streamContexLivingPool;
 
         static std::mutex EngineBaseLivingMX;
 
+    private:
+        static void TransportLoglevel(LOG_FILTER_TYPE filter);
+        void InitDataStatistics();
     protected:
         static StreamConfig getStreamConnectConfig(const std::shared_ptr<localVideoStreamConfig> &stream);
 
@@ -197,7 +205,7 @@ namespace rz {
 
         void onRejoinChannelSuccess(const std::string& channelName, const std::string& uid) override ;
 
-        void onLeaveChannel(const std::string &channelName,bool kike) override ;
+        void onLeaveChannel(const std::string &channelName,bool kick) override ;
 
         void onUserCountChangeCallBack(const std::string &channelName,int broadcasterNum, int audientceNum) override ;
 
@@ -217,6 +225,14 @@ namespace rz {
 
 
         //外部操作
+        static void registerAudioObserver(const AudioObserverInfo&) ;
+        
+        static void removeAudioObserver() ;
+        
+        static void registerVideoObserver(const VideoObserverInfo&) ;
+        
+        static void removeVideoObserver() ;
+
         static void channelRelease(const std::string &channelName);
 
         static void streamRelease(const std::string &channelName,const std::string &streamName);
@@ -292,12 +308,11 @@ namespace rz {
 
         static void setLogFile(const std::string &filePath);
 
-        static void setLogFilter(unsigned int filter);
+        static void setLogFilter(LOG_FILTER_TYPE filter);
 
         static void setLogFileSize(unsigned int fileSizeInKBytes);
 
         static void release();
-
 
         static void startDeviceTest(void *hwnd);
 

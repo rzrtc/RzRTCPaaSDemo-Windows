@@ -5,24 +5,28 @@
 #ifndef PAASSDK_IRTCENGINESTATE_H
 #define PAASSDK_IRTCENGINESTATE_H
 
+#include "IMediaObserver.h"
+
 #if defined(_WIN32)
 #define RZ_CALL __cdecl
 #define RZ_API extern "C" __declspec(dllexport)
 #define RZ_CPP_API __declspec(dllexport)
-#elif defined(__APPLE__)
-#include <TargetConditionals.h>
-#define RZ_API __attribute__((visibility("default"))) extern "C"
-#define RZ_CPP_API __attribute__((visibility("default")))
-#define RZ_CALL
-#elif defined(__ANDROID__) || defined(__linux__)
-#define RZ_API extern "C" __attribute__((visibility("default")))
-#define RZ_CPP_API __attribute__((visibility("default")))
-#define RZ_CALL
+//#elif defined(__APPLE__)
+//#include <TargetConditionals.h>
+//#define RZ_API __attribute__((visibility("default"))) extern "C"
+//#define RZ_CPP_API __attribute__((visibility("default")))
+//#define RZ_CALL
+//#elif defined(__ANDROID__) || defined(__linux__)
+//#define RZ_API extern "C" __attribute__((visibility("default")))
+//#define RZ_CPP_API __attribute__((visibility("default")))
+//#define RZ_CALL
 #else
 #define RZ_API extern "C"
 #define RZ_CPP_API
 #define RZ_CALL
 #endif
+
+
 namespace rz {
     //频道场景
     enum CHANNEL_PROFILE_TYPE {
@@ -142,9 +146,7 @@ namespace rz {
 
     struct AudioSourceConfig {
         AUDIO_STREAM_TYPE streamType = AUDIO_STREAM_PCM;  //音频流类型 非PCM类型下面几项不需要配置
-        int channelCount = 1;                             //声道数
-        unsigned int sampleRate = 16000;                  //采样率
-        AUDIO_PCM_FORMAT pcmFormat = AUDIO_PCM_S16;       //音频采集PCM格式
+        bool enableAec = true;
     };
 
     //媒体流类型
@@ -390,6 +392,10 @@ namespace rz {
         NETTYPE_4G,                     //  5: 网络类型为 4G 移动网络。
         NETTYPE_5G,                     //  6: 网络类型为 5G 移动网络。
     };
+
+
+
+
 
     //本地视频流发布状态
     enum LOCAL_VIDEO_STREAM_STATE {

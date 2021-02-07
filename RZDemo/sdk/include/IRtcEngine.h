@@ -162,7 +162,24 @@ namespace rz{
         //不可更换 joinchannel前配置
         virtual int setLocalVideoSource(IVideoSource *source,VIDEO_STREAM_TYPE streamType) = 0;
 
+		//设置自定义音频源, 不可更换 joinchannel前配置.
+        virtual int setLocalAudioSource(IAudioSource* source, const AudioSourceConfig& sourceConfig) = 0;
+
         virtual int setLocalVideoSink(IVideoSink *sink) = 0;
+
+        //observer配置接口 只能调用一次
+        virtual int registerAudioObserver(AudioObserverInfo&) = 0;
+
+        //remove 要求收到onLeaveChannel后再进行remove
+        virtual int removeAudioObserver() = 0;
+
+
+        //observer配置接口 只能调用一次
+        virtual int registerVideoObserver(VideoObserverInfo&) = 0;
+
+        //remove 要求收到onLeaveChannel后再进行remove
+        virtual int removeVideoObserver() = 0;
+
 
         /**
          * 切换前置/后置摄像头

@@ -113,6 +113,7 @@ namespace rz{
         bool enable = true;
         bool mute = false;
         bool publish = false;
+        bool enableAec = true;
 
         AudioSourceConfig sourceConfig;
         IAudioSource *audioSource = nullptr;
@@ -251,6 +252,11 @@ namespace rz{
         int interval = 1;    //回调间隔 ms
         int smooth = 10;     //音量检测平滑度
         bool report_vad = false;
+
+        AudioObserver* audioObserver = nullptr;
+        uint8_t audioFilterPosition = 0;
+        VideoObserver* videoObserver = nullptr;
+        uint8_t videoFilterPosition = 0;
 
         std::shared_ptr<IRtcChannelContext> pushLocalChannel;
 

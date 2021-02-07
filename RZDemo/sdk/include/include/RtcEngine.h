@@ -72,9 +72,17 @@ namespace rz {
 
         int setLocalVideoSource(IVideoSource *source,VIDEO_STREAM_TYPE streamType) override ;
 
-        int setLocalAudioSource(IAudioSource *source,const AudioSourceConfig &sourceConfig)  ;
+        int setLocalAudioSource(IAudioSource *source,const AudioSourceConfig &sourceConfig)  override;
 
         int setLocalVideoSink(IVideoSink *sink) override ;
+
+        int registerAudioObserver(AudioObserverInfo&) override ;
+
+        int removeAudioObserver() override ;
+
+        int registerVideoObserver(VideoObserverInfo&) override ;
+
+        int removeVideoObserver() override ;
 
         int enableAudioVolumeIndication(int interval, int smooth,bool report_vad) override ;
 

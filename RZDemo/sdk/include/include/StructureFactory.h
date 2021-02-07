@@ -36,6 +36,7 @@
 #include "MediaDeviceTest.h"
 #include "RZAudioVolumeIndication.h"
 #include "StatisticsInfoManager.h"
+#include "MediaFilter.h"
 #include "../Src/Fetching/RZFetchServers.h"
 
 namespace rz {
@@ -108,6 +109,12 @@ namespace rz {
 
         static std::shared_ptr<DataFlow<AudioData>> createAudioDataFlow(const std::string &flowName,const std::shared_ptr<DataFlowMonitor> &monitor,const std::shared_ptr<DataProducer<AudioData>> &producer,const std::shared_ptr<DataConsumer<AudioData>> consumer);
 
+        static std::shared_ptr<AudioFilterAdapter> createAudioFilter(const std::string& cId, const std::string& id, const std::string& name, AUDIO_OBSERVER_POSITION position,
+            AudioObserver* observer);
+
+        static std::shared_ptr<VideoFilterAdapter> createVideoFilter(const std::string& cId, const std::string& id, const std::string& name, VIDEO_OBSERVER_POSITION position,
+            VideoObserver* observer);
+
         static std::shared_ptr<AudioAEC> createAudioAEC(const AudioAECConfig &cfg, AudioAECEventHandler *Event);
 
         static std::shared_ptr<AudioANC> createAudioANC(AudioANCConfig &cfg, AudioANCEventHandler *errorEvent);
@@ -142,7 +149,9 @@ namespace rz {
 
         static std::shared_ptr<rzrtc::RZStreamHandler> createVideoSolPubStream(rzrtc::RZStreamConfig &context, rzrtc::RZStreamHandlerEvent *event);
 
-        static std::shared_ptr<AudioSourceDataProducer> createAudioSourceDataProducer(AudioSource *source,uint32_t frameRate,AudioSourceDataProducerEventHandler *event);
+		static std::shared_ptr<AudioSourceDataProducer> createAudioSourceDataProducer(AudioSource* source, uint32_t frameRate, AudioSourceDataProducerEventHandler* event);
+
+		static std::shared_ptr<AudioSourceDataProducer> createAudioSourceDataProducer(IAudioSource* source, uint32_t frameRate, AudioSourceDataProducerEventHandler* event);
 
         static std::shared_ptr<VideoSourceDataProducer> createVideoSourceDataProducer(VideoSource *source,uint32_t frameRate,VideoSourceDataProducerEventHandler *event);
 
@@ -156,7 +165,7 @@ namespace rz {
 
         static std::shared_ptr<rzrtc::RZStreamHandler> createVideoSolSubStream(rzrtc::RZStreamConfig &context, rzrtc::RZStreamHandlerEvent *event);
 
-        static std::shared_ptr<DataStatistics> createDataStatistics(const char *url);
+        static std::shared_ptr<DataStatistics> createDataStatistics(const DataStatisticsConfig& config);
 
         static std::shared_ptr<IVideoDeviceCollection> createVideoDeviceColloection(VideoDeviceCollectionalEventHandler *);
 
@@ -220,7 +229,9 @@ namespace rz {
 
         static std::shared_ptr<SubVideoStream> createSubVideoStream(const SubVideoStreamInfo &stream,MediaStreamSync *sync,SubVideoStreamEventHandler *event, std::function<void()> fun = nullptr);
 
-        static std::shared_ptr<PubAudioStream> createPubAudioStream(const PubAudioStreamInfo &stream,const std::shared_ptr<AudioSource> &source,PubAudioStreamEventHandler *event, std::function<void()> fun = nullptr);
+		static std::shared_ptr<PubAudioStream> createPubAudioStream(const PubAudioStreamInfo& stream, const std::shared_ptr<AudioSource>& source, PubAudioStreamEventHandler* event, std::function<void()> fun = nullptr);
+		
+        static std::shared_ptr<PubAudioStream> createPubAudioStream(const PubAudioStreamInfo& stream, const IAudioSource* source, PubAudioStreamEventHandler* event, std::function<void()> fun = nullptr);
 
         static std::shared_ptr<SubAudioStream> createSubAudioStream(const SubAudioStreamInfo &stream,MediaStreamSync *sync,SubAudioStreamEventHandler *event, std::function<void()> fun = nullptr);
 

@@ -27,9 +27,9 @@ namespace rz{
 
     class IAudioFrameConsumer {
     public:
-        //音频数据传输函数
-        virtual void consumeAudioData(const unsigned char *buffer,int length,AUDIO_STREAM_TYPE streamType,AUDIO_PCM_FORMAT frameType,
-                                      int channel,int sampleRate,long timestamp) = 0;
+
+		virtual void consumePcmData(uint8_t* buffer[8], uint32_t lineSize[8], AUDIO_PCM_FORMAT frameType,
+			uint32_t channel, uint32_t sampleRate, long timestamp) = 0;
 
         virtual ~IAudioFrameConsumer() = default;
 
