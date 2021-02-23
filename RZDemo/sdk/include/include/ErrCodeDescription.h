@@ -321,7 +321,7 @@ namespace rz{
             case ERR_LOOKUP_SCHEDULE_SERVER_TIMEOUT:
                 return "Lookup schedule server timed out (server no response)";
             case ERR_INVALID_APP_ID:
-                return "appId is invaild";
+                return "appId is invalid";
             case ERR_INVALID_CHANNEL_ID:
                 return "channelId is invalid";
             case ERR_LOOKUP_SCHEDULE_SERVER_FAILED:

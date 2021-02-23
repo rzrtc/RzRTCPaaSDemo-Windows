@@ -5,7 +5,7 @@
 #ifndef PAASSDK_IMEDIADEVICEMANAGER_H
 #define PAASSDK_IMEDIADEVICEMANAGER_H
 
-#include "DeviceColloection.h"
+#include "DeviceCollection.h"
 
 #define MAX_DEVICE_ID_LENGTH 64
 

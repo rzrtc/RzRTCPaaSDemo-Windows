@@ -11,15 +11,15 @@
 #define RZ_CALL __cdecl
 #define RZ_API extern "C" __declspec(dllexport)
 #define RZ_CPP_API __declspec(dllexport)
-//#elif defined(__APPLE__)
-//#include <TargetConditionals.h>
-//#define RZ_API __attribute__((visibility("default"))) extern "C"
-//#define RZ_CPP_API __attribute__((visibility("default")))
-//#define RZ_CALL
-//#elif defined(__ANDROID__) || defined(__linux__)
-//#define RZ_API extern "C" __attribute__((visibility("default")))
-//#define RZ_CPP_API __attribute__((visibility("default")))
-//#define RZ_CALL
+#elif defined(__APPLE__)
+#include <TargetConditionals.h>
+#define RZ_API __attribute__((visibility("default"))) extern "C"
+#define RZ_CPP_API __attribute__((visibility("default")))
+#define RZ_CALL
+#elif defined(__ANDROID__) || defined(__linux__)
+#define RZ_API extern "C" __attribute__((visibility("default")))
+#define RZ_CPP_API __attribute__((visibility("default")))
+#define RZ_CALL
 #else
 #define RZ_API extern "C"
 #define RZ_CPP_API

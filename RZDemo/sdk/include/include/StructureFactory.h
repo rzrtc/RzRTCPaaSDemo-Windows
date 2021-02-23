@@ -183,9 +183,9 @@ namespace rz {
 
         static std::shared_ptr<VideoScaleCrop> createVideoScaleCrop(VideoScaleCropConfig &dst, VideoScaleCropEventHandler *eventHandler);
 
-        static std::shared_ptr<streamSyncProcess<VideoData>> createVideoStreamSyncProcess(MediaStreamSync *sync);
+        static std::shared_ptr<StreamSyncProcess<VideoData>> createVideoStreamSyncProcess(MediaStreamSync *sync);
 
-        static std::shared_ptr<streamSyncProcess<AudioData>> createAudioStreamSyncProcess(MediaStreamSync *sync);
+        static std::shared_ptr<StreamSyncProcess<AudioData>> createAudioStreamSyncProcess(MediaStreamSync *sync);
 
         static std::shared_ptr<VideoPreviewObserver> createVideoPreviewObserver(const PubVideoStreamInfo &stream,IVideoSink *sink,VIDEO_MIRROR_MODE_TYPE mirror, VideoPreviewObserverEventHandler *event);
 

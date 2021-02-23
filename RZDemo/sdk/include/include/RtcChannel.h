@@ -31,7 +31,7 @@ namespace rz{
         int leaveChannel() override ;
 
         /**
-         * ËùÓĞ²ÎÊı±ØĞë´«µİ, ²»ÄÜÎª¿Õ
+         * æ‰€æœ‰å‚æ•°å¿…é¡»ä¼ é€’, ä¸èƒ½ä¸ºç©º
          */
         IRtcStream * createVideoStream(const char *streamName, IVideoSource *videoSource,VIDEO_STREAM_TYPE  streamType,IRtcStreamEventHandler *event,const VideoEncoderConfiguration &videoCfg) override ;
 

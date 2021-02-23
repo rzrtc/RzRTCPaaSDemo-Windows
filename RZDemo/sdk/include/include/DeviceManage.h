@@ -8,7 +8,8 @@
 #include <memory>
 
 #include "../IMediaDeviceManager.h"
-#include "DeviceColloection.h"
+#include "DeviceCollection.h"
+#include "DeviceCollectionEventHandler.h"
 
 namespace rz {
 

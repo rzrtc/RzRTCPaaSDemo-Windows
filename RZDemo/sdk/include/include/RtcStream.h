@@ -17,13 +17,13 @@ namespace rz{
     class RtcStream : public IRtcStream{
     private:
 
-        localVideoStreamConfig *streamContext;
+        localVideoStreamContext *streamContext;
         RtcChannel* channel = nullptr;
     protected:
         ~RtcStream() override = default;
     public:
 
-        explicit RtcStream(localVideoStreamConfig *context ,RtcChannel *cnl):streamContext(context),channel(cnl){}
+        explicit RtcStream(localVideoStreamContext*context ,RtcChannel *cnl):streamContext(context),channel(cnl){}
 
         const char *getStreamName() override ;
 

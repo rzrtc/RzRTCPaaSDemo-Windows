@@ -10,7 +10,7 @@
 #include "MediaSource.h"
 #include "RZSystemInfo.h"
 #include "DataStatistics.h"
-#include "DeviceColloection.h"
+#include "DeviceCollection.h"
 #include "DeviceCollectionProducer.h"
 #include "RZLogProcess.h"
 
@@ -61,7 +61,7 @@ namespace rz {
         static void deleteMediaDeviceColloectionProduce(MediaDeviceColloectionProduce *);
 
         //创建打点数据发送结构
-        static DataStatistics *createDataStatistics(const char *url);
+        static DataStatistics *createDataStatistics(const char* url, int interval, const char* logonFile);
 
         //释放打点数据发送结构
         static void deleteDataStatistics(DataStatistics *);

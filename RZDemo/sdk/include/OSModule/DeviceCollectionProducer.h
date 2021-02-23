@@ -5,8 +5,8 @@
 #ifndef PAASSDK_DEVICECOLLECTIONPRODUCER_H
 #define PAASSDK_DEVICECOLLECTIONPRODUCER_H
 
-#include "DeviceColloection.h"
-#include "DeviceColloectionEventHandler.h"
+#include "DeviceCollection.h"
+#include "DeviceCollectionEventHandler.h"
 
 namespace rz{
 

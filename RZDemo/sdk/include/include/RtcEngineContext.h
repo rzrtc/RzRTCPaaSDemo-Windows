@@ -35,15 +35,15 @@ namespace rz{
         STREAM_CONTEXT_LOCAL_AUDIO,
         STREAM_CONTEXT_REMOTE_AUDIO
     };
-    struct BaseStreamConfig {
+    struct BaseStreamContext {
         STREAM_CONTEXT_TYPE streamContextType;
-        BaseStreamConfig(STREAM_CONTEXT_TYPE type) {
+        BaseStreamContext(STREAM_CONTEXT_TYPE type) {
             streamContextType = type;
         }
     };
 
 
-    struct localVideoStreamConfig : public BaseStreamConfig {
+    struct localVideoStreamContext : public BaseStreamContext {
         IRtcChannelContext *channelContext = nullptr;
 
         std::shared_ptr<StreamInfoCache> streamInfo;
@@ -83,9 +83,9 @@ namespace rz{
         IVideoSource* lowVideoStreamSource = nullptr;
         std::shared_ptr<PubVideoStream> lowPubVideoStream;
 
-        localVideoStreamConfig():BaseStreamConfig(STREAM_CONTEXT_LOCAL_VIDEO) {}
+        localVideoStreamContext():BaseStreamContext(STREAM_CONTEXT_LOCAL_VIDEO) {}
 
-        ~localVideoStreamConfig() {
+        ~localVideoStreamContext() {
             streamInfo.reset();
             lowStreamInfo.reset();
 
@@ -95,14 +95,14 @@ namespace rz{
         }
     };
 
-    inline localVideoStreamConfig* getStreamContext(localVideoStreamConfig* ptr) {
+    inline localVideoStreamContext* getStreamContext(localVideoStreamContext* ptr) {
         if (ptr->streamContextType != STREAM_CONTEXT_LOCAL_VIDEO) {
             LOG_ERROR("StreamContextConstant") << "指针转换错误";
             return nullptr;
         }
-        return (localVideoStreamConfig*)ptr;
+        return (localVideoStreamContext*)ptr;
     }
-    struct localAudioStreamConfig : public BaseStreamConfig {
+    struct localAudioStreamContext : public BaseStreamContext {
         IRtcChannelContext *channelContext = nullptr;
 
         std::shared_ptr<StreamInfoCache> streamInfo;
@@ -128,23 +128,23 @@ namespace rz{
 
         std::shared_ptr<PubAudioStream> pubAudioStream;
 
-        localAudioStreamConfig() :BaseStreamConfig(STREAM_CONTEXT_LOCAL_AUDIO) {}
+        localAudioStreamContext() :BaseStreamContext(STREAM_CONTEXT_LOCAL_AUDIO) {}
 
-        ~localAudioStreamConfig() {
+        ~localAudioStreamContext() {
             streamInfo.reset();
 
             GlobalInfoCache::DelStreamInfo(streamId);
         }
     };
 
-    inline localAudioStreamConfig* getStreamContext(localAudioStreamConfig* ptr) {
+    inline localAudioStreamContext* getStreamContext(localAudioStreamContext* ptr) {
         if (ptr->streamContextType != STREAM_CONTEXT_LOCAL_AUDIO) {
             LOG_ERROR("StreamContextConstant") << "指针转换错误";
             return nullptr;
         }
-        return (localAudioStreamConfig*)ptr;
+        return (localAudioStreamContext*)ptr;
     }
-    struct remoteVideoStreamConfig : public BaseStreamConfig {
+    struct remoteVideoStreamContext : public BaseStreamContext {
         IRtcChannelContext *channelContext = nullptr;
 
         std::shared_ptr<StreamInfoCache> streamInfo;
@@ -174,9 +174,9 @@ namespace rz{
 
         std::shared_ptr<MediaStreamSync> streamSync;
 
-        remoteVideoStreamConfig() :BaseStreamConfig(STREAM_CONTEXT_REMOTE_VIDEO) {}
+        remoteVideoStreamContext() :BaseStreamContext(STREAM_CONTEXT_REMOTE_VIDEO) {}
 
-        ~remoteVideoStreamConfig() {
+        ~remoteVideoStreamContext() {
             subVideoStream.reset();
             streamSync.reset();
             streamInfo.reset();
@@ -188,14 +188,14 @@ namespace rz{
         }
     };
 
-    inline remoteVideoStreamConfig* getStreamContext(remoteVideoStreamConfig* ptr) {
+    inline remoteVideoStreamContext* getStreamContext(remoteVideoStreamContext* ptr) {
         if (ptr->streamContextType != STREAM_CONTEXT_REMOTE_VIDEO) {
             LOG_ERROR("StreamContextConstant") << "指针转换错误";
             return nullptr;
         }
-        return (remoteVideoStreamConfig*)ptr;
+        return (remoteVideoStreamContext*)ptr;
     }
-    struct remoteAudioStreamConfig : public BaseStreamConfig {
+    struct remoteAudioStreamContext : public BaseStreamContext {
         IRtcChannelContext *channelContext = nullptr;
 
         std::shared_ptr<StreamInfoCache> streamInfo;
@@ -216,9 +216,9 @@ namespace rz{
         std::shared_ptr<SubAudioStream> subAudioStream;
         std::shared_ptr<MediaStreamSync> streamSync;
 
-        remoteAudioStreamConfig() :BaseStreamConfig(STREAM_CONTEXT_REMOTE_AUDIO) {}
+        remoteAudioStreamContext() :BaseStreamContext(STREAM_CONTEXT_REMOTE_AUDIO) {}
 
-        ~remoteAudioStreamConfig() {
+        ~remoteAudioStreamContext() {
             subAudioStream.reset();
             streamSync.reset();
             streamInfo.reset();
@@ -227,12 +227,12 @@ namespace rz{
         }
     };
 
-    inline remoteAudioStreamConfig* getStreamContext(remoteAudioStreamConfig* ptr) {
+    inline remoteAudioStreamContext* getStreamContext(remoteAudioStreamContext* ptr) {
         if (ptr->streamContextType != STREAM_CONTEXT_REMOTE_AUDIO) {
             LOG_ERROR("StreamContextConstant") << "指针转换错误";
             return nullptr;
         }
-        return (remoteAudioStreamConfig*)ptr;
+        return (remoteAudioStreamContext*)ptr;
     }
 
     struct IRtcEngineContext {
@@ -257,13 +257,13 @@ namespace rz{
         uint8_t audioFilterPosition = 0;
         VideoObserver* videoObserver = nullptr;
         uint8_t videoFilterPosition = 0;
+        //当前发布流的频道
+        std::shared_ptr<IRtcChannelContext> pushChannelContext;
 
-        std::shared_ptr<IRtcChannelContext> pushLocalChannel;
+        std::map<std::string,std::shared_ptr<IRtcChannelContext>> channelContextPool;
 
-        std::map<std::string,std::shared_ptr<IRtcChannelContext>> channelPool;
-
-        std::shared_ptr<localVideoStreamConfig> videoStreamConfig;
-        std::shared_ptr<localAudioStreamConfig> audioStreamConfig;
+        std::shared_ptr<localVideoStreamContext> localVideoStreamCtx;
+        std::shared_ptr<localAudioStreamContext> localAudioStreamCtx;
     };
 
     struct IRtcChannelContext {
@@ -305,23 +305,26 @@ namespace rz{
         bool allVideoMute = false;
 
         //记录joinchannel前要求推送的其他路视频流
-        std::map<std::string, std::shared_ptr<localVideoStreamConfig>> pubStreamPool;
+        std::map<std::string, std::shared_ptr<localVideoStreamContext>> pubVideoStreamContextPool;
 
-        std::map<std::string, std::shared_ptr<remoteVideoStreamConfig>> remoteVideoStreamConfigPool;
+        std::map<std::string, std::shared_ptr<remoteVideoStreamContext>> subVideoStreamContextPool;
 
-        std::map<std::string, std::shared_ptr<remoteAudioStreamConfig>> remoteAudioStreamConfigPool;
-
+        std::map<std::string, std::shared_ptr<remoteAudioStreamContext>> subAudioStreamContexPool;
+        //MN的封装, 主要负责和信令服务器的通信
         std::shared_ptr<Channel> channelImpl;
 
 
         ~IRtcChannelContext() {
-            channelInfo.reset();
-            userInfo.reset();
-            pubStreamPool.clear();
+            //缓存清理, 暂时先分开吧
+			channelInfo.reset();
+			userInfo.reset();
 
-            remoteVideoStreamConfigPool.clear();
+            //发布流和订阅流的上下文pool清理
+            pubVideoStreamContextPool.clear();
+            subVideoStreamContextPool.clear();
+            subAudioStreamContexPool.clear();
 
-            remoteAudioStreamConfigPool.clear();
+			//缓存清理, 暂时先分开吧
             GlobalInfoCache::DelChannelInfo(channelId);
             GlobalInfoCache::DelUserInfo();
         }

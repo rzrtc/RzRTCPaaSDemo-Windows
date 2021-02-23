@@ -18,16 +18,6 @@ namespace rz {
         RZ_LOG_LEVEL_FATAL       //严重性错误信息 需要整个SDK进行退出
     };
 
-    enum LOG_FILTER_TYPE {
-        LOG_FILTER_DEBUG,
-        LOG_FILTER_INFO,
-        LOG_FILTER_WARN,
-        LOG_FILTER_ERROR,
-        LOG_FILTER_FATAL,
-        LOG_FILTER_OFF
-    };
-
-
     struct RZLogConfig {
         /**是否到控制台*/
         bool            enableConsole       = false;

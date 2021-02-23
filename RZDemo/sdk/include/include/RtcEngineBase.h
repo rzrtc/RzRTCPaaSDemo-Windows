@@ -81,8 +81,10 @@ namespace rz {
         static uint32_t LogFileSize;
 
         static rzl::Configurations conf;
-		
-        std::map<void*, void*> streamContexLivingPool;
+		/**
+		 * 目前对于值不感兴趣, 随便填写, 以后考虑换成map, 本次改动只优化变量名称
+		 */
+        std::map<void*, void*> streamContextLivingPool;
 
         static std::mutex EngineBaseLivingMX;
 
@@ -90,25 +92,25 @@ namespace rz {
         static void TransportLoglevel(LOG_FILTER_TYPE filter);
         void InitDataStatistics();
     protected:
-        static StreamConfig getStreamConnectConfig(const std::shared_ptr<localVideoStreamConfig> &stream);
+        static StreamConfig getStreamConnectConfig(const std::shared_ptr<localVideoStreamContext> & streamCtx);
 
-        static StreamConfig getStreamConnectConfig(const std::shared_ptr<localAudioStreamConfig> &stream);
+        static StreamConfig getStreamConnectConfig(const std::shared_ptr<localAudioStreamContext> & streamCtx);
 
-        static void createPubAudioStreamInfo(std::shared_ptr<localAudioStreamConfig> &stream);
+        static void createPubAudioStreamInfo(std::shared_ptr<localAudioStreamContext> & streamCtx);
 
-        static void createSubAudioStreamInfo(std::shared_ptr<remoteAudioStreamConfig> &stream,std::shared_ptr<IRtcChannelContext> &channel,MEDIA_STREAM_TYPE mediaStreamType,MediaStreamSync *sync);
+        static void createSubAudioStreamInfo(std::shared_ptr<remoteAudioStreamContext> & streamCtx,std::shared_ptr<IRtcChannelContext> &channelCtx,MEDIA_STREAM_TYPE mediaStreamType,MediaStreamSync *sync);
 
-        static void createPubVideoStreamInfo(std::shared_ptr<localVideoStreamConfig> &stream);
+        static void createPubVideoStreamInfo(std::shared_ptr<localVideoStreamContext> & streamCtx);
 
-        static void createSubVideoStreamInfo(std::shared_ptr<remoteVideoStreamConfig> &stream,std::shared_ptr<IRtcChannelContext> &channel,MEDIA_STREAM_TYPE mediaStreamType,MediaStreamSync *sync);
+        static void createSubVideoStreamInfo(std::shared_ptr<remoteVideoStreamContext> & streamCtx,std::shared_ptr<IRtcChannelContext> & channelCtx,MEDIA_STREAM_TYPE mediaStreamType,MediaStreamSync *sync);
 
-        static void localStreamCreate(std::shared_ptr<localAudioStreamConfig> stream);
+        static void localStreamCreate(std::shared_ptr<localAudioStreamContext> channelCtx);
 
-        static void localStreamCreate(std::shared_ptr<localVideoStreamConfig> stream);
+        static void localStreamCreate(std::shared_ptr<localVideoStreamContext> streamCtx);
 
-        static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<remoteAudioStreamConfig> &stream,bool allMute);
+        static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<remoteAudioStreamContext> & streamCtx,bool allMute);
 
-        static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<remoteVideoStreamConfig> &stream,bool allMute);
+        static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<remoteVideoStreamContext> & streamCtx,bool allMute);
     protected:
         void onError(MODULE_TYPE type, int errCode, const std::string &errMsg) override;
 
