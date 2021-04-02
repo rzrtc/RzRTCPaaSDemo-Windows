@@ -5,334 +5,337 @@
 #ifndef PAASSDK_RTCENGINEBASE_H
 #define PAASSDK_RTCENGINEBASE_H
 
-
 #include <Base/bitRateCalculation.h>
-#include "lastmileProbe/RZLastmileProbeCalculate.h"
-#include "RZLog.h"
-#include "RZTime.h"
+
+#include "../IMediaSink.h"
+#include "../IRtcEngine.h"
+#include "../IRtcEngineState.h"
 #include "IChannel.h"
-#include "ThreadPool.h"
-#include "RZLogging++.h"
+#include "MediaDeviceTest.h"
+#include "MediaStreamInfo.h"
 #include "PubAudioStream.h"
 #include "PubVideoStream.h"
+#include "RZAudioVolumeIndication.h"
+#include "RZLog.h"
+#include "RZLogging++.h"
+#include "RZTime.h"
+#include "RtcEngineContext.h"
+#include "StatisticsInfoManager.h"
+#include "StructureFactory.h"
 #include "SubAudioStream.h"
 #include "SubVideoStream.h"
-#include "MediaStreamInfo.h"
-#include "MediaDeviceTest.h"
-#include "../IMediaSink.h"
-#include "../IRtcEngineState.h"
-#include "RtcEngineContext.h"
-#include "../IRtcEngine.h"
-#include "StatisticsInfoManager.h"
-#include "RZAudioVolumeIndication.h"
-#include "StructureFactory.h"
-#include "RZLogging++.h"
-
+#include "ThreadPool.h"
+#include "lastmileProbe/RZLastmileProbeCalculate.h"
 
 namespace rz {
 
-    class RtcEngineBase :public LastmileProbeEventHandler,
-                       public systemInfoCollectionEventHandler,
-                       public ChannelEventHandler,
-                       public SubVideoStreamEventHandler,
-                       public PubVideoStreamEventHandler,
-                       public SubAudioStreamEventHandler,
-                       public PubAudioStreamEventHandler,
-                       public AudioDeviceCollectionalEventHandler,
-                       public VideoDeviceCollectionalEventHandler,
-                       public AudioPlaybackEventHandler,
-                       public MediaDeviceTestEventHandler,
-                       public StatisticsEventHandler,
-                       public AudioVolumeIndicationEventHandler{
-    private:
+class RtcEngineBase : public LastmileProbeEventHandler,
+                      public systemInfoCollectionEventHandler,
+                      public ChannelEventHandler,
+                      public SubVideoStreamEventHandler,
+                      public PubVideoStreamEventHandler,
+                      public SubAudioStreamEventHandler,
+                      public PubAudioStreamEventHandler,
+                      public AudioDeviceCollectionalEventHandler,
+                      public VideoDeviceCollectionalEventHandler,
+                      public AudioPlaybackEventHandler,
+                      public MediaDeviceTestEventHandler,
+                      public StatisticsEventHandler,
+                      public AudioVolumeIndicationEventHandler {
+ private:
+  std::shared_ptr<RZLog> rzLogImpl;
 
-        std::shared_ptr<RZLog> rzLogImpl;
+  std::shared_ptr<AudioDeviceManager> audioDeviceManage;
+  std::shared_ptr<VideoDeviceManager> videoDeviceManage;
 
-        std::shared_ptr<AudioDeviceManager> audioDeviceManage;
-        std::shared_ptr<VideoDeviceManager> videoDeviceManage;
+  std::shared_ptr<VideoSourceProducer> videoSourceProducer;
+  std::shared_ptr<AudioPlayback> audioPlayBack;
 
-        std::shared_ptr<VideoSourceProducer> videoSourceProducer;
-        std::shared_ptr<AudioPlayback> audioPlayBack;
+  std::shared_ptr<AudioSinkProducer> audioSinkProducer;
+  std::shared_ptr<RZAudioVolumeIndication> audioVolumeIndication;
 
-        std::shared_ptr<AudioSinkProducer> audioSinkProducer;
-        std::shared_ptr<RZAudioVolumeIndication> audioVolumeIndication;
+  std::shared_ptr<MediaDeviceTest> mediaDeviceTest;
 
-        std::shared_ptr<MediaDeviceTest> mediaDeviceTest;
+  std::shared_ptr<RZLastmileProbeCalculate> lastmileProbeCal;
 
-        std::shared_ptr<RZLastmileProbeCalculate> lastmileProbeCal;
+  std::shared_ptr<RZLastmileProbeTest> lastmileProbeTest;
 
-        std::shared_ptr<RZLastmileProbeTest> lastmileProbeTest;
+  std::shared_ptr<systemInfoCollection> systemColloction;
 
-        std::shared_ptr<systemInfoCollection> systemColloction;
+  std::shared_ptr<SystemInfoCache> systemInfo;
 
-        std::shared_ptr<SystemInfoCache> systemInfo;
+  std::shared_ptr<StatisticsInfoManager> statisticsManage;
+  std::shared_ptr<RZHttpClient> httpClient;
+  std::shared_ptr<DataStatistics> dataStatisticsWriter;
 
-        std::shared_ptr<StatisticsInfoManager> statisticsManage;
-		std::shared_ptr<RZHttpClient> httpClient;
-		std::shared_ptr<DataStatistics> dataStatisticsWriter;
+  // engine 上下文信息
+  IRtcEngineContext *engineContext = nullptr;
 
-        //engine 上下文信息
-        IRtcEngineContext *engineContext = nullptr;
+  static std::string logFilePath;
 
-        static std::string logFilePath;
-        
-        static LOG_FILTER_TYPE logLevel;
+  static LOG_FILTER_TYPE logLevel;
 
-        static uint32_t LogFileSize;
+  static uint32_t LogFileSize;
 
-        static rzl::Configurations conf;
-		/**
-		 * 目前对于值不感兴趣, 随便填写, 以后考虑换成map, 本次改动只优化变量名称
-		 */
-        std::map<void*, void*> streamContextLivingPool;
+  static rzl::Configurations conf;
+  /**
+   * 目前对于值不感兴趣, 随便填写, 以后考虑换成map, 本次改动只优化变量名称
+   */
+  std::map<void *, void *> streamContextLivingPool;
 
-        static std::mutex EngineBaseLivingMX;
+  static std::mutex EngineBaseLivingMX;
 
-    private:
-        static void TransportLoglevel(LOG_FILTER_TYPE filter);
-        void InitDataStatistics();
-    protected:
-        static StreamConfig getStreamConnectConfig(const std::shared_ptr<localVideoStreamContext> & streamCtx);
+ private:
+  static void TransportLoglevel(LOG_FILTER_TYPE filter);
+  void InitDataStatistics();
 
-        static StreamConfig getStreamConnectConfig(const std::shared_ptr<localAudioStreamContext> & streamCtx);
+ protected:
+  static StreamConfig getStreamConnectConfig(const std::shared_ptr<LocalVideoStreamContext> &streamCtx);
 
-        static void createPubAudioStreamInfo(std::shared_ptr<localAudioStreamContext> & streamCtx);
+  static StreamConfig getStreamConnectConfig(const std::shared_ptr<LocalAudioStreamContext> &streamCtx);
 
-        static void createSubAudioStreamInfo(std::shared_ptr<remoteAudioStreamContext> & streamCtx,std::shared_ptr<IRtcChannelContext> &channelCtx,MEDIA_STREAM_TYPE mediaStreamType,MediaStreamSync *sync);
+  static void createPubAudioStreamInfo(std::shared_ptr<LocalAudioStreamContext> &streamCtx);
 
-        static void createPubVideoStreamInfo(std::shared_ptr<localVideoStreamContext> & streamCtx);
+  static void createSubAudioStreamInfo(std::shared_ptr<RemoteAudioStreamContext> &streamCtx, std::shared_ptr<IRtcChannelContext> &channelCtx,
+                                       MEDIA_STREAM_TYPE mediaStreamType, MediaStreamSync *sync);
 
-        static void createSubVideoStreamInfo(std::shared_ptr<remoteVideoStreamContext> & streamCtx,std::shared_ptr<IRtcChannelContext> & channelCtx,MEDIA_STREAM_TYPE mediaStreamType,MediaStreamSync *sync);
+  static void createPubVideoStreamInfo(std::shared_ptr<LocalVideoStreamContext> &streamCtx);
 
-        static void localStreamCreate(std::shared_ptr<localAudioStreamContext> channelCtx);
+  static void createSubVideoStreamInfo(std::shared_ptr<RemoteVideoStreamContext> &streamCtx, std::shared_ptr<IRtcChannelContext> &channelCtx,
+                                       MEDIA_STREAM_TYPE mediaStreamType, MediaStreamSync *sync);
 
-        static void localStreamCreate(std::shared_ptr<localVideoStreamContext> streamCtx);
+  static void localStreamCreate(std::shared_ptr<LocalAudioStreamContext> channelCtx);
 
-        static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<remoteAudioStreamContext> & streamCtx,bool allMute);
+  static void localStreamCreate(std::shared_ptr<LocalVideoStreamContext> streamCtx);
 
-        static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<remoteVideoStreamContext> & streamCtx,bool allMute);
-    protected:
-        void onError(MODULE_TYPE type, int errCode, const std::string &errMsg) override;
+  static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<RemoteAudioStreamContext> &streamCtx, bool allMute);
 
-        void onWarn(MODULE_TYPE type, int warnCode, const std::string &warnMsg) override;
-    public:
-        
-        static RtcEngineBase *rtcEngineBase;
+  static SUBSCRIBE_STREAM_STATE getRemoteStreamState(std::shared_ptr<RemoteVideoStreamContext> &streamCtx, bool allMute);
 
-        RtcEngineEventHandler* eventHandler = nullptr;
-        
-        explicit RtcEngineBase(IRtcEngineContext *context);
+ protected:
+  void onError(MODULE_TYPE type, int errCode, const std::string &errMsg) override;
 
-        void onError(const std::string &channelName,MODULE_TYPE type,int errCode, const std::string &errMsg) override ;
+  void onWarn(MODULE_TYPE type, int warnCode, const std::string &warnMsg) override;
 
-        void onWarn(const std::string &channelName,MODULE_TYPE type,int warnCode, const std::string &warnMsg) override ;
+ public:
+  static RtcEngineBase *rtcEngineBase;
 
-        void onError(const void *streamContext,MODULE_TYPE type,int errCode, const std::string &errMsg) override ;
+  RtcEngineEventHandler *eventHandler = nullptr;
 
-        void onWarn(const void *streamContext,MODULE_TYPE type,int warnCode, const std::string &warnMsg) override ;
+  explicit RtcEngineBase(IRtcEngineContext *context);
 
-    public:
-        //系统负载信息回调
-        void onSystemLoadInfo(const systemLoadInfo& loadInfo) override ;
+  void onError(const std::string &channelName, MODULE_TYPE type, int errCode, const std::string &errMsg) override;
 
-        //音量综合回调
-        void onAudioVolumeIndication(const AudioVolumeInfo *speakers, unsigned int speakerNumber, int totalVolume) override ;
+  void onWarn(const std::string &channelName, MODULE_TYPE type, int warnCode, const std::string &warnMsg) override;
 
-        //设备测试
-        void onVolume(MODULE_TYPE type, int volume,int vad) override ;
+  void onError(const void *streamContext, MODULE_TYPE type, int errCode, const std::string &errMsg) override;
 
-        //设备事件
-        void onAudioDeviceVolumeChanged(MEDIA_DEVICE_TYPE deviceType, int volume, bool muted) override;
+  void onWarn(const void *streamContext, MODULE_TYPE type, int warnCode, const std::string &warnMsg) override;
 
-        void onDeviceWorkStateChanged(const char *deviceID, MEDIA_DEVICE_TYPE deviceType,
-                                      MEDIA_DEVICE_STATE_TYPE deviceState) override;
+ public:
+  //系统负载信息回调
+  void onSystemLoadInfo(const systemLoadInfo &loadInfo) override;
 
-        void onAudioRouteChanged(AUDIO_ROUTE_TYPE routing) override;
+  //音量综合回调
+  void onAudioVolumeIndication(const AudioVolumeInfo *speakers, unsigned int speakerNumber, int totalVolume) override;
 
-        //设备网络类型检测回调
-        void onNetTypeChanged(NETWORK_TYPE oldNetType, NETWORK_TYPE newNetType) override ;
+  //设备测试
+  void onVolume(MODULE_TYPE type, int volume, int vad) override;
 
-        //网络参数检测结果回调
-        void onLastmileQuality(rz::QUALITY_TYPE upNetQuality, rz::QUALITY_TYPE downNetQuality) override ;
+  //设备事件
+  void onAudioDeviceVolumeChanged(MEDIA_DEVICE_TYPE deviceType, int volume, bool muted) override;
 
-        void onLastmileProbeCallback(rz::LastmileProbeResult& probeResult) override ;
+  void onDeviceWorkStateChanged(const char *deviceID, MEDIA_DEVICE_TYPE deviceType, MEDIA_DEVICE_STATE_TYPE deviceState) override;
 
-        //StreamEventhandler
-        void onFirstVideoFrame(const void *streamContext,MODULE_TYPE type,int width, int height) override ;
+  void onAudioRouteChanged(AUDIO_ROUTE_TYPE routing) override;
 
-        void onVideoSizeChanged(const void *streamContext,MODULE_TYPE type, int width, int height) override ;
+  //设备网络类型检测回调
+  void onNetTypeChanged(NETWORK_TYPE oldNetType, NETWORK_TYPE newNetType) override;
 
-        void onStreamForzen(const void *streamContext,MODULE_TYPE type,bool forzen) override ;
+  //网络参数检测结果回调
+  void onLastmileQuality(rz::QUALITY_TYPE upNetQuality, rz::QUALITY_TYPE downNetQuality) override;
 
-        void onStreamRecvFirstFrame(const void *streamContext,MODULE_TYPE type) override ;
+  void onLastmileProbeCallback(rz::LastmileProbeResult &probeResult) override;
 
-        void onCodecSwitchWarn(const void *streamContext,MODULE_TYPE type,VIDEO_CODEC_TYPE oldDecoderType,VIDEO_CODEC_TYPE newDecoderType) override ;
+  // StreamEventhandler
+  void onFirstVideoFrame(const void *streamContext, MODULE_TYPE type, int width, int height) override;
 
-        void onStreamConnectStateChanged(const void *streamContext,MODULE_TYPE type,CONNECTION_STATE_TYPE stateType) override ;
+  void onVideoSizeChanged(const void *streamContext, MODULE_TYPE type, int width, int height) override;
 
-        void onStreamNetInfo(const void *streamContext,MODULE_TYPE type,rzrtc::NetworkQuality& networkQuality) override ;
+  void onStreamForzen(const void *streamContext, MODULE_TYPE type, bool forzen, uint64_t frameCount, uint64_t ts) override;
 
-        void onLossFrame(const void *streamContext,MODULE_TYPE type,int Num) override ;
+  void onStreamRecvFirstFrame(const void *streamContext, MODULE_TYPE type) override;
 
-        void onAudioStreamVolume(const void *streamContext,MODULE_TYPE type,int volume,int vad) override ;
+  void onCodecSwitchWarn(const void *streamContext, MODULE_TYPE type, VIDEO_CODEC_TYPE oldDecoderType, VIDEO_CODEC_TYPE newDecoderType) override;
 
-        void onFirstFramePublished(const void *streamContext,MODULE_TYPE type) override ;
+  void onStreamConnectStateChanged(const void *streamContext, MODULE_TYPE type, CONNECTION_STATE_TYPE stateType) override;
 
-        void onStreamStartSuccess(const void *streamContext,MODULE_TYPE type) override ;
+  void onStreamNetInfo(const void *streamContext, MODULE_TYPE type, rzrtc::NetworkQuality &networkQuality) override;
 
-        //channelEventHandler
-        void onRemoteVideoStreamMuteChanged(const std::string &channelName,const std::string &streamId,bool mute) override ;
+  void onLossFrame(const void *streamContext, MODULE_TYPE type, int Num) override;
 
-        void onRemoteAudioStreamMuteChanged(const std::string &channelName,const std::string &streamId,bool mute) override ;
+  void onAudioStreamVolume(const void *streamContext, MODULE_TYPE type, int volume, int vad) override;
 
-        void onRemoteVideoStreamDualChanged(const std::string &channelName,const std::string &streamId,bool dual) override ;
+  void onFirstFramePublished(const void *streamContext, MODULE_TYPE type) override;
 
-        void onRemoteVideoStreamOnline(const std::string &channelName,const std::string &uid,std::shared_ptr<MediaStreamSync> sync,const std::shared_ptr<MediaStreamInfo> &streamInfo) override ;
+  void onStreamStartSuccess(const void *streamContext, MODULE_TYPE type) override;
 
-        void onRemoteVideoStreamOffline(const std::string &channelName,const std::string &streamId) override ;
+  // channelEventHandler
+  void onRemoteVideoStreamMuteChanged(const std::string &channelName, const std::string &streamId, bool mute) override;
 
-        void onRemoteAudioStreamOnline(const std::string &channelName,const std::string &uid,std::shared_ptr<MediaStreamSync> sync,const std::shared_ptr<MediaStreamInfo> &streamInfo) override ;
+  void onRemoteAudioStreamMuteChanged(const std::string &channelName, const std::string &streamId, bool mute) override;
 
-        void onRemoteAudioStreamOffline(const std::string &channelName,const std::string &streamId) override ;
+  void onRemoteVideoStreamDualChanged(const std::string &channelName, const std::string &streamId, bool dual) override;
 
-        void onRemoteUserOnline(const std::string &channelName,const std::string &userId) override ;
+  void onRemoteVideoStreamOnline(const std::string &channelName, const std::string &uid, std::shared_ptr<MediaStreamSync> sync,
+                                 const std::shared_ptr<MediaStreamInfo> &streamInfo) override;
 
-        void onRemoteUserOffline(const std::string &channelName,const std::string &userId,rzrtc::MN_RET_CODE reason) override ;
+  void onRemoteVideoStreamOffline(const std::string &channelName, const std::string &streamId) override;
 
-        void onChannelConnectStateChanged(const std::string &channelName,CONNECTION_STATE_TYPE stateType,CONNECTION_CHANGED_REASON_TYPE reason) override ;
+  void onRemoteAudioStreamOnline(const std::string &channelName, const std::string &uid, std::shared_ptr<MediaStreamSync> sync,
+                                 const std::shared_ptr<MediaStreamInfo> &streamInfo) override;
 
-        void onConnectionLost(const std::string& channelName) override;
+  void onRemoteAudioStreamOffline(const std::string &channelName, const std::string &streamId) override;
 
-        void onJoinChannelSuccess(const std::string &channelName, const std::string &uid) override ;
+  void onRemoteUserOnline(const std::string &channelName, const std::string &userId) override;
 
-        void onRejoinChannelSuccess(const std::string& channelName, const std::string& uid) override ;
+  void onRemoteUserOffline(const std::string &channelName, const std::string &userId, rzrtc::MN_RET_CODE reason) override;
 
-        void onLeaveChannel(const std::string &channelName,bool kick) override ;
+  void onChannelConnectStateChanged(const std::string &channelName, CONNECTION_STATE_TYPE stateType, CONNECTION_CHANGED_REASON_TYPE reason) override;
 
-        void onUserCountChangeCallBack(const std::string &channelName,int broadcasterNum, int audientceNum) override ;
+  void onConnectionLost(const std::string &channelName) override;
 
-        void onNetWorkQualityChanged(const std::string &channelName,const std::string &uid,rz::QUALITY_TYPE upNetQuality,rz::QUALITY_TYPE downNetQuality) override ;
+  void onJoinChannelSuccess(const std::string &channelName, const std::string &uid) override;
 
-        //统计信息回调 StatisticsInfoManage
+  void onRejoinChannelSuccess(const std::string &channelName, const std::string &uid) override;
 
-        void onRtcStats(const std::string& channelName, const RtcStats& stats) override ;
+  void onLeaveChannel(const std::string &channelName, bool kick) override;
 
-        void onRemoteAudioStats(const std::string& channelName, const std::string& streamId, RemoteAudioStats& stats) override;
+  void onUserCountChangeCallBack(const std::string &channelName, int broadcasterNum, int audientceNum) override;
 
-        void onRemoteVideoStats(const std::string& channelName, const std::string& streamId, RemoteVideoStats& stats) override ;
+  void onNetWorkQualityChanged(const std::string &channelName, const std::string &uid, rz::QUALITY_TYPE upNetQuality,
+                               rz::QUALITY_TYPE downNetQuality) override;
 
-        void onLocalAudioStats(const std::string& streamName, LocalAudioStats& stats) override ;
+  //统计信息回调 StatisticsInfoManage
 
-        void onLocalVideoStats(const std::string& channelName, const std::string& streamName, LocalVideoStats& stats) override ;
+  void onRtcStats(const std::string &channelName, const RtcStats &stats) override;
 
+  void onRemoteAudioStats(const std::string &channelName, const std::string &streamId, RemoteAudioStats &stats) override;
 
-        //外部操作
-        static void registerAudioObserver(const AudioObserverInfo&) ;
-        
-        static void removeAudioObserver() ;
-        
-        static void registerVideoObserver(const VideoObserverInfo&) ;
-        
-        static void removeVideoObserver() ;
+  void onRemoteVideoStats(const std::string &channelName, const std::string &streamId, RemoteVideoStats &stats) override;
 
-        static void channelRelease(const std::string &channelName);
+  void onLocalAudioStats(const std::string &streamName, LocalAudioStats &stats) override;
 
-        static void streamRelease(const std::string &channelName,const std::string &streamName);
+  void onLocalVideoStats(const std::string &channelName, const std::string &streamName, LocalVideoStats &stats) override;
 
-        static void publish(bool isVideo,const std::string &channelName,const std::string &streamName);
+  //外部操作
+  static void registerAudioObserver(const AudioObserverInfo &);
 
-        static void unpublish(bool isVideo,const std::string &channelName,const std::string &streamName);
+  static void removeAudioObserver();
 
-        static void muteLocalVideoStream(const std::string &channelName,const std::string &streamName,bool mute);
+  static void registerVideoObserver(const VideoObserverInfo &);
 
-        static void muteLocalAudioStream(const std::string &channelName,const std::string &streamName,bool mute);
+  static void removeVideoObserver();
 
-        static void muteRemoteVideoStream(const std::string &channelName,const std::string &uid,const std::string &streamName, bool mute);
+  static void channelRelease(const std::string &channelName);
 
-        static void muteRemoteAudioStream(const std::string &channelName,const std::string &uid,const std::string &streamName, bool mute);
+  static void streamRelease(const std::string &channelName, const std::string &streamName);
 
-        static void muteAllRemoteAudioStreams(const std::string &channelName,bool mute);
+  static void publish(bool isVideo, const std::string &channelName, const std::string &streamName);
 
-        static void muteAllRemoteVideoStreams(const std::string &channelName,bool mute);
+  static void unpublish(bool isVideo, const std::string &channelName, const std::string &streamName);
 
-        static void joinChannel(const std::string &channelName);
+  static void muteLocalVideoStream(const std::string &channelName, const std::string &streamName, bool mute);
 
-        static void leaveChannel(const std::string &channelName,bool kike = false);
+  static void muteLocalAudioStream(const std::string &channelName, const std::string &streamName, bool mute);
 
-        static void setClientRole(const std::string &channelName,CLIENT_ROLE_TYPE type);
+  static void muteRemoteVideoStream(const std::string &channelName, const std::string &uid, const std::string &streamName, bool mute);
 
-        static void setLocalVideoSink(const std::string &channelName,const std::string &streamName,IVideoSink *sink);
+  static void muteRemoteAudioStream(const std::string &channelName, const std::string &uid, const std::string &streamName, bool mute);
 
-        static void setRemoteVideoSink(const std::string &channelName,const std::string &uid,const std::string &streamName,IVideoSink *sink);
+  static void muteAllRemoteAudioStreams(const std::string &channelName, bool mute);
 
-        static void setAudioSink(IAudioSink *sink);
+  static void muteAllRemoteVideoStreams(const std::string &channelName, bool mute);
 
-        static void enableLocalAudio(const std::string &channelName,const std::string &streamFlag, bool enabled);
+  static void joinChannel(const std::string &channelName);
 
-        static void setRemoteVideoStreamType(const std::string &channelName,const std::string &uid,const std::string &streamName, REMOTE_VIDEO_STREAM_TYPE streamType);
+  static void leaveChannel(const std::string &channelName, bool kike = false);
 
-        static void setRemoteRenderMode(const std::string &channelName,const std::string &uid,const std::string &streamName, RENDER_MODE_TYPE renderMode,
-                VIDEO_MIRROR_MODE_TYPE mirrorMode);
+  static void setClientRole(const std::string &channelName, CLIENT_ROLE_TYPE type);
 
-        static void setLocalRenderMode(const std::string &channelName,const std::string &streamName, RENDER_MODE_TYPE renderMode, VIDEO_MIRROR_MODE_TYPE mirrorMode);
+  static void setLocalVideoSink(const std::string &channelName, const std::string &streamName, IVideoSink *sink);
 
-        static void enableDualStreamMode(const std::string &channelName,const std::string &streamName, bool enabled);
+  static void setRemoteVideoSink(const std::string &channelName, const std::string &uid, const std::string &streamName, IVideoSink *sink);
 
-        static void setupRemoteVideo(const std::string &channelName,const std::string &uid,const std::string &streamName, const VideoCanvas &canvas);
+  static void setAudioSink(IAudioSink *sink);
 
-        static void enableLocalVideo(const std::string &channelName,const std::string &streamName,bool enable);
+  static void enableLocalAudio(const std::string &channelName, const std::string &streamFlag, bool enabled);
 
-        static void setupLocalVideo(const std::string &channelName,const std::string &streamName,const VideoCanvas &videoCanvas);
+  static void setRemoteVideoStreamType(const std::string &channelName, const std::string &uid, const std::string &streamName,
+                                       REMOTE_VIDEO_STREAM_TYPE streamType);
 
-        static void startPreview(const std::string &channelName,const std::string &streamName);
+  static void setRemoteRenderMode(const std::string &channelName, const std::string &uid, const std::string &streamName, RENDER_MODE_TYPE renderMode,
+                                  VIDEO_MIRROR_MODE_TYPE mirrorMode);
 
-        static void stopPreview(const std::string &channelName,const std::string &streamName);
+  static void setLocalRenderMode(const std::string &channelName, const std::string &streamName, RENDER_MODE_TYPE renderMode,
+                                 VIDEO_MIRROR_MODE_TYPE mirrorMode);
 
-        static void setVideoEncoderConfiguration(const std::string &channelName,const std::string &streamName,const VideoEncoderConfiguration &config);
+  static void enableDualStreamMode(const std::string &channelName, const std::string &streamName, bool enabled);
 
-        static void enableAudioVolumeIndication(int interval, int smooth,bool report_vad);
-        
-        static void switchCamera();
+  static void setupRemoteVideo(const std::string &channelName, const std::string &uid, const std::string &streamName, const VideoCanvas &canvas);
 
-        static void startLastmileProbeTest(const LastmileProbeConfig &config);
+  static void enableLocalVideo(const std::string &channelName, const std::string &streamName, bool enable);
 
-        static void stopLastmileProbeTest();
+  static void setupLocalVideo(const std::string &channelName, const std::string &streamName, const VideoCanvas &videoCanvas);
 
-        static void setDefaultAudioRouteToSpeakerphone(bool defaultToSpeaker);
+  static void startPreview(const std::string &channelName, const std::string &streamName);
 
-        static void setEnableSpeakerphone(bool speakerOn);
+  static void stopPreview(const std::string &channelName, const std::string &streamName);
 
-        static bool isSpeakerphoneEnabled();
+  static void setVideoEncoderConfiguration(const std::string &channelName, const std::string &streamName, const VideoEncoderConfiguration &config);
 
-        static IVideoDeviceManager *getVideoDeviceManager();
+  static void enableAudioVolumeIndication(int interval, int smooth, bool report_vad);
 
-        static IAudioDeviceManager *getAudioDeviceManager();
+  static void switchCamera();
 
-        static void setLogFile(const std::string &filePath);
+  static void startLastmileProbeTest(const LastmileProbeConfig &config);
 
-        static void setLogFilter(LOG_FILTER_TYPE filter);
+  static void stopLastmileProbeTest();
 
-        static void setLogFileSize(unsigned int fileSizeInKBytes);
+  static void setDefaultAudioRouteToSpeakerphone(bool defaultToSpeaker);
 
-        static void release();
+  static void setEnableSpeakerphone(bool speakerOn);
 
-        static void startDeviceTest(void *hwnd);
+  static bool isSpeakerphoneEnabled();
 
-        static void stopDeviceTest();
+  static IVideoDeviceManager *getVideoDeviceManager();
 
-        static void startRecordingDeviceTest(int indicationInterval);
+  static IAudioDeviceManager *getAudioDeviceManager();
 
-        static void stopRecordingDeviceTest();
+  static void setLogFile(const std::string &filePath);
 
-        static void startPlaybackDeviceTest(const char *testAudioFilePath);
+  static void setLogFilter(LOG_FILTER_TYPE filter);
 
-        static void stopPlaybackDeviceTest();
+  static void setLogFileSize(unsigned int fileSizeInKBytes);
 
-        static void startAudioDeviceLoopbackTest(int indicationInterval);
+  static void release();
 
-        static void stopAudioDeviceLoopbackTest();
+  static void startDeviceTest(void *hwnd);
 
-    };
-}
+  static void stopDeviceTest();
 
-#endif //PAASSDK_RTCENGINEBASE_H
+  static void startRecordingDeviceTest(int indicationInterval);
+
+  static void stopRecordingDeviceTest();
+
+  static void startPlaybackDeviceTest(const char *testAudioFilePath);
+
+  static void stopPlaybackDeviceTest();
+
+  static void startAudioDeviceLoopbackTest(int indicationInterval);
+
+  static void stopAudioDeviceLoopbackTest();
+};
+}  // namespace rz
+
+#endif  // PAASSDK_RTCENGINEBASE_H

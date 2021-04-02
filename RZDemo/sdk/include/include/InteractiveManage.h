@@ -34,15 +34,15 @@ namespace rz{
 
     class InteractiveManage{
     private:
-        struct timedTask {
-            std::function<void(void)> taskFun = nullptr;              //ÈÎÎñº¯Êı
-            int timeInterval = 0;                                     //ÈÎÎñµ÷ÓÃ¼ä¸ô   ms     ×îĞ¡¼ä¸ô 10ms
-            int taskImplemenCount = 0;                                //ÈÎÎñÒÑ¾­Ö´ĞĞµÄ´ÎÊı
-            uint32_t taskStartTime = 0;                                    //ÈÎÎñÆô¶¯Ê±¼ä
+        struct TimedTask {
+            std::function<void(void)> taskFun = nullptr;              //ä»»åŠ¡å‡½æ•°
+            int timeInterval = 0;                                     //ä»»åŠ¡è°ƒç”¨é—´éš”   ms     æœ€å°é—´éš” 10ms
+            int taskImplemenCount = 0;                                //ä»»åŠ¡å·²ç»æ‰§è¡Œçš„æ¬¡æ•°
+            uint32_t taskStartTime = 0;                                    //ä»»åŠ¡å¯åŠ¨æ—¶é—´
         };
 
         static std::mutex timedTaskPoolMX;
-        static std::map<std::string, std::shared_ptr<timedTask>> timedTaskPool;    //¶¨Ê±ÈÎÎñ³Ø
+        static std::map<std::string, std::shared_ptr<TimedTask>> timedTaskPool;    //å®šæ—¶ä»»åŠ¡æ± 
 
         static std::mutex taskPoolMX;
         static std::list<InteractiveTask> taskPool;
@@ -52,8 +52,8 @@ namespace rz{
 
         static std::atomic<bool> running;
 
-        //¸÷¾²Ì¬±äÁ¿×ñÑ­ÏÈÉùÃ÷ºóÊÍ·Å×¼Ôò Òì²½ÍË³öÒÀÀµÓÚ¾²Ì¬±äÁ¿asyncQuitµÄÎö¹¹º¯ÊıÇåÀíÍË³öÏß³Ì
-        //TODO Òò´Ë½«¾²Ì¬±äÁ¿asyncQuit·ÅÔÚÇåÀíÏß³ÌInteractiveManage::workThµÄºó·½ ²»¿É¸ü¸Ä
+        //å„é™æ€å˜é‡éµå¾ªå…ˆå£°æ˜åé‡Šæ”¾å‡†åˆ™ å¼‚æ­¥é€€å‡ºä¾èµ–äºé™æ€å˜é‡asyncQuitçš„ææ„å‡½æ•°æ¸…ç†é€€å‡ºçº¿ç¨‹
+        //TODO å› æ­¤å°†é™æ€å˜é‡asyncQuitæ”¾åœ¨æ¸…ç†çº¿ç¨‹InteractiveManage::workThçš„åæ–¹ ä¸å¯æ›´æ”¹
         static AsyncQuit asyncQuit;
 
     protected:
@@ -63,17 +63,17 @@ namespace rz{
         static void addTask(InteractiveTask task);
 
         /**
-         * ×¢²á¶¨Ê±ÈÎÎñ
-         * @param taskId ÈÎÎñID
-         * @param taskFun ÈÎÎñÖ´ĞĞº¯Êı
-         * @param timeInterval ÈÎÎñÖ´ĞĞ¼ä¸ô /ms ²»µÃĞ¡ÓÚ10ms ÏµÍ³ÒÀ¾İÈÎÎñÆô¶¯Ê±¼ä¡¢µ±Ç°Ê±¼äºÍÈÎÎñÖ´ĞĞ¼ä¸ô¼ÆËãÖ´ĞĞ´ÎÊı,¿ÉÒÔ±£ÕÏ³¤Ê±¼äÄÚµÄÈÎÎñÖ´ĞĞ´ÎÊıÓëÈÎÎñ¼ä¸ôµÄÒ»ÖÂĞÔ
-         * @param Immediate ÊÇ·ñÁ¢¼´Ö´ĞĞ
+         * æ³¨å†Œå®šæ—¶ä»»åŠ¡
+         * @param taskId ä»»åŠ¡ID
+         * @param taskFun ä»»åŠ¡æ‰§è¡Œå‡½æ•°
+         * @param timeInterval ä»»åŠ¡æ‰§è¡Œé—´éš” /ms ä¸å¾—å°äº10ms ç³»ç»Ÿä¾æ®ä»»åŠ¡å¯åŠ¨æ—¶é—´ã€å½“å‰æ—¶é—´å’Œä»»åŠ¡æ‰§è¡Œé—´éš”è®¡ç®—æ‰§è¡Œæ¬¡æ•°,å¯ä»¥ä¿éšœé•¿æ—¶é—´å†…çš„ä»»åŠ¡æ‰§è¡Œæ¬¡æ•°ä¸ä»»åŠ¡é—´éš”çš„ä¸€è‡´æ€§
+         * @param Immediate æ˜¯å¦ç«‹å³æ‰§è¡Œ
          */
         static void registTimedTask(const std::string& taskId, std::function<void(void)> taskFun, int timeInterval, bool Immediate);
 
         /**
-         * ÒÆ³ı¶¨Ê±ÈÎÎñ
-         * @param taskId ÈÎÎñID
+         * ç§»é™¤å®šæ—¶ä»»åŠ¡
+         * @param taskId ä»»åŠ¡ID
          */
         static void removeTimedTask(const std::string& taskId);
 

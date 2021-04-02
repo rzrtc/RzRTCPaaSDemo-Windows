@@ -96,7 +96,7 @@ namespace rz {
         }
 
 
-        virtual void onStreamForzen(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType, bool forzen) {
+        virtual void onStreamForzen(uint64_t unixTm, const std::string &streamId, STREAM_TYPE streamType, bool forzen, uint64_t frameCount) {
             (void)unixTm;
             (void)streamId;
             (void)streamType;
@@ -159,7 +159,7 @@ namespace rz {
 
         static void onStreamSubscribeState(const std::string &streamId,STREAM_TYPE streamType,SUBSCRIBE_STREAM_STATE state);
 
-        static void onStreamForzen(const std::string& streamId, STREAM_TYPE streamType, bool forzen);
+        static void onStreamForzen(const std::string &streamId, STREAM_TYPE streamType, bool forzen, uint64_t frameCount, uint64_t ts);
 
         static void onLocalStreamState(const std::string &streamId,STREAM_TYPE streamType,LOCAL_STREAM_STATE state);
 

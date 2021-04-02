@@ -115,7 +115,7 @@ namespace rz{
 
         void onAudioStartSuccess() override ;
 
-        void onVideoForzen(bool forzen) override ;
+        void onVideoForzen(bool forzen, uint64_t frameCount, uint64_t ts) override;
     };
 
 }

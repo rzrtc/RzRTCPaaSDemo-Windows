@@ -10,30 +10,30 @@
 
 namespace rz {
 
-    class IRtcStream {
-    protected:
-        virtual ~IRtcStream() = default;
-    public:
-        virtual const char *getStreamName() = 0;
+class IRtcStream {
+ protected:
+  virtual ~IRtcStream() = default;
 
-        virtual const char *getChannelId() = 0;
+ public:
+  virtual const char *getStreamName() = 0;
 
-        virtual void release() = 0;
+  virtual const char *getChannelId() = 0;
 
-        virtual int publish() = 0;
+  virtual void release() = 0;
 
-        virtual int unPublish() = 0;
+  virtual int publish() = 0;
 
-        virtual int muteVideoStream(bool mute) = 0;
+  virtual int unPublish() = 0;
 
-        virtual int enableDualStreamMode(bool enabled) = 0;
+  virtual int muteVideoStream(bool mute) = 0;
 
-        virtual int setVideoEncoderConfiguration(const VideoEncoderConfiguration &config) = 0;
+  virtual int enableDualStreamMode(bool enabled) = 0;
 
-        virtual int setLowVideoStream(IVideoSource*) = 0;
-    };
+  virtual int setVideoEncoderConfiguration(const VideoEncoderConfiguration &config) = 0;
 
-}
+  virtual int setLowVideoStream(IVideoSource *) = 0;
+};
 
+}  // namespace rz
 
-#endif //PAASSDK_IRTCSTREAM_H
+#endif  // PAASSDK_IRTCSTREAM_H
