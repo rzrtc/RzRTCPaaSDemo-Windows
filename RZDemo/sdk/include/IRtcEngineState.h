@@ -170,7 +170,7 @@ struct AudioSinkConfig {
 
 struct AudioSourceConfig {
   AUDIO_STREAM_TYPE streamType = AUDIO_STREAM_PCM;  //音频流类型 非PCM类型下面几项不需要配置
-  bool enableAec = true;
+  bool enableAec = false;
 };
 
 //媒体流类型

@@ -11,52 +11,48 @@
 #include "MediaSink.h"
 #include "MediaSource.h"
 
-namespace rz{
-    class GlobalOperation{
-    private:
-        static std::shared_ptr<VideoSourceProducer> videoSourceProducer;
-        static std::shared_ptr<AudioSourceProducer> audioSourceProducer;
-        static std::shared_ptr<VideoSinkProducer> videoSinkProducer;
-        static std::mutex viewPoolMX;
-        static std::map<void*, void*> viewPool;
-    public:
+namespace rz {
+class GlobalOperation {
+   private:
+    static std::shared_ptr<VideoSourceProducer> videoSourceProducer;
+    static std::shared_ptr<AudioSourceProducer> audioSourceProducer;
+    static std::shared_ptr<VideoSinkProducer> videoSinkProducer;
 
-        static void Init();
+   public:
+    static void Init();
 
-        static void Release();
+    static void Release();
 
-        /**
-         * 更新显示模式
-         * @param videoSink 要配置的videosink
-         * @param renderMode
-         */
-        static void setVideoRenderMode(const VideoSink *videoSink, RENDER_MODE_TYPE renderMode);
+    /**
+     * 更新显示模式
+     * @param videoSink 要配置的videosink
+     * @param renderMode
+     */
+    static void setVideoRenderMode(const VideoSink *videoSink, RENDER_MODE_TYPE renderMode);
 
+    /**
+     * 为videosink 配置画板 videocanvas
+     * @param videoSink 要配置的videosink
+     * @param videoCanvas 画板参数
+     */
+    static void setVideoCanvas(const VideoSink *videoSink, const VideoCanvas &videoCanvas);
 
-        /**
-         * 为videosink 配置画板 videocanvas
-         * @param videoSink 要配置的videosink
-         * @param videoCanvas 画板参数
-         */
-        static void setVideoCanvas(const VideoSink *videoSink, const VideoCanvas &videoCanvas);
+    /**
+     * 更新视频方向模式。
+     * @param orientationMode
+     */
+    static void setVideoOrientationMode(VideoSource *source, ORIENTATION_MODE orientationMode);
 
-        /**
-         * 更新视频方向模式。
-         * @param orientationMode
-         */
-        static void setVideoOrientationMode(VideoSource *source,ORIENTATION_MODE orientationMode);
+    /**
+     * 重置视频采集格式
+     * @param videoConfig
+     */
+    static void setVideoConfig(VideoSource *source, const VideoConfig &videoConfig);
 
-        /**
-         * 重置视频采集格式
-         * @param videoConfig
-         */
-        static void setVideoConfig(VideoSource *source,const VideoConfig &videoConfig);
+    static void HoldView(void *view);
 
-        static void HoldView(void* view);
+    static void ReleaseView(void *view);
+};
+}  // namespace rz
 
-        static void ReleaseView(void* view);
-    };
-}
-
-
-#endif //PAASSDK_GLOBALOPERATION_H
+#endif  // PAASSDK_GLOBALOPERATION_H

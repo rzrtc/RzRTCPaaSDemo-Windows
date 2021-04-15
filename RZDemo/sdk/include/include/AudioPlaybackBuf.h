@@ -23,7 +23,7 @@ namespace rz {
 
         static void pushPlaybackAudioData(std::shared_ptr<AudioData> &data) {
             std::lock_guard<std::mutex> lk(playbackDataMX);
-            playbackData.swap(data);
+            playbackData = data;
         }
     };
 
