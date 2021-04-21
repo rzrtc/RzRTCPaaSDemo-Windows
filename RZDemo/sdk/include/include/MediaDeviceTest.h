@@ -109,6 +109,8 @@ namespace rz{
 
         void onFirstVideoFrameSink(int width, int height) override ;
 
+        void onFrameSinkTimeStamps(uint32_t frameIndex, int64_t sinkTimeStamp) override ;
+
         void onVolume(int volume,int vad) override ;
 
         void onVideoStartSuccess() override ;

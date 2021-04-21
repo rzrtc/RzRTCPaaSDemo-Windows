@@ -117,12 +117,24 @@ namespace rz {
             (void)state;
         }
 
-        virtual void onLocalStreamState(uint64_t unixTm,const std::string &streamId,STREAM_TYPE streamType,LOCAL_STREAM_STATE state){
+        virtual void onLocalStreamState(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType, LOCAL_STREAM_STATE state) {
             (void)unixTm;
             (void)streamId;
             (void)streamType;
             (void)state;
         }
+
+        virtual void onVideoSinkTimeStamps(uint64_t unixTm, const std::string& channelName, const std::string& streamName, const std::string& uid, uint32_t frameIndex, uint64_t sinkTimestamp , STREAM_TYPE streamType){
+            (void)unixTm;
+            (void)channelName;
+            (void)streamName;
+            (void)uid;
+            (void)frameIndex;
+            (void)sinkTimestamp;
+            (void)streamType;
+
+        }
+
     };
 
     //定义共享事件管理器
@@ -144,6 +156,8 @@ namespace rz {
         static void onStreamConnectState(const std::string &streamId,STREAM_TYPE streamType,CONNECTION_STATE_TYPE state);
 
         static void onJoinChannel(const std::string &channelId);
+
+        static void onVideoSinkTimeStamps(const std::string& channelID, const std::string& streamName, const std::string&  uid, uint32_t  frameIndex, uint64_t sinkTimestamp , STREAM_TYPE streamType);
 
         static void onJoinChannelResult(const std::string &channelId,bool isSuccess,int reson);
 

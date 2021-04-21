@@ -110,7 +110,6 @@ namespace rz{
          */
         void onUserOffline(const std::string &channelName,const std::string &uid, USER_OFFLINE_REASON_TYPE reason);
 
-
         void onLocalVideoStateChanged(const std::string &channelName,const std::string &streamName, LOCAL_VIDEO_STREAM_STATE state,LOCAL_VIDEO_STREAM_ERROR error, int elapsed);
 
         void onLocalAudioStateChanged(const std::string &channelName,const std::string &streamName,LOCAL_AUDIO_STREAM_STATE state, LOCAL_AUDIO_STREAM_ERROR error, int elapsed);

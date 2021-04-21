@@ -160,6 +160,9 @@ class RtcEngineBase : public LastmileProbeEventHandler,
   // StreamEventhandler
   void onFirstVideoFrame(const void *streamContext, MODULE_TYPE type, int width, int height) override;
 
+  // 渲染时间戳回调
+  void onFrameSinkTimeStamps(const void *streamContext, MODULE_TYPE type, int32_t  index , int64_t sinkTimeStamp ) override;
+
   void onVideoSizeChanged(const void *streamContext, MODULE_TYPE type, int width, int height) override;
 
   void onStreamForzen(const void *streamContext, MODULE_TYPE type, bool forzen, uint64_t frameCount, uint64_t ts) override;
