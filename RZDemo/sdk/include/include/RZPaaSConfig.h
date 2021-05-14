@@ -33,7 +33,7 @@ namespace rz{
         const static int DataFlowMonitorInterval = 5000;
 
         //dataFlow 各process 缓冲区大小监控界限  超过该大小则进行日志输出
-        const static int dataProcessCache = 10;
+        const static int dataProcessCache = 15;
 
         //线程池线程数量
         const static int dataFlowThreadNum = 16;
@@ -97,16 +97,16 @@ namespace rz{
         const static int defaultLiveAudioBiteRate = 16000;
         //帧率的计算因子，分别对应
         /*
-         * fps < 7: 0.2
-         * 7<= fps < 10: 0.67
+         * fps < 1: 0.2
+         * 1<= fps < 10: 0.67
          * 10<= fps < 15: 0.8
          * 15<= fps < 24: 1
          * 24<= fps < 30: 1.3
          * 30<=  fps < 60: 1.5
          * fps > 60 : 2.25
          * */
-        constexpr  static int fpsLevel[] = {7, 10, 15, 24, 30, 60};
-        constexpr static float fpsFactorList[]= {0.5, 0.67, 0.8, 1, 1.3, 1.5, 2.25};
+        constexpr  static int fpsLevel[] = {1, 10, 15, 24, 30, 60};
+        constexpr static float fpsFactorList[]= {0.2, 0.67, 0.8, 1, 1.3, 1.5, 2.25};
         /*
          * len <=  60: 20.0
          * len <=  80: 13.0

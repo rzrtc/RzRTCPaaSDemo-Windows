@@ -149,7 +149,7 @@ namespace rz {
         static void removeSharedEventsRecver(const std::string &recvName);
 
 
-        static void onNetTypeChanged(NETWORK_TYPE oldNetType,NETWORK_TYPE newNetType) ;
+        static void onNetTypeChanged(NETWORK_TYPE oldNetType,NETWORK_TYPE newNetType);
 
         static void onChannelConnectState(const std::string &channelId,CONNECTION_STATE_TYPE state, CONNECTION_CHANGED_REASON_TYPE reason);
 
