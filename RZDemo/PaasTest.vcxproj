@@ -54,7 +54,7 @@
     <Link>
       <AdditionalDependencies>libabsl_bad_optional_access.lib;libavcodec.a;libavdevice.a;libavfilter.a;libavformat.a;libavutil.a;libmn.lib;libopus.lib;libpostproc.a;libprotobuf.lib;libsol.lib;libswresample.a;libswscale.a;libuv.lib;libwebrtc.lib;libx264.lib;libyuv.lib;PaaSSDK.lib;psapi.lib;iphlpapi.lib;userenv.lib;Secur32.lib;MSVCRTD.lib;bcrypt.lib;vfw32.lib;Shlwapi.lib;Crypt32.lib;ws2_32.lib;Wldap32.lib;winmm.lib;user32.lib;gdi32.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;d3d9.lib;Strmiids.lib;zlib.lib;libcurl.lib;dby-logan-log.lib;portaudio.lib;libcrypto.lib;libssl.lib;Normaliz.lib;SDL2.lib;dshowcapture.lib;videoInputD.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/FORCE:Multiple %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\lib\KMSVC\debug;$(SolutionDir)..\..\rz-paas-sdk-msvc\build-paas\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\lib\KMSVC\debug;$(SolutionDir)sdk;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\DataFlow;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\IChannel;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\MediaStream;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\ProcessInterface;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\libuv;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\ffmpeg;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\opus;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\yuv;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\OSModule;.\;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-native-sdk\third_party\videoinput;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -64,14 +64,21 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Link>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PaaSSDK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\lib\KMSVC\release;$(SolutionDir)sdk;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libabsl_bad_optional_access.lib;libavcodec.a;libavdevice.a;libavfilter.a;libavformat.a;libavutil.a;libmn.lib;libopus.lib;libpostproc.a;libprotobuf.lib;libsol.lib;libswresample.a;libswscale.a;libuv.lib;libwebrtc.lib;libx264.lib;libyuv.lib;PaaSSDK.lib;psapi.lib;iphlpapi.lib;userenv.lib;Secur32.lib;MSVCRTD.lib;bcrypt.lib;vfw32.lib;Shlwapi.lib;Crypt32.lib;ws2_32.lib;Wldap32.lib;winmm.lib;user32.lib;gdi32.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;d3d9.lib;Strmiids.lib;zlib.lib;libcurl.lib;dby-logan-log.lib;portaudio.lib;libcrypto.lib;libssl.lib;Normaliz.lib;SDL2.lib;dshowcapture.lib;videoInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/FORCE:Multiple %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>.\;%(AdditionalIncludeDirectories)$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\DataFlow;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\IChannel;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\MediaStream;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\ProcessInterface;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\libuv;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\ffmpeg;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\opus;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\include\third_party\yuv;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-paas-sdk\OSModule;.\;$(SolutionDir)..\..\rz-paas-sdk-msvc\rz-native-sdk\rz-native-sdk\third_party\videoinput;%(AdditionalIncludeDirectories)$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>QT_OPENGL_RENDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <PreBuildEvent>
+      <Message>
+      </Message>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>copy "$(ProjectDir)sdk\PaaSSDK.*" "$(OutDir)"</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
     <QtInstall>vs_2019_static</QtInstall>
@@ -135,6 +142,7 @@
     <ClCompile Include="VideoWidget.cpp" />
     <QtRcc Include="PaasTest.qrc" />
     <QtUic Include="LostDialog.ui" />
+    <QtUic Include="MainVideoItemBgDialog.ui" />
     <QtUic Include="RemoteUserInfoWidgets.ui" />
     <QtUic Include="SelectList.ui" />
     <QtUic Include="ChannelDialog.ui" />
