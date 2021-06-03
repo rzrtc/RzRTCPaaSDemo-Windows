@@ -495,7 +495,7 @@ enum SUBSCRIBE_STREAM_STATE
   SUBSCRIBE_STREAM_STATE_NO_SEND_NO_RECV = 5,  // 5: 流上线但没发送且不接收
   SUBSCRIBE_STREAM_STATE_SUBSCRIBING = 6,      // 6: 正在订阅
   SUBSCRIBE_STREAM_STATE_SUBSCRIBED = 7,       // 7: 订阅成功
-  SUBSCRIBE_STREAM_STATE_FROZEN = 8,           // 8: 卡顿中
+  SUBSCRIBE_STREAM_STATE_FROZEN = 8,           // 8: 卡顿中  ，这个会取消掉，1.5.3 以后不会用。卡顿状态日志有单独的日志
 };
 
 //用户状态

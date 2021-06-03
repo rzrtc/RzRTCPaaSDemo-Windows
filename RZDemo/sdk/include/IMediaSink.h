@@ -114,13 +114,6 @@ class IAudioSink : public IAudioFrameConsumer {
    */
   virtual AudioSinkConfig getSinkConfig() = 0;
 
-  /**
-   * 进行数据的抛出
-   * sdk接收调用该接口将数据进行抛出
-   */
-  virtual void consumePcmData(uint8_t *buffer[8], uint32_t lineSize[8], AUDIO_PCM_FORMAT frameType, uint32_t channel, uint32_t sampleRate,
-                              long timestamp) = 0;
-
   ~IAudioSink() override = default;
 };
 }  // namespace rz

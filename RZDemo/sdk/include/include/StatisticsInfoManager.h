@@ -99,6 +99,9 @@ namespace rz{
         //卡顿时长
         int totalFrozenTime = 0;
 
+        // 卡顿状态标识
+        bool lastForzenState = false; 
+
         //有效时长
         int totalActiveTime = 1;
 
@@ -118,6 +121,8 @@ namespace rz{
         }
 
         void SetStreamSubscribestate(SUBSCRIBE_STREAM_STATE state);
+
+        void streamForzenStateChange(bool frozen );
     };
 
     //负责远端视频流Stats事件的产生
@@ -135,6 +140,9 @@ namespace rz{
 
         //卡顿时长
         int totalFrozenTime = 0;
+
+        // 卡顿状态标识 
+        bool lastForzenState = false ; 
 
         //有效时长
         int totalActiveTime = 1;
@@ -156,6 +164,8 @@ namespace rz{
         }
 
         void SetStreamSubscribestate(SUBSCRIBE_STREAM_STATE state);
+
+        void streamForzenStateChange(bool frozen);
     };
 
     //负责本地音频流Stats事件的产生
@@ -217,6 +227,9 @@ namespace rz{
         void onStreamSubscribeState(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType, SUBSCRIBE_STREAM_STATE state) override ;
 
         void onLocalStreamState(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType, LOCAL_STREAM_STATE state) override ;
+
+        void onStreamForzen(uint64_t unixTm, const std::string &streamId, STREAM_TYPE streamType, bool forzen, uint64_t frameCount) override ;
+
     };
 
 }

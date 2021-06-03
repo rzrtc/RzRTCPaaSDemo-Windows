@@ -1,121 +1,145 @@
-#include "PaasTest.h"
-#include <QtWidgets/QApplication>
-#include <QDateTime>
-#include <QDebug>
-#include <QDir>
-#include "Settings.h"
+#ifdef _WIN32
 
-#include <Windows.h>
-#include "easydump/easydump.h"
+int main(int argc, char *argv[]) {
+    return 0;
+}
+#else
+#include <iostream>
+#include <memory>
 
-#define OBS_WINDOW_CLASS         TEXT("OBSWindowClass")
+#include "Base/DataFlow.h"
+#include "Src/ProcessImpl/RZAudioFile.h"
+#include "include/DataFlow/DataConsumer.h"
+#include "include/DataFlow/DataProducer.h"
+#include "include/ProcessInterface/VideoScaleCrop.h"
+using namespace rz;
 
+class sink : public rz::IVideoSink {
+    uint32_t lastts = 0;
 
-void outputMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg);
-LONG WINAPI __UnhandledExceptionHandler(_EXCEPTION_POINTERS* pExceptionInfo);
-int main(int argc, char *argv[])
-{
-	HANDLE hOBSMutex = CreateMutex(NULL, TRUE, TEXT("OBSMutex"));
-	if (GetLastError() == ERROR_ALREADY_EXISTS)// Èç¹ûÒÑÓĞ»¥³âÁ¿´æÔÚ ÕâÀïGetLastErrorÔòÊÇCreateMutexµÄError
-	{
-		HWND hwndMain = FindWindow(OBS_WINDOW_CLASS, NULL);//»ñÈ¡¸Ã´°Ìå¾ä±ú
-		if (hwndMain)
-			SetForegroundWindow(hwndMain);//ÉèÖÃ½¹µãµ½³ÌĞò´°¿Ú
+public:
+    bool onInitialize() override {
+        return true;
+    };
 
-		CloseHandle(hOBSMutex);//»¥³âÁ¿´æÔÚÊÍ·Å¾ä±ú²¢¸´Î»»¥³âÁ¿
-		return 0;
-	}
-    QApplication a(argc, argv);
-	a.setAttribute(Qt::AA_UseDesktopOpenGL, true);
-	::SetUnhandledExceptionFilter(__UnhandledExceptionHandler);
-	qInstallMessageHandler(outputMessage);
-	PaasTest w;
-    w.show();
-    return a.exec();
+    bool onStart() override {
+        return true;
+    }
+
+    void onStop() override {
+    }
+
+    void onDispose() override {
+    }
+
+    rz::VideoSinkConfig getSinkConfig() override {
+        rz::VideoSinkConfig sinkConfig;
+        sinkConfig.streamType = VIDEO_STREAM_FRAME;
+        sinkConfig.pixelFormat = VIDEO_PIXEL_I420;
+        return sinkConfig;
+    }
+
+    void consumeVideoData(rz::VideoData *data) {
+        uint8_t *content = nullptr;
+        uint32_t len = 0;
+
+        std::cout << "sink consumeVideoData " << data->getTimeStamp() << std::endl;
+
+        if (lastts != data->getTimeStamp())
+            std::cout << data->getTimeStamp() << std::endl;
+
+        if (data->getTimeStamp() == 99999)
+            std::cout << "recv Complate " << std::endl;
+
+        lastts = data->getTimeStamp() + 1;
+    };
+
+    /**
+ * è¿›è¡Œæ•°æ®çš„æŠ›å‡º
+ * sdkè°ƒç”¨è¯¥æ¥å£å°†è§†é¢‘æ•°æ®ç»™åˆ°å¹³å°å±‚è¿›è¡Œæ¸²æŸ“
+ */
+    void consumeVideoFrame(const unsigned char *buffer, VIDEO_PIXEL_FORMAT frameType,
+                           int width, int height, long timestamp) override {};
+
+    /**
+     * streamType = VIDEO_STREAM_H264 || streamType = VIDEO_STREAM_CUSTOM
+     * è¿›è¡Œæ•°æ®çš„æŠ›å‡º
+     * sdkè°ƒç”¨è¯¥æ¥å£å°†è§†é¢‘æ•°æ®ç»™åˆ°å¹³å°å±‚è¿›è¡Œæ¸²æŸ“
+     */
+    void consumeVideoPacket(const unsigned char *buffer, long length, VIDEO_STREAM_TYPE streamType,bool isKey, long timestamp) override {};
+};
+
+class VideoProcess : public rz::VideoScaleCrop {
+public:
+    void WorkFun(std::shared_ptr<rz::VideoData> &data) override {
+        SendData(data);
+    }
+
+    int ReSet(rz::VideoScaleCropConfig &dst) override {
+        return 0;
+    }
+
+    int Release() override {
+        return 0;
+    }
+};
+
+int processTest() {
+    //å¯åŠ¨çº¿ç¨‹æ± 
+    rz::ThreadPool::Start();
+
+    sink *sinkPtr = new sink;
+
+    auto consumerPtr = std::make_shared<rz::VideoSinkDataConsumer>(sinkPtr, rz::VIDEO_MIRROR_MODE_TYPE::VIDEO_MIRROR_MODE_AUTO,nullptr);
+
+    auto dataProducerPtr = std::make_shared<rz::VideoSourceDataProducer>(nullptr, nullptr);
+
+    auto process = std::make_shared<VideoProcess>();
+
+    auto videoTestFlow = new rz::DataFlow<rz::VideoData>("testFlow", dataProducerPtr, consumerPtr);
+
+    videoTestFlow->registDataProcess(process);
+
+    uint32_t ts = 0;
+
+    uint8_t *plane[4] = {nullptr};
+    uint32_t pitch[4] = {0};
+
+    while (ts < 100000) {
+        auto data = new rz::VideoData(rz::VIDEO_PIXEL_I420, ts, 1080, 720,
+                                      rz::VIDEO_MIRROR_MODE_DISABLED, plane, pitch);
+
+        dataProducerPtr->consumeVideoData(data);
+
+        ts++;
+    }
+
+    std::cout << "send Complate " << std::endl;
+
+    //ä¸»çº¿ç¨‹ç­‰å¾…æ•°æ®å¸§å¤„ç†å®Œæˆæ‰èƒ½é€€å‡º é¿å…çº¿ç¨‹æ± çš„åœæ­¢å¯¼è‡´çš„DataFlowå¤±å»é©±åŠ¨å™¨ å¯¼è‡´æ•°æ®å¸§å¤„ç†ä¸å®Œæ•´
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+    //åœæ­¢çº¿ç¨‹æ± 
+    rz::ThreadPool::Stop();
+
+    return 0;
 }
 
-LONG WINAPI __UnhandledExceptionHandler(_EXCEPTION_POINTERS* pExceptionInfo)
-{
-	OutputDebugString(TEXT("Create a dump file since an exception occurred in sub-thread.\n"));
-	int iRet = cpp4j::RecordExceptionInfo(pExceptionInfo, TEXT("PaaSTest"));
-	return iRet;
+int main() {
+    //streamTest
+    /*StreamSample streamSample;
+    streamSample.init();
+    streamSample.videoPubStreamTest();
+    streamSample.audioPubStreamTest();
+    std::this_thread::sleep_for(std::chrono::seconds(100));
+    streamSample.stop();*/
+
+    //threadPoolTest
+    /*ThreadPoolSample threadPoolSample;
+    threadPoolSample.init();
+    //threadPoolSample.audioProcessTaskTest("audio", "../data/16000_16_noise.pcm");
+    threadPoolSample.threadPoolTets(10);
+    threadPoolSample.stop();*/
+    return 0;
 }
-
-void outputMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg)
-{
-	static QMutex mutex;
-	QMutexLocker locker(&mutex);
-	QString text = "Debug:";
-	bool bErrorFlag = false;
-	bool bIsInfo = false;
-	switch (type)
-	{
-	case QtInfoMsg:
-		text = QString("---Info: ");
-		bIsInfo = true;
-		break;
-	case QtDebugMsg:
-		text = QString("---Debug: ");
-		break;
-	case QtWarningMsg:
-		text = QString("###Warning: ");
-		break;
-	case QtCriticalMsg:
-		text = QString("***Critical: ");
-		bErrorFlag = true;
-		break;
-	case QtFatalMsg:
-		text = QString("@@@Fatal: ");
-		bErrorFlag = true;
-		break;
-	}
-
-	QString context_info = QString("%1 %2 ").arg(QString(context.file)).arg(context.line);
-	QString current_date_time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ddd");
-	QString current_date = QString("(%1)").arg(current_date_time);
-	QString message = QString("%1 %2 %3 %4").arg(text).arg(context_info).arg(current_date).arg(msg);
-
-	QString strErrorFile, strInfoFile;
-	QString str = QCoreApplication::applicationDirPath();
-	str.append("/rzlog");
-
-	QDir dir;
-	if (dir.mkpath(str) == false)
-		return;
-
-	{
-		QString current_date = QDateTime::currentDateTime().toString("yyyy_MM_dd");
-		strErrorFile = str;
-		strInfoFile = str;
-		str.append("/").append(current_date).append(".txt");
-		strErrorFile.append("/").append("error_").append(current_date).append(".txt");
-		strInfoFile.append("/").append("info_").append(current_date).append(".txt");
-	}
-
-	/*str.replace("/", "\\");
-	strErrorFile.replace("/", "\\");
-	strInfoFile.replace("/", "\\");*/
-	QFile file(str);
-	file.open(QIODevice::WriteOnly | QIODevice::Append);
-	QTextStream text_stream(&file);
-	text_stream << message << "\r\n";
-	file.flush();
-	file.close();
-	if (bErrorFlag) {
-		QFile errorFile(strErrorFile);
-		errorFile.open(QIODevice::WriteOnly | QIODevice::Append);
-		QTextStream text_stream_error(&errorFile);
-		text_stream_error << message << "\r\n";
-		errorFile.flush();
-		errorFile.close();
-	}
-
-	if (bIsInfo) {
-		QFile infoFile(strInfoFile);
-		infoFile.open(QIODevice::WriteOnly | QIODevice::Append);
-		QTextStream text_stream_error(&infoFile);
-		text_stream_error << message << "\r\n";
-		infoFile.flush();
-		infoFile.close();
-	}
-}
+#endif
