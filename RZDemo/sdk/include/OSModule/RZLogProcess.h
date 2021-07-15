@@ -18,6 +18,27 @@ namespace rz {
         RZ_LOG_LEVEL_FATAL       //严重性错误信息 需要整个SDK进行退出
     };
 
+    // 用于 http  Get() 的返回值
+    enum HttpErrorCode{
+    No_Error = 0,
+
+    /** 链接阶段的错误100开始 */
+    Connect_Error_Start_From_100 = 100,     //该错误码为了阶段划分, 不要使用
+    DNS_Resolve_Fail,                       //DNS解析失败, 待研究确认
+    Connect_Timeout,                        //链接服务器超时, 待研究确认, 可能不能这么细致
+  
+      /** 发送阶段的错误200开始 */
+     Send_Error_Start_From_200 = 200,       //该错误码为了阶段划分, 不要使用
+     Send_Timeout,                          //发送数据超时
+   
+     /** 接收阶段的错误300开始 */
+    Receive_Error_Start_From_300 = 300,     //该错误码为了阶段划分, 不要使用
+    Receive_Timeout,                        //接收数据超时
+
+     Other_Error_Start_From_400 = 400
+};
+
+
     struct RZLogConfig {
         /**是否到控制台*/
         bool            enableConsole       = false;
