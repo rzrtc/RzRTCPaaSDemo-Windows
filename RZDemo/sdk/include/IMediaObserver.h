@@ -27,63 +27,63 @@ struct VideoFrame {
 
 class VideoObserver {
  public:
-  //»ñÈ¡¸÷ÆµµÀÔ¶¶ËÊÓÆµ²¥·ÅÇ°µÄÊı¾İ
+  //è·å–å„é¢‘é“è¿œç«¯è§†é¢‘æ’­æ”¾å‰çš„æ•°æ®
   virtual bool onRenderVideoFrame(const char* channelId, const char* uid, const char* streamName, VideoFrame& videoFrame) = 0;
 
-  //»ñµÃ²É¼¯µÄÊÓÆµ
+  //è·å¾—é‡‡é›†çš„è§†é¢‘
   virtual bool onCaptureVideoFrame(const char* streamName, VideoFrame& videoFrame) = 0;
 
-  //»ñµÃÊÓÆµ±àÂëÇ°µÄÊı¾İ
+  //è·å¾—è§†é¢‘ç¼–ç å‰çš„æ•°æ®
   virtual bool onPreEncodeVideoFrame(const char* streamName, VideoFrame& videoFrame) = 0;
 };
 
 enum VIDEO_OBSERVER_POSITION
 {
-  POSITION_POST_CAPTURER = 1 << 0,  //ÊÓÆµ²É¼¯ºóµÄÎ»ÖÃ
-  POSITION_PRE_ENCODER = 1 << 1,    //ÊÓÆµ±àÂëÇ°µÄÎ»ÖÃ
-  POSITION_PRE_RENDERER = 1 << 2    //Ô¶¶ËÊÓÆµ²¥·ÅÇ°µÄÎ»ÖÃ
+  POSITION_POST_CAPTURER = 1 << 0,  //è§†é¢‘é‡‡é›†åçš„ä½ç½®
+  POSITION_PRE_ENCODER = 1 << 1,    //è§†é¢‘ç¼–ç å‰çš„ä½ç½®
+  POSITION_PRE_RENDERER = 1 << 2    //è¿œç«¯è§†é¢‘æ’­æ”¾å‰çš„ä½ç½®
 };
 
 struct VideoObserverInfo {
   VideoObserver* observer = nullptr;
-  uint8_t observerPosition = 0;  //¸ÃÖµµÄÓÉÀ´ÎªOBSERVER_POSITION¸÷¸öÃ¶¾ÙÖµÍ¨¹ı & ²Ù×÷Í¬Ê±ÅäÖÃ¶à¸ö¹Û²ìµã
+  uint8_t observerPosition = 0;  //è¯¥å€¼çš„ç”±æ¥ä¸ºOBSERVER_POSITIONå„ä¸ªæšä¸¾å€¼é€šè¿‡ & æ“ä½œåŒæ—¶é…ç½®å¤šä¸ªè§‚å¯Ÿç‚¹
 };
 
 enum AUDIO_FRAME_TYPE
 { AUDIO_FRAME_PCM16 };
 
 struct AudioFrame {
-  AUDIO_FRAME_TYPE type = AUDIO_FRAME_PCM16;  //ÒôÆµÊı¾İÀàĞÍ
-  int samples = 320;                          //¸ÃÖ¡ÒôÆµÊı¾İ²ÉÑùÊı
-  int bytesPerSample = 2;                     //Ã¿¸ö²ÉÑùÕ¼ÓĞµÄbyteÊıÁ¿
-  int channels = 1;                           //ÉùµÀÊı
-  int samplesRate = 16000;                    //²ÉÑùÂÊ
-  void* buffer = nullptr;                     //Êı¾İ
-  uint32_t timeStamp = 0;                     //ÒôÆµÖ¡Ê±¼ä´Á
+  AUDIO_FRAME_TYPE type = AUDIO_FRAME_PCM16;  //éŸ³é¢‘æ•°æ®ç±»å‹
+  int samples = 320;                          //è¯¥å¸§éŸ³é¢‘æ•°æ®é‡‡æ ·æ•°
+  int bytesPerSample = 2;                     //æ¯ä¸ªé‡‡æ ·å æœ‰çš„byteæ•°é‡
+  int channels = 1;                           //å£°é“æ•°
+  int samplesRate = 16000;                    //é‡‡æ ·ç‡
+  void* buffer = nullptr;                     //æ•°æ®
+  uint32_t timeStamp = 0;                     //éŸ³é¢‘å¸§æ—¶é—´æˆ³
   ~AudioFrame() { delete[] buffer; }
 };
 
 class AudioObserver {
  public:
-  //»ñÈ¡¸÷ÆµµÀ»ìÒôÇ°µÄÒôÆµ²¥·ÅÊı¾İ¡£
+  //è·å–å„é¢‘é“æ··éŸ³å‰çš„éŸ³é¢‘æ’­æ”¾æ•°æ®ã€‚
   virtual bool onPlaybackAudioFrameBeforeMixing(const char* channelId, const char* uid, AudioFrame& audioFrame) = 0;
 
-  //»ñµÃ²É¼¯µÄÒôÆµ¡£
+  //è·å¾—é‡‡é›†çš„éŸ³é¢‘ã€‚
   virtual bool onRecordAudioFrame(AudioFrame& audioFrame) = 0;
 
-  //»ñµÃ²¥·ÅµÄÉùÒô¡£
+  //è·å¾—æ’­æ”¾çš„å£°éŸ³ã€‚
   virtual bool onPlaybackAudioFrame(AudioFrame& audioFrame) = 0;
 };
 
 enum AUDIO_OBSERVER_POSITION
 {
-  AUDIO_OBSERVER_RECORD = 1 << 0,    //ÒôÆµ²É¼¯ºóµÄÎ»ÖÃ
-  AUDIO_OBSERVER_PLAYBACK = 1 << 1,  //ÒôÆµ²¥·ÅÇ°µÄÎ»ÖÃ
-  AUDIO_OBSERVER_MIXBEFORE = 1 << 2  //ÒôÆµ»ìÒôÇ°µÄÎ»ÖÃ
+  AUDIO_OBSERVER_RECORD = 1 << 0,    //éŸ³é¢‘é‡‡é›†åçš„ä½ç½®
+  AUDIO_OBSERVER_PLAYBACK = 1 << 1,  //éŸ³é¢‘æ’­æ”¾å‰çš„ä½ç½®
+  AUDIO_OBSERVER_MIXBEFORE = 1 << 2  //éŸ³é¢‘æ··éŸ³å‰çš„ä½ç½®
 };
 
 struct AudioObserverInfo {
   AudioObserver* observer = nullptr;
-  uint8_t observerPosition = 0;  //¸ÃÖµµÄÓÉÀ´ÎªOBSERVER_POSITION¸÷¸öÃ¶¾ÙÖµÍ¨¹ı & ²Ù×÷Í¬Ê±ÅäÖÃ¶à¸ö¹Û²ìµã
+  uint8_t observerPosition = 0;  //è¯¥å€¼çš„ç”±æ¥ä¸ºOBSERVER_POSITIONå„ä¸ªæšä¸¾å€¼é€šè¿‡ & æ“ä½œåŒæ—¶é…ç½®å¤šä¸ªè§‚å¯Ÿç‚¹
 };
 }  // namespace rz

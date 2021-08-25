@@ -273,6 +273,7 @@ struct IRtcChannelContext {
     std::string mnIP;
     int mnPort;
 
+    bool isSol2 = true;
     std::string solIP;
     int solPort;
     std::vector<std::string> solProxy;
@@ -324,7 +325,7 @@ struct IRtcChannelContext {
         GlobalInfoCache::DelUserInfo();
     }
 
-    net::FetchError getSolAddress(std::string &solIp, int &port) {
+    net::FetchError getSolAddress(std::string &solIp, int &port, bool& sol2) {
         auto log = RZLOG_GUARD("fetchServer", " getLibSolSrvAddress ", 300);
         if (solIP.empty()) {
             net::FetchError errcode = net::FetchError::No_Error;
@@ -333,12 +334,14 @@ struct IRtcChannelContext {
             if (solAds == nullptr) {
                 return errcode;
             }
-            solIP = solAds->proxy.ip;
-            solPort = solAds->proxy.port;
-            solProxy = solAds->proxy.proxyList;
+            this->solIP = solAds->proxy.ip;
+            this->solPort = solAds->proxy.port;
+            this->solProxy = solAds->proxy.proxyList;
+            this->isSol2 = solAds->isSol2;
         }
-        solIp = solIP;
-        port = solPort;
+        solIp = this->solIP;
+        port = this->solPort;
+        sol2 = this->isSol2;
         return net::FetchError::No_Error;
     }
 

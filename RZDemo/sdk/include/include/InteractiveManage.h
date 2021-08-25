@@ -20,13 +20,15 @@ namespace rz{
 
     struct InteractiveTask{
         std::string taskName;
-        uint32_t startTime;
+        uint32_t startTime {0};
+        bool needPrintOnDo {true};
         std::function<void ()> taskFun = nullptr;
         std::function<void()> taskOverFun = nullptr;
-        explicit InteractiveTask(std::string name,std::function<void ()> fun){
-            taskName = name;
-            taskFun = fun;
-            startTime = RZTime::opts();
+        explicit InteractiveTask(std::string name, bool needPrint, std::function<void ()> fun){
+            this->taskName = name;
+            this->needPrintOnDo = needPrint;
+            this->taskFun = fun;
+            this->startTime = RZTime::opts();
         }
     };
 

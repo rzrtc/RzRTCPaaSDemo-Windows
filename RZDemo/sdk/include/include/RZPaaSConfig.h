@@ -106,7 +106,7 @@ namespace rz{
          * fps > 60 : 2.25
          * */
         constexpr  static int fpsLevel[] = {1, 10, 15, 24, 30, 60};
-        constexpr static float fpsFactorList[]= {0.2, 0.67, 0.8, 1, 1.3, 1.5, 2.25};
+        constexpr static float fpsFactorList[]= {0.2f, 0.67f, 0.8f, 1.0f, 1.3f, 1.5f, 2.25f};
         /*
          * len <=  60: 20.0
          * len <=  80: 13.0
@@ -119,7 +119,7 @@ namespace rz{
          * len <=  1080: 1
          * len > 1080: 0.8
          * */
-        constexpr  static float baseLenFactorList[] = {20.0, 13.0, 8.0, 3.0, 2.4, 1.6, 1.4, 1.2, 1, 0.8};
+        constexpr  static float baseLenFactorList[] = {20.0f, 13.0f, 8.0f, 3.0f, 2.4f, 1.6f, 1.4f, 1.2f, 1.0f, 0.8f};
     };
 
 }
