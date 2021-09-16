@@ -51,6 +51,12 @@ static const int VideoPixelLinesize[VIDEO_PIXEL_COUNT][MAX_VIDEO_PLANE] = {
     {2, 1, 1, 0}, {1, 1, 1, 1}, {2, 1, 0, 0}, {1, 1, 1, 1}, {2, 1, 1, 0}, {1, 1, 1, 1}, {2, 1, 0, 0}, {2, 1, 1, 0},
 };
 
+enum MEDIA_DATA_TYPE {
+    AUDIO_DATA = 0,
+    VIDEO_DATA,
+};
+
+
 //视频帧结构
 struct VideoData : public MediaData {
  private:
@@ -73,11 +79,16 @@ struct VideoData : public MediaData {
   uint32_t DataSize = 0;
 
  public:
+
+ MEDIA_DATA_TYPE  mediaDataType = VIDEO_DATA;
+
   VIDEO_STREAM_TYPE getVideoStreamType() { return videoStreamType; }
 
   VIDEO_PIXEL_FORMAT getVideoPixelFormat() { return format; }
 
   uint32_t getIndex() { return index; }
+
+  void setIndex(uint32_t idx) { index = idx; }
 
   uint32_t getTimeStamp() { return timestamp; }
 
@@ -404,6 +415,9 @@ struct AudioData : public MediaData {
   uint32_t MemLen = 0;      //内存长度
 
  public:
+
+  MEDIA_DATA_TYPE mediaDataType = AUDIO_DATA;
+
   AUDIO_STREAM_TYPE getAudioStreamType() { return audioStreamType; }
 
   AUDIO_PCM_FORMAT getAudioPcmFormat() { return format; }
@@ -428,6 +442,8 @@ struct AudioData : public MediaData {
   bool isEnableAGC() { return enableAGC; }
 
   bool isEnableHowling() { return enableHowling; }
+    
+  bool isKeyFrame() { return false; }
 
   uint32_t getIndex() { return index; }
 

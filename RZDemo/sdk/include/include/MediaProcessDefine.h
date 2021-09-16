@@ -20,6 +20,10 @@ namespace rz {
         virtual ~MediaData() = default;
     };
 
+    enum DECODER_TYPE {
+        HARDWARE_DECODER = 0,
+        SOFTWARE_DECODER,
+    };
 
     enum MODULE_TYPE{
         MODULE_UNKNOW = -1,

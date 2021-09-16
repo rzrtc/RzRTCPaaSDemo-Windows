@@ -10,7 +10,7 @@
 
 #include "DelegatManager.h"
 #include "IRtcEngineState.h"
-
+#include "MediaDefine.h"
 
 namespace rz {
 
@@ -81,20 +81,74 @@ namespace rz {
             (void)h;
         }
 
-        virtual void onFirstFrameRecved(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType) {
+        virtual void onFirstAudioFrameRecved(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType) {
             (void)unixTm;
             (void)streamId;
             (void)streamType;
         }
 
-        virtual void onFirstVideoStreamSink(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType, int w, int h) {
+        virtual void onFirstVideoFrameRecved(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType,
+                                             uint32_t width, uint32_t height, uint32_t index, bool isKey) {
             (void)unixTm;
             (void)streamId;
             (void)streamType;
-            (void)w;
-            (void)h;
+            (void)width;
+            (void)height;
+            (void)index;
+            (void)isKey;
         }
 
+        virtual void onFirstVideoKeyFrameRecved(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType,
+                                             uint32_t width, uint32_t height, uint32_t index) {
+            (void)unixTm;
+            (void)streamId;
+            (void)streamType;
+            (void)width;
+            (void)height;
+            (void)index;
+        }
+
+       virtual void onFirstVideoFrameDecode(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType,
+            uint32_t index, uint32_t width, uint32_t height,
+            DECODER_TYPE d_type ) {
+            (void)unixTm;
+            (void)streamId;
+            (void)streamType;
+            (void)width;
+            (void)height;
+            (void)index;
+            (void)d_type;
+
+        }
+
+        virtual void onFirstVideoStreamSink(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType, int width, int height) {
+            (void)unixTm;
+            (void)streamId;
+            (void)streamType;
+            (void)width;
+            (void)height;
+        }
+
+       virtual void onFirstVideoFramePublished(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType, uint32_t width, uint32_t height,
+            uint32_t index, bool isKey ) {
+            (void)unixTm;
+            (void)streamId;
+            (void)streamType;
+            (void)width;
+            (void)height;
+            (void)index;
+            (void)isKey;
+        }
+
+       virtual void onFirstKeyFramePublished(uint64_t unixTm, const std::string& streamId, STREAM_TYPE streamType,
+           uint32_t width, uint32_t height, uint32_t index) {
+            (void)unixTm;
+            (void)streamId;
+            (void)streamType;
+            (void)width;
+            (void)height;
+            (void)index;
+        }
 
         virtual void onStreamForzen(uint64_t unixTm, const std::string &streamId, STREAM_TYPE streamType, bool forzen, uint64_t frameCount) {
             (void)unixTm;
@@ -148,7 +202,6 @@ namespace rz {
 
         static void removeSharedEventsRecver(const std::string &recvName);
 
-
         static void onNetTypeChanged(NETWORK_TYPE oldNetType,NETWORK_TYPE newNetType);
 
         static void onChannelConnectState(const std::string &channelId,CONNECTION_STATE_TYPE state, CONNECTION_CHANGED_REASON_TYPE reason);
@@ -165,7 +218,17 @@ namespace rz {
 
         static void onVideoSizeChanged(const std::string &streamId,STREAM_TYPE streamType,int w,int h);
 
-        static void onFirstFrameRecved(const std::string &streamId,STREAM_TYPE streamType);
+        static void onFirstAudioFrameRecved(const std::string &streamId,STREAM_TYPE streamType);
+
+        static void onFirstVideoFrameRecved(const std::string& streamId, STREAM_TYPE streamType,uint32_t width, uint32_t height , uint32_t  index, bool isKey, uint64_t time);
+
+        static void onFirstVideoKeyFrameRecved(const std::string& streamId, STREAM_TYPE streamType,uint32_t width, uint32_t height , uint32_t  index,   uint64_t time);
+
+        static void onFirstVideoFramePublished(const std::string &streamId, STREAM_TYPE streamType, uint32_t width, uint32_t height, uint32_t index, bool isKey ,uint64_t time);
+
+        static void onFirstKeyFramePublished(const std::string& streamId, STREAM_TYPE streamType, uint32_t width,uint32_t height, uint32_t index,  uint64_t time);
+
+       static  void  onFirstVideoFrameDecode(const std::string& streamId, STREAM_TYPE streamType , uint32_t index, uint32_t width,uint32_t height,DECODER_TYPE d_type ,uint64_t time);
 
         static void onFirstVideoStreamSink(const std::string& streamId, STREAM_TYPE streamType, int w, int h);
 

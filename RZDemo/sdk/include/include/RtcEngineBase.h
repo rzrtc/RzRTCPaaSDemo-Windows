@@ -88,8 +88,13 @@ class RtcEngineBase : public LastmileProbeEventHandler,
  private:
   static void TransportLoglevel(LOG_FILTER_TYPE filter);
   void InitDataStatistics();
+  
+  //  用于给streamInfo 赋值
+ static void setStreamInfoConfig(const std::shared_ptr<LocalVideoStreamContext>& streamCtx);
+ static void setStreamInfoConfig(const std::shared_ptr<LocalAudioStreamContext>& streamCtx);
 
  protected:
+  inline static std::string getLowVideoStreamID(const std::string& bigVideoStreamId);
   static StreamConfig getStreamConnectConfig(const std::shared_ptr<LocalVideoStreamContext> &streamCtx);
 
   static StreamConfig getStreamConnectConfig(const std::shared_ptr<LocalAudioStreamContext> &streamCtx);
@@ -158,7 +163,7 @@ class RtcEngineBase : public LastmileProbeEventHandler,
   void onLastmileProbeCallback(rz::LastmileProbeResult &probeResult) override;
 
   // StreamEventhandler
-  void onFirstVideoFrame(const void *streamContext, MODULE_TYPE type, int width, int height) override;
+  void onFirstVideoFrameSink(const void *streamContext, MODULE_TYPE type, int width, int height) override;
 
   // 渲染时间戳回调
   void onFrameSinkTimeStamps(const void *streamContext, MODULE_TYPE type, int32_t  index , int64_t sinkTimeStamp ) override;
@@ -167,7 +172,11 @@ class RtcEngineBase : public LastmileProbeEventHandler,
 
   void onStreamForzen(const void *streamContext, MODULE_TYPE type, bool forzen, uint64_t frameCount, uint64_t ts) override;
 
-  void onStreamRecvFirstFrame(const void *streamContext, MODULE_TYPE type) override;
+  void onStreamRecvFirstVideoKeyFrame(const void* streamContext, MODULE_TYPE type, uint32_t width, uint32_t height, uint32_t index) override;
+
+  void onStreamRecvFirstVideoFrame(const void *streamContext, MODULE_TYPE type ,uint32_t width, uint32_t height , uint32_t  index, bool isKey) override;
+
+  void onStreamRecvFirstAudioFrame(const void* streamContext, MODULE_TYPE type) override;
 
   void onCodecSwitchWarn(const void *streamContext, MODULE_TYPE type, VIDEO_CODEC_TYPE oldDecoderType, VIDEO_CODEC_TYPE newDecoderType) override;
 
@@ -179,7 +188,13 @@ class RtcEngineBase : public LastmileProbeEventHandler,
 
   void onAudioStreamVolume(const void *streamContext, MODULE_TYPE type, int volume, int vad) override;
 
-  void onFirstFramePublished(const void *streamContext, MODULE_TYPE type) override;
+  void onFirstVideoFramePublished(const void *streamContext, MODULE_TYPE type ,uint32_t width , uint32_t height  , uint32_t index, bool isKey) override; 
+ 
+  void onFirstKeyFramePublished(const void* streamContext, MODULE_TYPE type, uint32_t width, uint32_t height, uint32_t index) override; 
+
+  void onFirstAudioFramePublished(const void* streamContext, MODULE_TYPE type) override; 
+
+  void onFirstVideoFrameDecode(const void* streamContext, MODULE_TYPE m_type, uint32_t index, uint32_t width ,uint32_t height, DECODER_TYPE d_type) override;
 
   void onStreamStartSuccess(const void *streamContext, MODULE_TYPE type) override;
 
@@ -189,6 +204,9 @@ class RtcEngineBase : public LastmileProbeEventHandler,
   void onRemoteAudioStreamMuteChanged(const std::string &channelName, const std::string &streamId, bool mute) override;
 
   void onRemoteVideoStreamDualChanged(const std::string &channelName, const std::string &streamId, bool dual) override;
+
+  // 设置远端视频大小流回调
+  void onRemoteVideoStreamTypeChanged(const void* streamContext, REMOTE_VIDEO_STREAM_TYPE type) override;
 
   void onRemoteVideoStreamOnline(const std::string &channelName, const std::string &uid, std::shared_ptr<MediaStreamSync> sync,
                                  const std::shared_ptr<MediaStreamInfo> &streamInfo) override;
