@@ -42,6 +42,8 @@ namespace rz {
 
         ~RtcEngine() override = default;
 
+        int enableBitratePrediction(bool enablePrediction, bool enableAutoAdjust) override;
+
         int enableLocalAudio(bool enabled) override ;
 
         int setAudioProfile(AUDIO_PROFILE_TYPE profile, AUDIO_SCENARIO_TYPE scenario) override ;

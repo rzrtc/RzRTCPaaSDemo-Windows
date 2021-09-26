@@ -14,9 +14,9 @@ struct VideoFrame {
   int yStride = 0;
   int uStride = 0;
   int vStride = 0;
-  void* yBuffer = nullptr;
-  void* uBuffer = nullptr;
-  void* vBuffer = nullptr;
+  uint8_t* yBuffer = nullptr;
+  uint8_t* uBuffer = nullptr;
+  uint8_t* vBuffer = nullptr;
   int32_t timeStamp = 0;
   ~VideoFrame() {
     delete[] yBuffer;
@@ -58,7 +58,7 @@ struct AudioFrame {
   int bytesPerSample = 2;                     //每个采样占有的byte数量
   int channels = 1;                           //声道数
   int samplesRate = 16000;                    //采样率
-  void* buffer = nullptr;                     //数据
+  uint8_t* buffer = nullptr;                     //数据
   uint32_t timeStamp = 0;                     //音频帧时间戳
   ~AudioFrame() { delete[] buffer; }
 };

@@ -249,6 +249,9 @@ struct IRtcEngineContext {
     int smooth = 10;                     //音量检测平滑度
     bool report_vad = false;
 
+    bool enablePrediction {false};      //是否开启码率预测功能, 默认为false
+    bool enableAutoAdjust {false};      //是否使用自动调整功能
+
     AudioObserver *audioObserver = nullptr;
     uint8_t audioFilterPosition = 0;
     VideoObserver *videoObserver = nullptr;

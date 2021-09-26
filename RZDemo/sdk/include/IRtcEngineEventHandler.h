@@ -148,7 +148,14 @@ class IRtcEngineEventHandler {
    * 通话前网络质量探测报告回调。
    * @param result
    */
-  virtual void onLastmileProbeResult(const LastmileProbeResult &result) { (void)result; }
+  virtual void onLastmileProbeResult(const LastmileProbeResult &result) { 
+      (void)result; 
+  }
+
+  virtual void onPredictedBitrateChanged(int newBitrate, bool isLow) {  
+      (void)newBitrate;
+      (void)isLow;
+  };
 
   virtual ~IRtcEngineEventHandler() = default;
 };

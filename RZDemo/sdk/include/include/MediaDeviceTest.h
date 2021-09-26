@@ -18,109 +18,111 @@
 #include "AudioDataOutputConsumer.h"
 #include "AudioResample.h"
 
-namespace rz{
+namespace rz {
 
-    class MediaDeviceTestEventHandler{
-    protected:
+class MediaDeviceTestEventHandler {
+protected:
+    virtual void onError(MODULE_TYPE type, int errCode, const std::string& errMsg) = 0;
 
-        virtual void onError(MODULE_TYPE type, int errCode, const std::string &errMsg) = 0;
+    virtual void onWarn(MODULE_TYPE type, int warnCode, const std::string& warnMsg) = 0;
 
-        virtual void onWarn(MODULE_TYPE type, int warnCode, const std::string &warnMsg) = 0;
-    public:
+public:
+    virtual void _onError(MODULE_TYPE type, int errCode, const std::string& errMsg) final {
+        onError(type, errCode, errMsg);
+    }
 
-        virtual void _onError(MODULE_TYPE type, int errCode, const std::string &errMsg) final {
-            onError(type,errCode,errMsg);
-        }
+    virtual void _onWarn(MODULE_TYPE type, int warnCode, const std::string& warnMsg) final {
+        onWarn(type, warnCode, warnMsg);
+    }
 
-        virtual void _onWarn(MODULE_TYPE type, int warnCode, const std::string &warnMsg) final {
-            onWarn(type,warnCode,warnMsg);
-        }
+    virtual void onVolume(MODULE_TYPE type, int volume, int vad) = 0;
+};
 
-        virtual void onVolume(MODULE_TYPE type, int volume,int vad) = 0;
-    };
+class MediaDeviceTest
+    : public VideoSinkEventHandler
+    , public VideoScaleCropEventHandler
+    , public AudioSourceDataProducerEventHandler
+    , public VideoSinkDataConsumerEventHandler
+    , public VideoSourceDataProducerEventHandler
+    , public AudioSinkEventHandler
+    , public AudioResampleEventHandler
+    , public AudioVolumeDetectEventHandler
+    , public AudioSourceEventHandler
+    , public VideoSourceEventHandler {
+private:
+    //视频测试流及中间处理项
+    std::shared_ptr<DataFlowMonitor> videoTestDataFlowMonitor;
+    std::shared_ptr<DataFlow<VideoData>> videoTestDataFlow;
+    std::shared_ptr<VideoSource> videoSource;
+    std::shared_ptr<VideoSourceDataProducer> videoDataProducer;
+    std::shared_ptr<VideoScaleCrop> videoScaleCrop;
+    std::shared_ptr<VideoSinkDataConsumer> videoDataConsumer;
+    std::shared_ptr<VideoSink> videoSink;
 
+    //音频播放设备测试流及中间处理项
+    std::shared_ptr<DataFlowMonitor> audioPlaybackTestDataFlowMonitor;
+    std::shared_ptr<DataFlow<AudioData>> audioPlaybackTestDataFlow;
+    std::shared_ptr<AudioSource> audioFileSource;
+    std::shared_ptr<AudioSourceDataProducer> audioPlaybackDataProducer;
+    std::shared_ptr<AudioVolumeDetect> audioPlaybackVolumeDetect;
+    std::shared_ptr<AudioSinkDataConsumer> audioPlaybackDataConsumer;
+    std::shared_ptr<AudioSink> audioSink;
 
-    class MediaDeviceTest : public VideoSinkEventHandler,public VideoScaleCropEventHandler,public AudioSourceDataProducerEventHandler,
-            public VideoSinkDataConsumerEventHandler,public VideoSourceDataProducerEventHandler,public AudioSinkEventHandler,
-            public AudioResampleEventHandler,
-            public AudioVolumeDetectEventHandler,public AudioSourceEventHandler,public VideoSourceEventHandler{
-    private:
-        //视频测试流及中间处理项
-        std::shared_ptr<DataFlowMonitor> videoTestDataFlowMonitor;
-        std::shared_ptr<DataFlow<VideoData>> videoTestDataFlow;
-        std::shared_ptr<VideoSource> videoSource;
-        std::shared_ptr<VideoSourceDataProducer> videoDataProducer;
-        std::shared_ptr<VideoScaleCrop> videoScaleCrop;
-        std::shared_ptr<VideoSinkDataConsumer> videoDataConsumer;
-        std::shared_ptr<VideoSink> videoSink;
+    //音频录制设备测试流及中间处理项
+    std::shared_ptr<DataFlowMonitor> audioRecordTestDataFlowMonitor;
+    std::shared_ptr<DataFlow<AudioData>> audioRecordTestDataFlow;
+    std::shared_ptr<AudioSource> audioRecordSource;
+    std::shared_ptr<AudioSourceDataProducer> audioRecordDataProducer;
+    std::shared_ptr<AudioVolumeDetect> audioRecordVolumeDetect;
+    std::shared_ptr<AudioResample> audioResample;
+    std::shared_ptr<DataConsumerAdapter<AudioData>> audioRecordDataConsumer;
 
-        //音频播放设备测试流及中间处理项
-        std::shared_ptr<DataFlowMonitor> audioPlaybackTestDataFlowMonitor;
-        std::shared_ptr<DataFlow<AudioData>> audioPlaybackTestDataFlow;
-        std::shared_ptr<AudioSource> audioFileSource;
-        std::shared_ptr<AudioSourceDataProducer> audioPlaybackDataProducer;
-        std::shared_ptr<AudioVolumeDetect> audioPlaybackVolumeDetect;
-        std::shared_ptr<AudioSinkDataConsumer> audioPlaybackDataConsumer;
-        std::shared_ptr<AudioSink> audioSink;
+    //音频回路测试流
+    std::shared_ptr<DataFlowMonitor> audioLoopBackTestDataFlowMonitor;
+    std::shared_ptr<DataFlow<AudioData>> audioLoopBackTestDataFlow;
 
-        //音频录制设备测试流及中间处理项
-        std::shared_ptr<DataFlowMonitor> audioRecordTestDataFlowMonitor;
-        std::shared_ptr<DataFlow<AudioData>> audioRecordTestDataFlow;
-        std::shared_ptr<AudioSource> audioRecordSource;
-        std::shared_ptr<AudioSourceDataProducer> audioRecordDataProducer;
-        std::shared_ptr<AudioVolumeDetect> audioRecordVolumeDetect;
-        std::shared_ptr<AudioResample> audioResample;
-        std::shared_ptr<DataConsumerAdapter<AudioData>> audioRecordDataConsumer;
+    MediaDeviceTestEventHandler* eventHandler = nullptr;
 
+public:
+    explicit MediaDeviceTest(MediaDeviceTestEventHandler* event) : eventHandler(event) {}
 
-        //音频回路测试流
-        std::shared_ptr<DataFlowMonitor> audioLoopBackTestDataFlowMonitor;
-        std::shared_ptr<DataFlow<AudioData>> audioLoopBackTestDataFlow;
+    ~MediaDeviceTest();
 
-        MediaDeviceTestEventHandler *eventHandler = nullptr;
-    public:
+    int startVideoDeviceTest(void* hwnd);
 
-        explicit MediaDeviceTest(MediaDeviceTestEventHandler *event):eventHandler(event){}
+    int stopVideoDeviceTest();
 
-        ~MediaDeviceTest();
+    int startAudioDeviceLoopbackTest(int indicationInterval);
 
-        int startVideoDeviceTest(void *hwnd);
+    int stopAudioDeviceLoopbackTest();
 
-        int stopVideoDeviceTest();
+    int startRecordingDeviceTest(int indicationInterval);
 
-        int startAudioDeviceLoopbackTest(int indicationInterval);
+    int stopRecordingDeviceTest();
 
-        int stopAudioDeviceLoopbackTest();
+    int startPlaybackDeviceTest(const char* testAudioFilePath);
 
-        int startRecordingDeviceTest(int indicationInterval);
+    int stopPlaybackDeviceTest();
 
-        int stopRecordingDeviceTest();
+protected:
+    void onError(MODULE_TYPE type, int errCode, const std::string& errMsg) override;
 
-        int startPlaybackDeviceTest(const char *testAudioFilePath);
+    void onWarn(MODULE_TYPE type, int warnCode, const std::string& warnMsg) override;
 
-        int stopPlaybackDeviceTest();
+public:
+    void onFirstVideoFrameSink(int width, int height) override;
 
-    protected:
-        void onError(MODULE_TYPE type, int errCode, const std::string &errMsg) override ;
+    void onFrameSinkTimeStamps(uint32_t frameIndex, int64_t sinkTimeStamp) override;
 
-        void onWarn(MODULE_TYPE type, int warnCode, const std::string &warnMsg) override ;
+    void onVolume(int volume, int vad) override;
 
-    public:
+    void onVideoStartSuccess() override;
 
-        void onFirstVideoFrameSink(int width, int height) override ;
+    void onAudioStartSuccess() override;
 
-        void onFrameSinkTimeStamps(uint32_t frameIndex, int64_t sinkTimeStamp) override ;
+    void onVideoFrozen(bool forzen, uint64_t frameCount, uint64_t ts) override;
+};
 
-        void onVolume(int volume,int vad) override ;
+}  // namespace rz
 
-        void onVideoStartSuccess() override ;
-
-        void onAudioStartSuccess() override ;
-
-        void onVideoForzen(bool forzen, uint64_t frameCount, uint64_t ts) override;
-    };
-
-}
-
-
-#endif //PAASSDK_MEDIADEVICETEST_H
+#endif  //PAASSDK_MEDIADEVICETEST_H

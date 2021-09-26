@@ -37,7 +37,16 @@ class IRtcStreamEventHandler {
     (void)height;
   }
 
-  virtual void onLocalVideoStats(IRtcStream *stream, const LocalVideoStats &stats) { (void)stats; }
+  virtual void onLocalVideoStats(IRtcStream* stream, const LocalVideoStats& stats) {
+      (void)stream;
+      (void)stats; 
+  }
+
+  virtual void onPredictedBitrateChanged(IRtcStream* stream, int newBitrate, bool isLow) { 
+      (void)stream;
+      (void)newBitrate;
+      (void)isLow;
+  };
 };
 
 }  // namespace rz

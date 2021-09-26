@@ -226,6 +226,17 @@ class IRtcChannelEventHandler {
     (void)channel;
     (void)stats;
   }
+  /**
+   * 
+   */
+  virtual void onPredictedBitrateChanged(IRtcChannel* channel, const char* uid, const char* streamName,
+                                         int newBitrate, bool isLow) {
+      (void)channel;
+      (void)uid;
+      (void)streamName;
+      (void)newBitrate;
+      (void)isLow;
+  };
 
   virtual ~IRtcChannelEventHandler() = default;
 };
