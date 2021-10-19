@@ -13,12 +13,12 @@
 
 namespace rz {
 class GlobalOperation {
-   private:
+private:
     static std::shared_ptr<VideoSourceProducer> videoSourceProducer;
     static std::shared_ptr<AudioSourceProducer> audioSourceProducer;
     static std::shared_ptr<VideoSinkProducer> videoSinkProducer;
 
-   public:
+public:
     static void Init();
 
     static void Release();
@@ -28,30 +28,30 @@ class GlobalOperation {
      * @param videoSink 要配置的videosink
      * @param renderMode
      */
-    static void setVideoRenderMode(const VideoSink *videoSink, RENDER_MODE_TYPE renderMode);
+    static void setVideoRenderMode(const VideoSink* videoSink, RENDER_MODE_TYPE renderMode);
 
     /**
      * 为videosink 配置画板 videocanvas
      * @param videoSink 要配置的videosink
      * @param videoCanvas 画板参数
      */
-    static void setVideoCanvas(const VideoSink *videoSink, const VideoCanvas &videoCanvas);
+    static void setVideoCanvas(const VideoSink* videoSink, const VideoCanvas& videoCanvas);
 
     /**
      * 更新视频方向模式。
      * @param orientationMode
      */
-    static void setVideoOrientationMode(VideoSource *source, ORIENTATION_MODE orientationMode);
+    static void setVideoOrientationMode(VideoSource* source, ORIENTATION_MODE orientationMode);
 
     /**
      * 重置视频采集格式
      * @param videoConfig
      */
-    static void setVideoConfig(VideoSource *source, const VideoConfig &videoConfig);
+    static void setVideoConfig(VideoSource* source, const VideoConfig& videoConfig);
 
-    static void HoldView(void *view);
+    static void HoldView(void* view);
 
-    static void ReleaseView(void *view);
+    static void ReleaseView(void* view);
 };
 }  // namespace rz
 

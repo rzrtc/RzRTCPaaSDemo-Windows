@@ -40,7 +40,7 @@ struct BaseStreamContext {
 };
 
 struct LocalVideoStreamContext : public BaseStreamContext {
-    IRtcChannelContext *channelContext = nullptr;
+    IRtcChannelContext* channelContext = nullptr;
 
     std::shared_ptr<StreamInfoCache> streamInfo;
     std::shared_ptr<StreamInfoCache> lowStreamInfo;
@@ -56,18 +56,18 @@ struct LocalVideoStreamContext : public BaseStreamContext {
     bool preview = false;
 
     VIDEO_STREAM_TYPE streamType = VIDEO_STREAM_FRAME;
-    IVideoSource *videoSource = nullptr;
+    IVideoSource* videoSource = nullptr;
     VideoEncoderConfiguration videoConfig;
 
     bool enabledDual = false;
 
-    IVideoSink *videoSink = nullptr;  //是否配置自定义的本地视频回显渲染器
+    IVideoSink* videoSink = nullptr;  //是否配置自定义的本地视频回显渲染器
     RENDER_MODE_TYPE renderMode = RENDER_MODE_HIDDEN;
     VIDEO_MIRROR_MODE_TYPE mirrorMode = VIDEO_MIRROR_MODE_AUTO;
     bool haveVideoCanvas = false;
     VideoCanvas videoCanvas;  //本地视频的canvas
 
-    IRtcStreamEventHandler *eventHandler = nullptr;
+    IRtcStreamEventHandler* eventHandler = nullptr;
     CONNECTION_STATE_TYPE connectionStateType = CONNECTION_STATE_DISCONNECTED;
 
     bool firstPublished = false;
@@ -76,7 +76,7 @@ struct LocalVideoStreamContext : public BaseStreamContext {
 
     std::shared_ptr<PubVideoStream> pubVideoStream;
 
-    IVideoSource *lowVideoStreamSource = nullptr;
+    IVideoSource* lowVideoStreamSource = nullptr;
     std::shared_ptr<PubVideoStream> lowPubVideoStream;
 
     LocalVideoStreamContext() : BaseStreamContext(STREAM_CONTEXT_LOCAL_VIDEO) {}
@@ -91,15 +91,15 @@ struct LocalVideoStreamContext : public BaseStreamContext {
     }
 };
 
-inline LocalVideoStreamContext *getStreamContext(LocalVideoStreamContext *ptr) {
+inline LocalVideoStreamContext* getStreamContext(LocalVideoStreamContext* ptr) {
     if (ptr->streamContextType != STREAM_CONTEXT_LOCAL_VIDEO) {
         LOG_ERROR("StreamContextConstant") << "指针转换错误";
         return nullptr;
     }
-    return (LocalVideoStreamContext *)ptr;
+    return (LocalVideoStreamContext*)ptr;
 }
 struct LocalAudioStreamContext : public BaseStreamContext {
-    IRtcChannelContext *channelContext = nullptr;
+    IRtcChannelContext* channelContext = nullptr;
 
     std::shared_ptr<StreamInfoCache> streamInfo;
 
@@ -112,7 +112,7 @@ struct LocalAudioStreamContext : public BaseStreamContext {
     bool enableAec = true;
 
     AudioSourceConfig sourceConfig;
-    IAudioSource *audioSource = nullptr;
+    IAudioSource* audioSource = nullptr;
     AUDIO_PROFILE_TYPE audioProfileType = AUDIO_PROFILE_DEFAULT;
     AUDIO_SCENARIO_TYPE audioScenarioType = AUDIO_SCENARIO_DEFAULT;
 
@@ -133,15 +133,15 @@ struct LocalAudioStreamContext : public BaseStreamContext {
     }
 };
 
-inline LocalAudioStreamContext *getStreamContext(LocalAudioStreamContext *ptr) {
+inline LocalAudioStreamContext* getStreamContext(LocalAudioStreamContext* ptr) {
     if (ptr->streamContextType != STREAM_CONTEXT_LOCAL_AUDIO) {
         LOG_ERROR("StreamContextConstant") << "指针转换错误";
         return nullptr;
     }
-    return (LocalAudioStreamContext *)ptr;
+    return (LocalAudioStreamContext*)ptr;
 }
 struct RemoteVideoStreamContext : public BaseStreamContext {
-    IRtcChannelContext *channelContext = nullptr;
+    IRtcChannelContext* channelContext = nullptr;
 
     std::shared_ptr<StreamInfoCache> streamInfo;
     std::shared_ptr<StreamInfoCache> lowStreamInfo;
@@ -155,7 +155,7 @@ struct RemoteVideoStreamContext : public BaseStreamContext {
     VIDEO_MIRROR_MODE_TYPE mirrorMode = VIDEO_MIRROR_MODE_AUTO;
     bool setStreamType = false;
     REMOTE_VIDEO_STREAM_TYPE videoStreamType = REMOTE_VIDEO_STREAM_HIGH;
-    IVideoSink *videoSink = nullptr;  //是否配置自定义的本地视频回显渲染器
+    IVideoSink* videoSink = nullptr;  //是否配置自定义的本地视频回显渲染器
     bool haveVideoCanvas = false;
     VideoCanvas videoCanvas;  //本地视频的canvas
 
@@ -184,15 +184,15 @@ struct RemoteVideoStreamContext : public BaseStreamContext {
     }
 };
 
-inline RemoteVideoStreamContext *getStreamContext(RemoteVideoStreamContext *ptr) {
+inline RemoteVideoStreamContext* getStreamContext(RemoteVideoStreamContext* ptr) {
     if (ptr->streamContextType != STREAM_CONTEXT_REMOTE_VIDEO) {
         LOG_ERROR("StreamContextConstant") << "指针转换错误";
         return nullptr;
     }
-    return (RemoteVideoStreamContext *)ptr;
+    return (RemoteVideoStreamContext*)ptr;
 }
 struct RemoteAudioStreamContext : public BaseStreamContext {
-    IRtcChannelContext *channelContext = nullptr;
+    IRtcChannelContext* channelContext = nullptr;
 
     std::shared_ptr<StreamInfoCache> streamInfo;
 
@@ -201,7 +201,7 @@ struct RemoteAudioStreamContext : public BaseStreamContext {
     std::string streamId;
     bool haveLocalMute = false;
     bool localMute = false;
-    IAudioSink *audioSink = nullptr;
+    IAudioSink* audioSink = nullptr;
 
     bool remoteMute = false;
 
@@ -223,12 +223,12 @@ struct RemoteAudioStreamContext : public BaseStreamContext {
     }
 };
 
-inline RemoteAudioStreamContext *getStreamContext(RemoteAudioStreamContext *ptr) {
+inline RemoteAudioStreamContext* getStreamContext(RemoteAudioStreamContext* ptr) {
     if (ptr->streamContextType != STREAM_CONTEXT_REMOTE_AUDIO) {
         LOG_ERROR("StreamContextConstant") << "指针转换错误";
         return nullptr;
     }
-    return (RemoteAudioStreamContext *)ptr;
+    return (RemoteAudioStreamContext*)ptr;
 }
 
 struct IRtcEngineContext {
@@ -242,19 +242,19 @@ struct IRtcEngineContext {
     std::string appId;
     int baseTime = 0;
     CODEC_PRIORITY codecPriority = PRIORITY_AUTO;
-    RtcEngineEventHandler *eventHandler = nullptr;
+    RtcEngineEventHandler* eventHandler = nullptr;
 
     bool AudioVolumeIndication = false;  //音量提示标记符
     int interval = 1;                    //回调间隔 ms
     int smooth = 10;                     //音量检测平滑度
     bool report_vad = false;
 
-    bool enablePrediction {false};      //是否开启码率预测功能, 默认为false
-    bool enableAutoAdjust {false};      //是否使用自动调整功能
+    bool enablePrediction {false};  //是否开启码率预测功能, 默认为false
+    bool enableAutoAdjust {false};  //是否使用自动调整功能
 
-    AudioObserver *audioObserver = nullptr;
+    AudioObserver* audioObserver = nullptr;
     uint8_t audioFilterPosition = 0;
-    VideoObserver *videoObserver = nullptr;
+    VideoObserver* videoObserver = nullptr;
     uint8_t videoFilterPosition = 0;
     //当前发布流的频道
     std::shared_ptr<IRtcChannelContext> pushChannelContext;
@@ -266,7 +266,7 @@ struct IRtcEngineContext {
 };
 
 struct IRtcChannelContext {
-    IRtcEngineContext *engineContext = nullptr;
+    IRtcEngineContext* engineContext = nullptr;
 
     std::shared_ptr<ChannelInfoCache> channelInfo;
     std::shared_ptr<UserInfoCache> userInfo;
@@ -291,6 +291,9 @@ struct IRtcChannelContext {
     std::string uid;
 
     bool isJoinChannel = false;
+    std::atomic_bool waitOnleaveChannel {false};
+    std::mutex onLeaveChannelCondMtx;
+    std::condition_variable onLeaveChannelCond;
 
     //标记本地流是否发布到本频道
     PUBLISH_MEDIA_TYPE publishType = PUBLISH_INIT;
@@ -328,7 +331,7 @@ struct IRtcChannelContext {
         GlobalInfoCache::DelUserInfo();
     }
 
-    net::FetchError getSolAddress(std::string &solIp, int &port, bool& sol2) {
+    net::FetchError getSolAddress(std::string& solIp, int& port, bool& sol2) {
         auto log = RZLOG_GUARD("fetchServer", " getLibSolSrvAddress ", 300);
         if (solIP.empty()) {
             net::FetchError errcode = net::FetchError::No_Error;
@@ -348,7 +351,7 @@ struct IRtcChannelContext {
         return net::FetchError::No_Error;
     }
 
-    net::FetchError getMNAddress(std::string &mnIp, int &port) {
+    net::FetchError getMNAddress(std::string& mnIp, int& port) {
         auto log = RZLOG_GUARD("fetchServer", " getLibMnSrvAddress ", 300);
         if (mnIP.empty()) {
             net::FetchError errcode = net::FetchError::No_Error;
@@ -365,6 +368,20 @@ struct IRtcChannelContext {
         return net::FetchError::No_Error;
     }
 
+    inline void waitOnleaveChannelFlag() {
+        int maxTime {1000};
+        int waitTime {10};
+        while (this->waitOnleaveChannel && maxTime) {
+            std::unique_lock<std::mutex> lk(this->onLeaveChannelCondMtx);
+            this->onLeaveChannelCond.wait_for(lk, std::chrono::milliseconds(waitTime));
+            maxTime -= waitTime;
+        }
+    }
+    inline void notifyOnleaveChanne() {
+        this->waitOnleaveChannel = false;
+        this->onLeaveChannelCond.notify_all();
+    }
+    inline void changeWaitOnleaveChannelFlag(bool flag) { this->waitOnleaveChannel = flag; }
 };
 }  // namespace rz
 

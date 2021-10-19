@@ -39,7 +39,7 @@ protected:
     StatisticsEventHandler* eventHandler = nullptr;
 
     std::string statsProducerId;
-
+    InteractiveManage::TimerTaskID m_timerID {0};
     virtual void WorkFun() = 0;
 
 public:
@@ -47,11 +47,11 @@ public:
         eventHandler = event;
         statsProducerId = ID;
 
-        InteractiveManage::registTimedTask(statsProducerId + "statsProducer", std::bind(&StatsProducer::WorkFun, this),
-                                           RZPaaSConfig::statisticsInfoInterval * 1000, false);
+        m_timerID = InteractiveManage::registTimedTask("StatsProducer", std::bind(&StatsProducer::WorkFun, this),
+                                                       RZPaaSConfig::statisticsInfoInterval * 1000, false);
     }
 
-    virtual ~StatsProducer() { InteractiveManage::removeTimedTask(statsProducerId + "statsProducer"); }
+    virtual ~StatsProducer() { InteractiveManage::removeTimedTask(m_timerID); }
 };
 
 //负责RtcStats事件的产生

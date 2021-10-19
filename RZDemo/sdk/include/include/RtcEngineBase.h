@@ -90,10 +90,11 @@ private:
     static void TransportLoglevel(LOG_FILTER_TYPE filter);
     void InitDataStatistics();
     void AutoAdjustVideoStreamBitrate(const void* streamContext, MODULE_TYPE type, int newBitrate);
+
 protected:
     inline static std::string getLowVideoStreamID(const std::string& bigVideoStreamId);
-    
-  static StreamConfig getStreamConnectConfig(const std::shared_ptr<LocalVideoStreamContext> &streamCtx);
+
+    static StreamConfig getStreamConnectConfig(const std::shared_ptr<LocalVideoStreamContext>& streamCtx);
 
     static StreamConfig getStreamConnectConfig(const std::shared_ptr<LocalAudioStreamContext>& streamCtx);
 
@@ -165,8 +166,8 @@ public:
 
     void onLastmileProbeCallback(rz::LastmileProbeResult& probeResult) override;
 
-  // 第一帧被渲染回调
-  void onFirstVideoFrameSink(const void *streamContext, MODULE_TYPE type, int width, int height) override;
+    // 第一帧被渲染回调
+    void onFirstVideoFrameSink(const void* streamContext, MODULE_TYPE type, int width, int height) override;
 
     // 渲染时间戳回调
     void onFrameSinkTimeStamps(const void* streamContext, MODULE_TYPE type, int32_t index,
@@ -199,11 +200,11 @@ public:
 
     void onFirstVideoFramePublished(const void* streamContext, MODULE_TYPE type, uint32_t width, uint32_t height,
                                     uint32_t index, bool isKey) override;
- 
+
     void onFirstKeyFramePublished(const void* streamContext, MODULE_TYPE type, uint32_t width, uint32_t height,
                                   uint32_t index) override;
 
-  void onFirstAudioFramePublished(const void* streamContext, MODULE_TYPE type) override; 
+    void onFirstAudioFramePublished(const void* streamContext, MODULE_TYPE type) override;
 
     void onFirstVideoFrameDecode(const void* streamContext, MODULE_TYPE m_type, uint32_t index, uint32_t width,
                                  uint32_t height, DECODER_TYPE d_type) override;
@@ -218,7 +219,8 @@ public:
 
     void onRemoteAudioStreamMuteChanged(const std::string& channelName, const std::string& streamId,
                                         bool mute) override;
-    void onRemoteVideoStreamDualChanged(const std::string &channelName, const std::string &streamId, bool dual) override;
+    void onRemoteVideoStreamDualChanged(const std::string& channelName, const std::string& streamId,
+                                        bool dual) override;
 
     // 设置远端视频大小流回调
     void onRemoteVideoStreamTypeChanged(const void* streamContext, REMOTE_VIDEO_STREAM_TYPE type) override;

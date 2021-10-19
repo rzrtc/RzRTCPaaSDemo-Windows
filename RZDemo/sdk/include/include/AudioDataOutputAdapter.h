@@ -13,40 +13,37 @@
 #include "MediaStreamInfo.h"
 //#include "StructureFactory.h"
 
+namespace rz {
 
-namespace rz{
+class AudioDataOutputAdapter {
+public:
+    virtual int registAudioStream(void* flag, const SubAudioStreamInfo& streamInfo) = 0;
 
+    virtual int removeAudioStream(void* flag) = 0;
 
-    class AudioDataOutputAdapter{
-    public:
-        virtual int registAudioStream(void *flag,const SubAudioStreamInfo &streamInfo) = 0;
+    virtual int pushAudioData(void* flag, std::shared_ptr<AudioData>& data) = 0;
+};
 
-        virtual int removeAudioStream(void *flag) = 0;
+class AudioPlayback;
 
-        virtual int pushAudioData(void *flag, std::shared_ptr<AudioData> &data) = 0;
-    };
+class AudioDataOutput {
+private:
+    static AudioDataOutputAdapter* adapter;
+    static AudioPlayback* audioPlayback;
+    static std::atomic_int subAudioStreamNum;
 
-    class AudioPlayback;
+public:
+    static void Start(AudioDataOutputAdapter* ptr, AudioPlayback* playback);
 
-    class AudioDataOutput{
-    private:
-        static AudioDataOutputAdapter *adapter;
-        static AudioPlayback* audioPlayback;
-        static std::atomic_int subAudioStreamNum;
-    public:
+    static void Stop();
 
-        static void Start(AudioDataOutputAdapter *ptr, AudioPlayback* playback);
+    static int registAudioStream(void* flag, const SubAudioStreamInfo& streamInfo);
 
-        static void Stop();
+    static int removeAudioStream(void* flag);
 
-        static int registAudioStream(void *flag,const SubAudioStreamInfo &streamInfo) ;
+    static int pushAudioData(void* flag, std::shared_ptr<AudioData>& data);
+};
 
-        static int removeAudioStream(void *flag) ;
+}  // namespace rz
 
-        static int pushAudioData(void *flag, std::shared_ptr<AudioData> &data) ;
-
-    };
-
-}
-
-#endif //PAASSDK_AUDIODATAOUTPUTADAPTER_H
+#endif  //PAASSDK_AUDIODATAOUTPUTADAPTER_H

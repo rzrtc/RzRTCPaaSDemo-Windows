@@ -13,76 +13,75 @@
 
 namespace rz {
 
-    class AudioDeviceManager : public IAudioDeviceManager{
-        std::shared_ptr<IAudioDeviceCollection> audioPlaybackCollection = nullptr;
-        std::shared_ptr<IAudioDeviceCollection> audioRecordingCollection = nullptr;
-        AudioDeviceCollectionalEventHandler *eventHandler = nullptr;
-    public:
+class AudioDeviceManager : public IAudioDeviceManager {
+    std::shared_ptr<IAudioDeviceCollection> audioPlaybackCollection = nullptr;
+    std::shared_ptr<IAudioDeviceCollection> audioRecordingCollection = nullptr;
+    AudioDeviceCollectionalEventHandler* eventHandler = nullptr;
 
-        explicit AudioDeviceManager(AudioDeviceCollectionalEventHandler *event) ;
+public:
+    explicit AudioDeviceManager(AudioDeviceCollectionalEventHandler* event);
 
-        IAudioDeviceCollection *enumeratePlaybackDevices() override ;
+    IAudioDeviceCollection* enumeratePlaybackDevices() override;
 
-        IAudioDeviceCollection *enumerateRecordingDevices() override ;
+    IAudioDeviceCollection* enumerateRecordingDevices() override;
 
-        int setPlaybackDevice(const char deviceId[MAX_DEVICE_ID_LENGTH]) override ;
+    int setPlaybackDevice(const char deviceId[MAX_DEVICE_ID_LENGTH]) override;
 
-        int setRecordingDevice(const char deviceId[MAX_DEVICE_ID_LENGTH]) override ;
+    int setRecordingDevice(const char deviceId[MAX_DEVICE_ID_LENGTH]) override;
 
-        int setPlaybackDeviceVolume(int volume) override ;
+    int setPlaybackDeviceVolume(int volume) override;
 
-        int getPlaybackDeviceVolume(int *volume) override ;
+    int getPlaybackDeviceVolume(int* volume) override;
 
-        int setRecordingDeviceVolume(int volume) override ;
+    int setRecordingDeviceVolume(int volume) override;
 
-        int getRecordingDeviceVolume(int *volume) override ;
+    int getRecordingDeviceVolume(int* volume) override;
 
-        int setPlaybackDeviceMute(bool mute) override ;
+    int setPlaybackDeviceMute(bool mute) override;
 
-        int getPlaybackDeviceMute(bool *mute) override ;
+    int getPlaybackDeviceMute(bool* mute) override;
 
-        int setRecordingDeviceMute(bool mute) override ;
+    int setRecordingDeviceMute(bool mute) override;
 
-        int getRecordingDeviceMute(bool *mute) override ;
+    int getRecordingDeviceMute(bool* mute) override;
 
-        int startRecordingDeviceTest(int indicationInterval) override ;
+    int startRecordingDeviceTest(int indicationInterval) override;
 
-        int stopRecordingDeviceTest() override ;
+    int stopRecordingDeviceTest() override;
 
-        int startPlaybackDeviceTest(const char *testAudioFilePath) override ;
+    int startPlaybackDeviceTest(const char* testAudioFilePath) override;
 
-        int stopPlaybackDeviceTest() override ;
+    int stopPlaybackDeviceTest() override;
 
-        int getPlaybackDevice(char deviceId[MAX_DEVICE_ID_LENGTH]) override ;
+    int getPlaybackDevice(char deviceId[MAX_DEVICE_ID_LENGTH]) override;
 
-        int getPlaybackDeviceInfo(char deviceId[MAX_DEVICE_ID_LENGTH], char deviceName[MAX_DEVICE_ID_LENGTH]) override ;
+    int getPlaybackDeviceInfo(char deviceId[MAX_DEVICE_ID_LENGTH], char deviceName[MAX_DEVICE_ID_LENGTH]) override;
 
-        int getRecordingDevice(char deviceId[MAX_DEVICE_ID_LENGTH]) override ;
+    int getRecordingDevice(char deviceId[MAX_DEVICE_ID_LENGTH]) override;
 
-        int getRecordingDeviceInfo(char deviceId[MAX_DEVICE_ID_LENGTH], char deviceName[MAX_DEVICE_ID_LENGTH]) override ;
+    int getRecordingDeviceInfo(char deviceId[MAX_DEVICE_ID_LENGTH], char deviceName[MAX_DEVICE_ID_LENGTH]) override;
 
-        int startAudioDeviceLoopbackTest(int indicationInterval) override ;
+    int startAudioDeviceLoopbackTest(int indicationInterval) override;
 
-        int stopAudioDeviceLoopbackTest() override ;
-    };
+    int stopAudioDeviceLoopbackTest() override;
+};
 
+class VideoDeviceManager : public IVideoDeviceManager {
+    std::shared_ptr<IVideoDeviceCollection> videoDeviceCollection = nullptr;
 
-    class VideoDeviceManager : public IVideoDeviceManager {
-        std::shared_ptr<IVideoDeviceCollection> videoDeviceCollection = nullptr;
-    public:
-        explicit VideoDeviceManager(VideoDeviceCollectionalEventHandler *event) ;
+public:
+    explicit VideoDeviceManager(VideoDeviceCollectionalEventHandler* event);
 
-        IVideoDeviceCollection *enumerateVideoDevices() override ;
+    IVideoDeviceCollection* enumerateVideoDevices() override;
 
-        int startDeviceTest(void *hwnd) override ;
+    int startDeviceTest(void* hwnd) override;
 
-        int stopDeviceTest() override ;
+    int stopDeviceTest() override;
 
-        int setDevice(const char deviceId[MAX_DEVICE_ID_LENGTH]) override ;
+    int setDevice(const char deviceId[MAX_DEVICE_ID_LENGTH]) override;
 
-        int getDevice(char deviceId[MAX_DEVICE_ID_LENGTH]) override ;
+    int getDevice(char deviceId[MAX_DEVICE_ID_LENGTH]) override;
+};
+}  // namespace rz
 
-    };
-}
-
-#endif //PAASSDK_DEVICEMANAGE_H
+#endif  //PAASSDK_DEVICEMANAGE_H

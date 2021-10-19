@@ -184,10 +184,9 @@ public:
         (void)state;
     }
 
-    virtual void onVideoSinkTimeStamps(uint64_t unixTm, const std::string& channelName, const std::string& streamName,
+    virtual void onVideoSinkTimeStamps(const std::string& channelName, const std::string& streamName,
                                        const std::string& uid, uint32_t frameIndex, uint64_t sinkTimestamp,
                                        STREAM_TYPE streamType) {
-        (void)unixTm;
         (void)channelName;
         (void)streamName;
         (void)uid;
@@ -209,26 +208,26 @@ public:
 
     static void removeSharedEventsRecver(const std::string& recvName);
 
-    static void onNetTypeChanged(NETWORK_TYPE oldNetType, NETWORK_TYPE newNetType);
+    static void onNetTypeChanged(NETWORK_TYPE oldNetType, NETWORK_TYPE newNetType, uint64_t unixTm);
 
     static void onChannelConnectState(const std::string& channelId, CONNECTION_STATE_TYPE state,
-                                      CONNECTION_CHANGED_REASON_TYPE reason);
+                                      CONNECTION_CHANGED_REASON_TYPE reason, uint64_t unixTm);
 
-    static void onStreamConnectState(const std::string& streamId, STREAM_TYPE streamType, CONNECTION_STATE_TYPE state);
+    static void onStreamConnectState(const std::string& streamId, STREAM_TYPE streamType, CONNECTION_STATE_TYPE state, uint64_t unixTm);
 
-    static void onJoinChannel(const std::string& channelId);
+    static void onJoinChannel(const std::string& channelId, uint64_t unixTm);
 
     static void onVideoSinkTimeStamps(const std::string& channelID, const std::string& streamName,
                                       const std::string& uid, uint32_t frameIndex, uint64_t sinkTimestamp,
                                       STREAM_TYPE streamType);
 
-    static void onJoinChannelResult(const std::string& channelId, bool isSuccess, int reson);
+    static void onJoinChannelResult(const std::string& channelId, bool isSuccess, int reson, uint64_t unixTm);
 
-    static void onLeaveChannel(const std::string& channelId);
+    static void onLeaveChannel(const std::string& channelId, uint64_t unixTm);
 
-    static void onVideoSizeChanged(const std::string& streamId, STREAM_TYPE streamType, int w, int h);
+    static void onVideoSizeChanged(const std::string& streamId, STREAM_TYPE streamType, int w, int h, uint64_t unixTm);
 
-    static void onFirstAudioFrameRecved(const std::string& streamId, STREAM_TYPE streamType);
+    static void onFirstAudioFrameRecved(const std::string& streamId, STREAM_TYPE streamType, uint64_t unixTm);
 
     static void onFirstVideoFrameRecved(const std::string& streamId, STREAM_TYPE streamType, uint32_t width,
                                         uint32_t height, uint32_t index, bool isKey, uint64_t time);
@@ -245,17 +244,17 @@ public:
     static void onFirstVideoFrameDecode(const std::string& streamId, STREAM_TYPE streamType, uint32_t index,
                                         uint32_t width, uint32_t height, DECODER_TYPE d_type, uint64_t time);
 
-    static void onFirstVideoStreamSink(const std::string& streamId, STREAM_TYPE streamType, int w, int h);
+    static void onFirstVideoStreamSink(const std::string& streamId, STREAM_TYPE streamType, int w, int h, uint64_t unixTm);
 
-    static void onStreamPublishState(const std::string& streamId, STREAM_TYPE streamType, PUBLISH_STREAM_STATE state);
+    static void onStreamPublishState(const std::string& streamId, STREAM_TYPE streamType, PUBLISH_STREAM_STATE state, uint64_t unixTm);
 
     static void onStreamSubscribeState(const std::string& streamId, STREAM_TYPE streamType,
-                                       SUBSCRIBE_STREAM_STATE state);
+                                       SUBSCRIBE_STREAM_STATE state, uint64_t unixTm);
 
     static void onStreamFrozen(const std::string& streamId, STREAM_TYPE streamType, bool forzen, uint64_t frameCount,
                                uint64_t ts);
 
-    static void onLocalStreamState(const std::string& streamId, STREAM_TYPE streamType, LOCAL_STREAM_STATE state);
+    static void onLocalStreamState(const std::string& streamId, STREAM_TYPE streamType, LOCAL_STREAM_STATE state, uint64_t unixTm);
 };
 
 }  // namespace rz

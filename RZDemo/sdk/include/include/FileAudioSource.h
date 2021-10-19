@@ -9,14 +9,14 @@
 
 namespace rz {
 
-    class FileAudioSourceProducer{
-    public:
-        virtual AudioSource *GetFileAudioSource(const char *fileName,AudioSourceEventHandler *event) = 0;
+class FileAudioSourceProducer {
+public:
+    virtual AudioSource* GetFileAudioSource(const char* fileName, AudioSourceEventHandler* event) = 0;
 
-        virtual void DelFileAudioSource(AudioSource *ptr) = 0;
+    virtual void DelFileAudioSource(AudioSource* ptr) = 0;
 
-        virtual ~FileAudioSourceProducer() = default;
-    };
-}
+    virtual ~FileAudioSourceProducer() = default;
+};
+}  // namespace rz
 
-#endif //PAASSDK_FILEAUDIOSOURCE_H
+#endif  //PAASSDK_FILEAUDIOSOURCE_H

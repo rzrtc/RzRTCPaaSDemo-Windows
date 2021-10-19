@@ -4,6 +4,7 @@
 class DBAudioProcess {
     class Implementation;
     std::unique_ptr<Implementation> pimpl;
+
 public:
     DBAudioProcess(int sample);
     ~DBAudioProcess();

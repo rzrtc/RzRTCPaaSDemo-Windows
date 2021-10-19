@@ -12,20 +12,21 @@
 
 namespace rz {
 
-    class AudioPlaybackBuf {
-        static std::mutex playbackDataMX;
-        static std::shared_ptr<AudioData> playbackData;
-    public:
-        static std::shared_ptr<AudioData> getPlaybackAudioData() {
-            std::lock_guard<std::mutex> lk(playbackDataMX);
-            return playbackData;
-        }
+class AudioPlaybackBuf {
+    static std::mutex playbackDataMX;
+    static std::shared_ptr<AudioData> playbackData;
 
-        static void pushPlaybackAudioData(std::shared_ptr<AudioData> &data) {
-            std::lock_guard<std::mutex> lk(playbackDataMX);
-            playbackData = data;
-        }
-    };
+public:
+    static std::shared_ptr<AudioData> getPlaybackAudioData() {
+        std::lock_guard<std::mutex> lk(playbackDataMX);
+        return playbackData;
+    }
 
-}
-#endif //PAASSDK_AUDIOPLAYBACKBUF_H
+    static void pushPlaybackAudioData(std::shared_ptr<AudioData>& data) {
+        std::lock_guard<std::mutex> lk(playbackDataMX);
+        playbackData = data;
+    }
+};
+
+}  // namespace rz
+#endif  //PAASSDK_AUDIOPLAYBACKBUF_H

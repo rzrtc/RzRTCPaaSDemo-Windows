@@ -20,6 +20,9 @@ class IRtcChannel {
   virtual ~IRtcChannel() = default;
 
  public:
+  /**
+   * 释放channel相关资源, 必须在leaveChannel之后调用。同步等待OnleaveChannel回调完成, 才会执行和返回。
+   */
   virtual void release() = 0;
 
   virtual const char *getChannelId() = 0;

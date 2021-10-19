@@ -15,33 +15,33 @@ namespace rz {
 class RtcChannel;
 
 class RtcStream : public IRtcStream {
- private:
-  LocalVideoStreamContext *streamContext;
-  RtcChannel *channel = nullptr;
+private:
+    LocalVideoStreamContext* streamContext;
+    RtcChannel* channel = nullptr;
 
- protected:
-  ~RtcStream() override = default;
+protected:
+    ~RtcStream() override = default;
 
- public:
-  explicit RtcStream(LocalVideoStreamContext *context, RtcChannel *cnl) : streamContext(context), channel(cnl) {}
+public:
+    explicit RtcStream(LocalVideoStreamContext* context, RtcChannel* cnl) : streamContext(context), channel(cnl) {}
 
-  const char *getStreamName() override;
+    const char* getStreamName() override;
 
-  const char *getChannelId() override;
+    const char* getChannelId() override;
 
-  void release() override;
+    void release() override;
 
-  int publish() override;
+    int publish() override;
 
-  int unPublish() override;
+    int unPublish() override;
 
-  int muteVideoStream(bool mute) override;
+    int muteVideoStream(bool mute) override;
 
-  int enableDualStreamMode(bool enabled) override;
+    int enableDualStreamMode(bool enabled) override;
 
-  int setVideoEncoderConfiguration(const VideoEncoderConfiguration &config) override;
+    int setVideoEncoderConfiguration(const VideoEncoderConfiguration& config) override;
 
-  int setLowVideoStream(IVideoSource *) override;
+    int setLowVideoStream(IVideoSource*) override;
 };
 
 }  // namespace rz

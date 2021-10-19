@@ -12,66 +12,71 @@
 #include "AudioResample.h"
 #include "AudioPlaybackBuf.h"
 
-namespace rz{
+namespace rz {
 
-    class AudioPlaybackEventHandler{
-    protected:
-        virtual void onError(MODULE_TYPE type,int errCode, const std::string &errMsg) = 0;
-        virtual void onWarn(MODULE_TYPE type,int warnCode, const std::string &warnMsg) = 0;
-    public:
-        virtual void _onError(MODULE_TYPE type,int errCode, const std::string &errMsg) final {
-            onError(type,errCode,errMsg);
-        }
+class AudioPlaybackEventHandler {
+protected:
+    virtual void onError(MODULE_TYPE type, int errCode, const std::string& errMsg) = 0;
+    virtual void onWarn(MODULE_TYPE type, int warnCode, const std::string& warnMsg) = 0;
 
-        virtual void _onWarn(MODULE_TYPE type,int warnCode, const std::string &warnMsg) final {
-            onWarn(type,warnCode,warnMsg);
-        }
+public:
+    virtual void _onError(MODULE_TYPE type, int errCode, const std::string& errMsg) final {
+        onError(type, errCode, errMsg);
+    }
 
-        virtual void onVolume(MODULE_TYPE type,int volume,int vad) = 0;
+    virtual void _onWarn(MODULE_TYPE type, int warnCode, const std::string& warnMsg) final {
+        onWarn(type, warnCode, warnMsg);
+    }
 
-        virtual ~AudioPlaybackEventHandler() = default;
-    };
+    virtual void onVolume(MODULE_TYPE type, int volume, int vad) = 0;
 
-    class AudioPlayback : public AudioMixEventHandle,public AudioResampleEventHandler,public AudioSinkEventHandler,public AudioVolumeDetectEventHandler{
-    private:
+    virtual ~AudioPlaybackEventHandler() = default;
+};
 
-        std::shared_ptr<DataFlowMonitor> audioPlaybackMonitor;
-        std::shared_ptr<DataFlow<AudioData>> audioPlaybackFlow;
+class AudioPlayback
+    : public AudioMixEventHandle
+    , public AudioResampleEventHandler
+    , public AudioSinkEventHandler
+    , public AudioVolumeDetectEventHandler {
+private:
+    std::shared_ptr<DataFlowMonitor> audioPlaybackMonitor;
+    std::shared_ptr<DataFlow<AudioData>> audioPlaybackFlow;
 
-        std::shared_ptr<AudioMix> audioMix;
-        std::shared_ptr<AudioResample> audioResample;
-        std::shared_ptr<AudioVolumeDetect> audioVolumeDetect;
-        std::shared_ptr<AudioFilterAdapter> audioPlaybackFilter;
-        std::shared_ptr<AudioSinkDataConsumer> audioSinkDataConsumer;
+    std::shared_ptr<AudioMix> audioMix;
+    std::shared_ptr<AudioResample> audioResample;
+    std::shared_ptr<AudioVolumeDetect> audioVolumeDetect;
+    std::shared_ptr<AudioFilterAdapter> audioPlaybackFilter;
+    std::shared_ptr<AudioSinkDataConsumer> audioSinkDataConsumer;
 
-        std::shared_ptr<AudioSink> audioSink;
+    std::shared_ptr<AudioSink> audioSink;
 
-        AudioPlaybackEventHandler *eventHandler = nullptr;
-    public:
-        explicit AudioPlayback(const AudioSinkConfig &sinkCfg,AudioPlaybackEventHandler *event);
+    AudioPlaybackEventHandler* eventHandler = nullptr;
 
-        ~AudioPlayback() override ;
+public:
+    explicit AudioPlayback(const AudioSinkConfig& sinkCfg, AudioPlaybackEventHandler* event);
 
-        AudioDataOutputAdapter *getAudioOutputAdapter();
+    ~AudioPlayback() override;
 
-        void onVolume(int volume,int vad) override ;
+    AudioDataOutputAdapter* getAudioOutputAdapter();
 
-        int enableAudioVolumeIndication(int interval, int smooth, bool report_vad);
+    void onVolume(int volume, int vad) override;
 
-        void Start();
+    int enableAudioVolumeIndication(int interval, int smooth, bool report_vad);
 
-        void Stop();
+    void Start();
 
-        void setAudioPlaybackFilter(std::shared_ptr<AudioFilterAdapter>& filter);
+    void Stop();
 
-        void removeAudioPlaybackFilter();
+    void setAudioPlaybackFilter(std::shared_ptr<AudioFilterAdapter>& filter);
 
-    protected:
-        void onError(MODULE_TYPE type,int errCode, const std::string &errMsg) override ;
+    void removeAudioPlaybackFilter();
 
-        void onWarn(MODULE_TYPE type,int warnCode, const std::string &warnMsg) override ;
-    };
+protected:
+    void onError(MODULE_TYPE type, int errCode, const std::string& errMsg) override;
 
-}
+    void onWarn(MODULE_TYPE type, int warnCode, const std::string& warnMsg) override;
+};
 
-#endif //PAASSDK_AUDIOPLAYBACK_H
+}  // namespace rz
+
+#endif  //PAASSDK_AUDIOPLAYBACK_H
