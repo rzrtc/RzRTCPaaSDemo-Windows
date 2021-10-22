@@ -49,7 +49,6 @@ private:
     std::mutex AudioDataPoolMX;
     std::map<void*, std::shared_ptr<AudioStream>> AudioDataPool;
     std::list<std::shared_ptr<AudioData>> mixDataPool;
-    DelegatManager::TimerTaskID m_timerID {0};
     DuoBei::AudioResampleInitCfg initCfg {};
     // 音频帧数据最大缓存数量
     static const uint32_t MAX_CACHE_SIZE {10};

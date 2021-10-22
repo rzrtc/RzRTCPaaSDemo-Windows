@@ -12,19 +12,30 @@
 
 namespace rz {
 
-class AudioPlaybackBuf {
-    static std::mutex playbackDataMX;
-    static std::shared_ptr<AudioData> playbackData;
+class AudioPlaybackBuf final{
+    std::shared_ptr<AudioData> playbackData;
+
+private:
+    AudioPlaybackBuf() {}
+    AudioPlaybackBuf(const AudioPlaybackBuf&) = delete;
+    AudioPlaybackBuf(const AudioPlaybackBuf&&) = delete;
+    AudioPlaybackBuf& operator=(const AudioPlaybackBuf&) = delete;
+    AudioPlaybackBuf& operator=(const AudioPlaybackBuf&&) = delete;
 
 public:
-    static std::shared_ptr<AudioData> getPlaybackAudioData() {
-        std::lock_guard<std::mutex> lk(playbackDataMX);
-        return playbackData;
+    ~AudioPlaybackBuf() = default;
+
+public:
+    static AudioPlaybackBuf& GetInstance() {
+        static AudioPlaybackBuf audioPlaybackBuf;
+        return audioPlaybackBuf;
+    }
+    inline std::shared_ptr<AudioData> getPlaybackAudioData() {
+        return std::atomic_load(&this->playbackData);
     }
 
-    static void pushPlaybackAudioData(std::shared_ptr<AudioData>& data) {
-        std::lock_guard<std::mutex> lk(playbackDataMX);
-        playbackData = data;
+    inline void pushPlaybackAudioData(std::shared_ptr<AudioData>& data) {
+        std::atomic_store(&(this->playbackData), data);
     }
 };
 
